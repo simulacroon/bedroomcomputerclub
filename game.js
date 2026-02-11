@@ -12,8 +12,6 @@ const poems = [
 ];
 
 async function setup() {
-  noCanvas();
-
   await loadModel();
   await setupWebcam();
   loopPrediction();
@@ -27,7 +25,7 @@ async function loadModel() {
 
 async function setupWebcam() {
   webcam = new tmImage.Webcam(320, 240, true);
-  await webcam.setup();   // 👈 AQUÍ pide permisos
+  await webcam.setup();   // aquí Chrome pide permisos
   await webcam.play();
 }
 
@@ -35,9 +33,11 @@ async function loopPrediction() {
   webcam.update();
 
   const predictions = await model.predict(webcam.canvas);
-  let best = predictions.reduce((a, b) => a.probability > b.probability ? a : b);
+  const best = predictions.reduce((a, b) =>
+    a.probability > b.probability ? a : b
+  );
 
-  if (best.probability > 0.85) {
+  if (best.probability > 0.85 && best.className !== currentGesture) {
     currentGesture = best.className;
     reactToGesture(currentGesture);
   }
@@ -46,17 +46,9 @@ async function loopPrediction() {
 }
 
 function reactToGesture(gesture) {
-  if (gesture === "mal") {
-    generateBrokenAscii();
-  }
-
-  if (gesture === "bien") {
-    generatePoem();
-  }
-
-  if (gesture === "stop") {
-    clearScreen();
-  }
+  if (gesture === "mal") generateBrokenAscii();
+  if (gesture === "bien") generatePoem();
+  if (gesture === "stop") clearScreen();
 }
 
 function generateBrokenAscii() {
@@ -69,11 +61,16 @@ function generateBrokenAscii() {
 }
 
 function generatePoem() {
-  let poem = poems[Math.floor(Math.random() * poems.length)];
-  let output = poem.repeat(30);
-  document.getElementById("ascii").innerText = output;
+  const poem = poems[Math.floor(Math.random() * poems.length)];
+  document.getElementById("ascii").innerText = poem.repeat(30);
 }
 
 function clearScreen() {
   document.getElementById("ascii").innerText = "";
 }
+
+// 👇 gesto humano obligatorio
+document.getElementById("start").addEventListener("click", async () => {
+  document.getElementById("start").style.display = "none";
+  await setup();
+});
