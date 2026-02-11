@@ -1,0 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  background: black;
+  color: white;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+#ascii {
+  white-space: pre;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 10px;
+}
