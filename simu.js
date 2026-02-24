@@ -1,61 +1,68 @@
 const panels = document.querySelectorAll('.panel');
 const audio = document.getElementById('sound');
+const cursor = document.getElementById('cursor');
+
+const isHome = document.body.classList.contains('home');
 
 let index = 0;
 let isScrolling = false;
 let audioUnlocked = false;
 
-function showPanel(i) {
-  panels.forEach(p => p.classList.remove('active'));
-  panels[i].classList.add('active');
-}
+/* =========================
+   HOME: scroll + audio
+========================= */
+if (isHome && panels.length > 0) {
 
-showPanel(index);
-
-// PRIMER CLICK → desbloquea audio
-window.addEventListener('click', () => {
-  if (!audioUnlocked) {
-    audio.play().then(() => {
-      audio.pause();
-      audio.currentTime = 0;
-      audioUnlocked = true;
-      console.log('Audio desbloqueado');
-    }).catch(err => {
-      console.log('No se pudo desbloquear audio', err);
-    });
-  } else {
-    // si ya estaba sonando → apagar
-    audio.pause();
-    audio.currentTime = 0;
-  }
-});
-
-// SCROLL → imagen + sonido
-window.addEventListener('wheel', (e) => {
-  if (!audioUnlocked) return;
-
-  if (audio.paused) audio.play();
-
-  if (isScrolling) return;
-  isScrolling = true;
-
-  if (e.deltaY > 0) {
-    index = Math.min(index + 1, panels.length - 1);
-  } else {
-    index = Math.max(index - 1, 0);
+  function showPanel(i) {
+    panels.forEach(p => p.classList.remove('active'));
+    panels[i].classList.add('active');
   }
 
   showPanel(index);
 
-  setTimeout(() => {
-    isScrolling = false;
-  }, 700);
-});
+  window.addEventListener('click', () => {
+    if (!audioUnlocked) {
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audioUnlocked = true;
+      }).catch(() => {});
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  });
 
-const cursor = document.getElementById('cursor');
+  window.addEventListener('wheel', (e) => {
+    if (!audioUnlocked) return;
+    if (audio.paused) audio.play();
+    if (isScrolling) return;
+
+    isScrolling = true;
+
+    if (e.deltaY > 0) {
+      index = Math.min(index + 1, panels.length - 1);
+    } else {
+      index = Math.max(index - 1, 0);
+    }
+
+    showPanel(index);
+
+    setTimeout(() => {
+      isScrolling = false;
+    }, 700);
+  });
+
+}
+
+/* =========================
+   CURSOR GLOBAL
+========================= */
 
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
+let currentX = mouseX;
+let currentY = mouseY;
 
 window.addEventListener('mousemove', (e) => {
   mouseX = e.clientX;
@@ -63,9 +70,16 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function moveCursor() {
-  cursor.style.left = mouseX + 'px';
-  cursor.style.top = mouseY + 'px';
+  if (cursor) {
+    currentX += (mouseX - currentX) * 0.15;
+    currentY += (mouseY - currentY) * 0.15;
+
+    cursor.style.left = currentX + 'px';
+    cursor.style.top = currentY + 'px';
+  }
+
   requestAnimationFrame(moveCursor);
 }
 
 moveCursor();
+

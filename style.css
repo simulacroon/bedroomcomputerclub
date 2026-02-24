@@ -1,8 +1,14 @@
 html, body {
   margin: 0;
   height: 100%;
+
+}
+
+
+.home {
   overflow: hidden;
 }
+
 
 body {
   
@@ -38,25 +44,29 @@ opacity: 1;
 
 }
 
+
+.home {
+  overflow: hidden;
+}
+
 /* TEXTO */
-body::after {
+.home::after {
   content: "scroll para activar · click para silencio";
   position: fixed;
   bottom: 20px;
   right: 20px;
 
   font-size: 12px;
-  opacity: 0.6;
   font-family: monospace;
   color: white;
 
-  background:black;
+  background: black;
   padding: 6px 10px;
   border-radius: 2px;
 
   opacity: 0.85;
-
 }
+
 
 /* CURSOR */
 #cursor {
@@ -156,4 +166,152 @@ body::after {
 
 .logo-link:hover {
   opacity: 1;
+}
+
+
+.video-page {
+  background: #000;
+  color: white;
+  margin: 0;
+  min-height: 100vh;
+}
+
+
+
+.video-hero {
+  padding: 120px 80px 80px 80px;
+}
+
+.video-title {
+  font-size: 8vw;          /* escala con pantalla */
+  font-weight: 700;
+  margin: 0 0 80px 0;
+  line-height: 0.9;
+}
+
+.video-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+
+.video-text {
+  width: 250px;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-top: 750px; /* 👈 ajusta este valor */
+}
+
+.video-bottom {
+  position: absolute;
+  bottom: 80px;
+  right: 80px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+/* VIDEO PRINCIPAL */
+.video-container video {
+  width: 720px;
+  max-width: 50vw;
+  height: auto;
+  display: block;
+  margin-top: 300px;
+}
+
+/* CARRUSEL VERTICAL */
+.video-carousel {
+  position: relative;
+  height: 500px;
+  width: 180px;
+  overflow: hidden;
+ 
+ } 
+
+.video-carousel-track {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  animation: verticalScroll 20s linear infinite;
+}
+
+/* videos pequeños */
+.video-carousel video {
+  width: 160px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.video-carousel video:hover {
+  opacity: 1;
+}
+
+/* animación */
+@keyframes verticalScroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+
+.video-360-section {
+  margin-top: 900px; /* porque tu layout es absolute */
+  display: flex;
+  justify-content: center;
+  padding-bottom: 200px;
+}
+
+#viewer360 {
+  width: 900px;
+  height: 500px;
+  background: black;
+
+}
+
+.video-360-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+
+.side-text {
+  width: 180px;
+  font-size: 12px;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+
+
+
+.ascii-divider {
+  margin: 180px 0;
+  text-align: center;
+  font-family: monospace;
+  color: white;
+  opacity: 0.6;
+}
+
+.divider-line-1 {
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.divider-line-2 {
+  font-size: 14px;
+  letter-spacing: 6px;
+  line-height: 1.8;
+}
+
+#viewer360,
+#viewer360b {
+  width: 900px;
+  height: 500px;
+  background: black;
 }
