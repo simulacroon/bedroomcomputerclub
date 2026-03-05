@@ -81,7 +81,7 @@ body {
 
 .panel img {
   max-width: 700px;
-  width: 100;
+  width: 100%;
   opacity: 0.9;
   
 }
@@ -399,6 +399,7 @@ opacity: 1;
   background: black;
 
 }
+
 
 
 
