@@ -122,7 +122,7 @@ opacity: 1;
 
 /* TEXTO */
 .home::after {
-  content: "scroll para activar · click para silencio";
+  content: "clic - scroll para activar · clic para silencio";
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -399,6 +399,7 @@ opacity: 1;
   background: black;
 
 }
+
 
 
 
