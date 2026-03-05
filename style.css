@@ -30,7 +30,7 @@ body {
 
 .bg-float{
   position:absolute;
-  left:40px;
+  left:100px;
   top:40%;
   width:200px;
   opacity:0.9;
@@ -428,6 +428,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
