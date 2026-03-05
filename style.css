@@ -12,7 +12,7 @@ html, body {
 
 body {
   
-  background: red;
+  background: #2c1cf9;
   cursor: none;
   font-family: monospace;
 }
@@ -399,6 +399,7 @@ opacity: 1;
   background: black;
 
 }
+
 
 
 
