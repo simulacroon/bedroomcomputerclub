@@ -12,7 +12,7 @@ html, body {
 
 body {
   
-  background: #2c1cf9;
+  background: red;
   cursor: none;
   font-family: monospace;
 }
@@ -119,10 +119,6 @@ opacity: 1;
 }
 
 
-
-.home {
-  overflow: hidden;
-}
 
 /* TEXTO */
 .home::after {
@@ -403,5 +399,6 @@ opacity: 1;
   background: black;
 
 }
+
 
 
