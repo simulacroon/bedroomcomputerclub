@@ -31,8 +31,8 @@ body {
 .bg-float{
   position:absolute;
   left:100px;
-  bottom:20px;
-  width:600px;
+  bottom:10px;
+  width:500px;
   opacity:0.9;
   
 
@@ -405,7 +405,7 @@ opacity: 1;
 
 .bg-wave{
   position:absolute;
-  left:40px;
+  left:100px;
   top:30%;
   width:400px;
   opacity:0.7;
@@ -428,6 +428,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
