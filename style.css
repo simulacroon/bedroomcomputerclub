@@ -30,9 +30,18 @@ body {
 
 .bg-float{
   position:absolute;
-  width:80px;
+  width:200px;
   opacity:0.9;
+
+  animation: float 6s ease-in-out infinite;
 }
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(-12px);}
+  100%{transform:translateY(0);}
+}
+
 
 .f1{
   left:120px;
@@ -54,15 +63,6 @@ body {
   top:500px;
 }
 
-.bg-float{
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float{
-  0%{transform:translateY(0);}
-  50%{transform:translateY(-12px);}
-  100%{transform:translateY(0);}
-}
 
 
 /* PANEL IMÁGENES */
@@ -425,6 +425,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
