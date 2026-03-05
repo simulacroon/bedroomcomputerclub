@@ -405,9 +405,9 @@ opacity: 1;
 
 .bg-wave{
   position:absolute;
-  left:60%;
-  top:40%;
-  width:300px;
+  left:20px;
+  top:30%;
+  width:330px;
   opacity:0.7;
 
   animation: wavePulse 5s ease-in-out infinite;
@@ -428,6 +428,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
