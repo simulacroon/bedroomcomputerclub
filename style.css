@@ -107,7 +107,7 @@ opacity: 1;
 
 .text-top{
   position:absolute;
-  top:5px;
+  top:2px;
   left:10px;
   color:white;
   font-family:'Space Mono', monospace;
@@ -115,7 +115,7 @@ opacity: 1;
 
 .text-bottom{
   position:absolute;
-  bottom:5px;
+  bottom:2px;
   right:10px;
   color:white;
   font-family:'Space Mono', monospace;
@@ -428,6 +428,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
