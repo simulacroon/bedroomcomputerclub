@@ -400,6 +400,31 @@ opacity: 1;
 
 }
 
+.bg-wave{
+  position:absolute;
+  left:60%;
+  top:40%;
+  width:300px;
+  opacity:0.7;
+
+  animation: wavePulse 5s ease-in-out infinite;
+}
+
+@keyframes wavePulse{
+
+  0%{
+    transform:scale(0.9);
+  }
+
+  50%{
+    transform:scale(1.2);
+  }
+
+  100%{
+    transform:scale(0.9);
+  }
+
+}
 
 
 
