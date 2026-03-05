@@ -30,8 +30,11 @@ body {
 
 .bg-float{
   position:absolute;
+  left:40px;
+  top:40%;
   width:200px;
   opacity:0.9;
+  
 
   animation: float 6s ease-in-out infinite;
 }
@@ -425,6 +428,7 @@ opacity: 1;
   }
 
 }
+
 
 
 
