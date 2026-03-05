@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>connecting...</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  margin:0;
+  background:black;
+  color:#00ff9f;
+  font-family:'Space Mono', monospace;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+  overflow:hidden;
+}
+
+.terminal{
+  font-size:14px;
+  line-height:1.8;
+  opacity:0.85;
+}
+
+.cursor{
+  display:inline-block;
+  width:10px;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0;}
+  100%{opacity:1;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="terminal">
+
+bedroomcomputerclub node detected...<br>
+loading smlcrn interface...<br>
+establishing connection...<br>
+redirecting<span class="cursor">_</span>
+
+</div>
+
+<script>
+
+setTimeout(function(){
+
+window.location.href = "https://simulacroon.bandcamp.com/community";
+
+}, 3000);
+
+</script>
+
+</body>
+</html>
