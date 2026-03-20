@@ -117,14 +117,28 @@
     
   
 
-    <!-- VIDEO 360 -->
+   <section class="circle-video-row">
+
+  <video class="circle-video" muted playsinline preload="auto">
+    <source src="video/dron_1.mp4" type="video/mp4">
+  </video>
+
+  <video class="circle-video" muted playsinline preload="auto">
+    <source src="video/andoke_1.mp4" type="video/mp4">
+  </video>
+
+  <video class="circle-video" muted playsinline preload="auto">
+    <source src="video/selva_1.mp4" type="video/mp4">
+  </video>
 
 </section>
 
-    <section class="video-360-section">
+    <!-- VIDEO 360 -->
 
 
-    <div class="video-360-layout">
+   <section class="video-360-section">
+
+  <div class="video-360-layout">
     
     <div class="side-text left-text">
       entorno inmersivo.<br>
@@ -132,7 +146,11 @@
       percepción expandida.
     </div>
 
-    <source src="video/caos1.mp4" type="video/mp4">
+    <div class="video-frame">
+      <video autoplay muted loop playsinline>
+        <source src="video/puebloandoe.mp4" type="video/mp4">
+      </video>
+    </div>
 
     <div class="side-text right-text">
       archivo espacial.<br>
@@ -142,15 +160,15 @@
 
   </div>
 
-</section>  
+</section>
       
 
+
+
+    
     <div id="cursor"></div>
     <script src="simu.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="video360.js"></script>
-
+  
 
 
   </section>
