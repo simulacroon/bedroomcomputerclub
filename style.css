@@ -333,17 +333,6 @@ opacity: 1;
 }
 
 
-.video-extra {
-  display: flex;
-  justify-content: center;
-  margin-top: 200px;
-  margin-bottom: 200px;
-}
-
-.video-extra video {
-  width: 900px;
-  max-width: 80vw;
-}
 
 .video-360-section {
   margin-top: 900px; /* porque tu layout es absolute */
