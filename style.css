@@ -352,18 +352,28 @@ opacity: 1;
   padding-bottom: 200px;
 }
 
-#viewer360 {
-  width: 900px;
-  height: 500px;
-  background: black;
+.video-frame{
+  width:900px;
+  height:500px;
+  background:black;
+  overflow:hidden;
+  position:relative;
+}
 
+/* VIDEO */
+.video-frame video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  mix-blend-mode: screen;
 }
 
 .video-360-layout {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
+  gap: 30px;
 }
 
 .side-text {
@@ -372,6 +382,7 @@ opacity: 1;
   line-height: 1.6;
   opacity: 0.6;
 }
+
 
 
 
@@ -429,6 +440,64 @@ opacity: 1;
 
 }
 
+
+
+/* ===== VIDEOS CIRCULARES ===== */
+
+.circle-video-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:120px;
+
+  margin:200px 0;
+}
+
+/* videos */
+.circle-video{
+  width:260px;
+  height:260px;
+
+  object-fit:cover;
+  border-radius:50%;
+
+  opacity:0;
+  transform:scale(0.7);
+
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
+}
+
+/* aparece */
+.circle-video.visible{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* CONTENEDOR */
+.video-circles{
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  margin:200px 0;
+}
+
+/* CÍRCULO */
+.circle-video{
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  overflow:hidden;   /* 👈 corta el video */
+  position:relative;
+}
+
+/* VIDEO */
+.circle-video video{
+  width:100%;
+  height:100%;
+  object-fit:cover; /* llena el círculo */
+}
 
 
 
