@@ -81,5 +81,31 @@ function moveCursor() {
   requestAnimationFrame(moveCursor);
 }
 
+
+// ===== videos circulares scroll =====
+
+const circleVideos = document.querySelectorAll(".circle-video");
+
+const circleObserver = new IntersectionObserver((entries)=>{
+
+  entries.forEach(entry=>{
+
+    const vid = entry.target;
+
+    if(entry.isIntersecting){
+      vid.classList.add("visible");
+      vid.play();
+    }else{
+      vid.pause();
+      vid.currentTime = 0;
+    }
+
+  });
+
+},{
+  threshold:0.6
+});
+
+circleVideos.forEach(v => circleObserver.observe(v));
 moveCursor();
 
