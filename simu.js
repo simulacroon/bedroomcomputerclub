@@ -82,6 +82,10 @@ function moveCursor() {
 }
 
 
+moveCursor();
+
+
+
 // ===== videos circulares scroll =====
 
 const circleVideos = document.querySelectorAll(".circle-video");
@@ -107,5 +111,4 @@ const circleObserver = new IntersectionObserver((entries)=>{
 });
 
 circleVideos.forEach(v => circleObserver.observe(v));
-moveCursor();
 
