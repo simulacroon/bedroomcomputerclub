@@ -31,7 +31,7 @@ body {
 .bg-wave{
   position:absolute;
   left:400px;
-  top:20%;
+  top:50%;
   width:600px;
   opacity:0.7;
 
@@ -72,22 +72,22 @@ body {
 
 .f1{
   left:120px;
-  top:360px;
+  top:460px;
 }
 
 .f2{
   left:260px;
-  top:420px;
+  top:520px;
 }
 
 .f3{
   left:180px;
-  top:520px;
+  top:620px;
 }
 
 .f4{
   left:320px;
-  top:600px;
+  top:700px;
 }
 
 
