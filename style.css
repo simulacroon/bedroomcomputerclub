@@ -35,7 +35,7 @@ body {
   width:500px;
   opacity:0.9;
   
-  transform: translateY(120px); /* BAJA TODO */
+  transform: translateY(400px); /* BAJA TODO */
   animation: float 6s ease-in-out infinite;
 }
 
