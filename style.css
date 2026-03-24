@@ -251,13 +251,13 @@ opacity: 1;
 .logo-link {
   position: fixed;
   top: 140px;
-  left: 40px;
+  left: 70px;
   z-index: 5;
   opacity: 0.85;
 }
 
 .logo-link img {
-  width: 300px; /* ajusta */
+  width: 400px; /* ajusta */
   height: auto;
   display: block;
 }
