@@ -510,7 +510,7 @@ opacity: 1;
 .feudalismo-text{
   color:#63ff7a;
   font-family:monospace;
-  max-width:420px;
+  width:420px;
 }
 
 .fdlsm{
@@ -539,7 +539,6 @@ opacity: 1;
 
 .feudalismo-video{
   display:flex;
-  justify-content:flex-end;
 }
 
 .feudalismo-video video{
