@@ -508,13 +508,13 @@ opacity: 1;
 
 .feudalismo-video-left{
   justify-self:start;
+  width:100%;
 }
 
 .feudalismo-video-left video{
+  display:block;
   width:100%;
   height:auto;
-  object-fit:cover;
-  opacity:0.9;
 }
 
 
