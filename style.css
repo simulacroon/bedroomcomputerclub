@@ -486,23 +486,25 @@ opacity: 1;
   object-fit:cover; /* llena el círculo */
 }
 
-/FEUDALISMO/
+/* FEUDALISMO */
 
 .feudalismo-section{
   width:100%;
-  height:100vh;
+  min-height:100vh;
 
   display:grid;
-
-  /* izquierda grande, centro medio, derecha pequeña */
   grid-template-columns: 1.3fr 1fr 0.8fr;
 
   align-items:center;
+  column-gap:80px;
 
   max-width:1400px;
   margin:0 auto;
   padding:120px 80px;
 }
+
+
+/* VIDEO IZQUIERDA */
 
 .feudalismo-video-left{
   justify-self:start;
@@ -510,19 +512,22 @@ opacity: 1;
 
 .feudalismo-video-left video{
   width:100%;
-  max-width:520px;
   height:auto;
   object-fit:cover;
   opacity:0.9;
 }
 
 
+/* TEXTO CENTRO */
+
 .feudalismo-text{
   color:#63ff7a;
   font-family:monospace;
+  text-align:left;
 
-  text-align:left;   /* ← en tu diseño NO está centrado */
-  justify-self:center;
+  justify-self:start;
+  margin-left:40px;
+
   max-width:420px;
 }
 
@@ -545,13 +550,14 @@ opacity: 1;
   margin:10px 0;
 }
 
-
-
 .feudalismo-text p{
   color:white;
   line-height:1.5;
   font-size:14px;
 }
+
+
+/* VIDEO DERECHA */
 
 .feudalismo-video{
   justify-self:end;
@@ -564,12 +570,13 @@ opacity: 1;
 }
 
 
+/* EXTRA */
+
 .mknk-text{
   color:red;
   line-height:1.5;
   font-size:34px;
 }
-  
 
 
 
