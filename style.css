@@ -510,8 +510,11 @@ opacity: 1;
   justify-self:start;
   width:100%;
   max-width:520px;
+  display:block;
+  aspect-ratio: 16 / 9;   /* ← CLAVE */
+  object-fit: cover;
 
-  min-width:0;   /* ← SOLUCIÓN */
+  
 }
 
 .feudalismo-video-left video{
@@ -528,11 +531,12 @@ opacity: 1;
   color:#63ff7a;
   font-family:monospace;
   text-align:left;
+  hyphens:auto;
 
   justify-self:start;
   margin-left:40px;
 
-  max-width:420px;
+  max-width:340px;
 }
 
 
@@ -558,6 +562,10 @@ opacity: 1;
   color:white;
   line-height:1.5;
   font-size:14px;
+  
+  text-align:justify;
+  text-justify:inter-word;
+}
 }
 
 
