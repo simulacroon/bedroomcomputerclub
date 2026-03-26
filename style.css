@@ -628,8 +628,13 @@ opacity: 1;
   filter:brightness(1.2);
 }
 
-
-
+.mknk::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.2);
+  z-index:1;
+}
 
 
 
