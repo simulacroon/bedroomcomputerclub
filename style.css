@@ -509,7 +509,7 @@ opacity: 1;
 .feudalismo-video-left{
   justify-self:start;
   width:100%;
-  max-width:520px;
+  max-width:420px;
   display:block;
   aspect-ratio: 16 / 9;   /* ← CLAVE */
   object-fit: cover;
@@ -536,7 +536,7 @@ opacity: 1;
   justify-self:start;
   margin-left:40px;
 
-  max-width:200px;
+  max-width:215px;
 }
 
 
