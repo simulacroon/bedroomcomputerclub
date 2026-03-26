@@ -509,6 +509,8 @@ opacity: 1;
 .feudalismo-video-left{
   justify-self:start;
   width:100%;
+  background:red;
+  min-height:300px;
 }
 
 .feudalismo-video-left video{
