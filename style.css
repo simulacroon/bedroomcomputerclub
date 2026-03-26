@@ -493,32 +493,39 @@ opacity: 1;
   height:100vh;
 
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr; /* 3 columnas */
+
+  /* izquierda grande, centro medio, derecha pequeña */
+  grid-template-columns: 1.3fr 1fr 0.8fr;
+
   align-items:center;
+
   max-width:1400px;
   margin:0 auto;
-
   padding:120px 80px;
 }
 
-.fdlsm-video{
-  width: 420px;
-  height: auto;
-  object-fit: cover;
-  opacity: 0.9;
-  justify-self:center;
+.feudalismo-video-left{
+  justify-self:start;
 }
+
+.feudalismo-video-left video{
+  width:100%;
+  max-width:520px;
+  height:auto;
+  object-fit:cover;
+  opacity:0.9;
 }
+
 
 .feudalismo-text{
   color:#63ff7a;
   font-family:monospace;
-  width:420px;
-  justify-self:center;
-  text-align:center;
 
+  text-align:left;   /* ← en tu diseño NO está centrado */
+  justify-self:center;
+  max-width:420px;
 }
-}
+
 
 .fdlsm{
   font-size:72px;
@@ -538,6 +545,8 @@ opacity: 1;
   margin:10px 0;
 }
 
+
+
 .feudalismo-text p{
   color:white;
   line-height:1.5;
@@ -545,15 +554,13 @@ opacity: 1;
 }
 
 .feudalismo-video{
-  display:flex;
-  justify-self:center;
+  justify-self:end;
 }
 
 .feudalismo-video video{
   width:320px;
   height:auto;
   object-fit:cover;
-  
 }
 
 
