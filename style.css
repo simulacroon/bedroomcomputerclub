@@ -600,8 +600,8 @@ opacity: 1;
   position:absolute;
   inset:0;
 
-  width:80%;
-  height:80%;
+  width:95%;
+  height:95%;
 
   object-fit:cover;
   z-index:0;
@@ -615,8 +615,9 @@ opacity: 1;
 }
 
 .mknk-button img{
-  width:520px;
+  width:620px;
   height:auto;
+  
 
   cursor:pointer;
   transition:transform .3s ease, filter .3s ease;
