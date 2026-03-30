@@ -610,7 +610,7 @@ opacity: 1;
 .mknk-button{
   position:relative;
   z-index:2;
-  transform: translateX(200px); /* mueve hacia la derecha */
+  transform: translateX(170px); /* mueve hacia la derecha */
 
   display:block;
 }
