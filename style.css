@@ -670,10 +670,11 @@ opacity: 1;
   justify-content:center;
   align-items:center;
   margin-bottom:40px;
-  transform:translateX(-10px); 
   position:relative;
-  left:10px;
+
+  transform:translateX(-10px);
 }
+
 
 
 .final-videos video{
