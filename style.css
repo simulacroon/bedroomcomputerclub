@@ -658,6 +658,7 @@ opacity: 1;
 
   text-align:center;
   padding:120px 0;
+  
 }
 
 /* GRID VIDEOS */
@@ -670,6 +671,8 @@ opacity: 1;
   align-items:center;
   margin-bottom:40px;
   transform:translateX(-10px); 
+  position:relative;
+  left:10px;
 }
 
 
