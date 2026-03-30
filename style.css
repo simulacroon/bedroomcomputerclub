@@ -664,12 +664,13 @@ opacity: 1;
 
 .final-videos{
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(4, 140px); /* tamaño real de videos */
   gap:20px;
   justify-content:center;
   align-items:center;
   margin-bottom:40px;
 }
+
 
 .final-videos video{
   width:140px;
@@ -677,6 +678,7 @@ opacity: 1;
   object-fit:cover;
   filter:grayscale(100%);
   transition:transform .4s ease, filter .4s ease;
+  
 }
 
 
@@ -692,6 +694,10 @@ opacity: 1;
   font-size:12px;
   color:#aaa;
   letter-spacing:2px;
+
+  width:max-content;
+  margin:0 auto;
+
 }
 
 
