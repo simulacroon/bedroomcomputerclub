@@ -610,6 +610,7 @@ opacity: 1;
 .mknk-button{
   position:relative;
   z-index:2;
+  transform: translateX(200px); /* mueve hacia la derecha */
 
   display:block;
 }
@@ -654,7 +655,9 @@ opacity: 1;
   justify-content:flex-end;
   align-items:center;
   gap:40px;
-  padding:80px 20px;
+
+  text-align:center;
+  padding:120px 0;
 }
 
 /* GRID VIDEOS */
@@ -663,6 +666,9 @@ opacity: 1;
   display:grid;
   grid-template-columns:repeat(4, 1fr);
   gap:20px;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:40px;
 }
 
 .final-videos video{
@@ -672,6 +678,7 @@ opacity: 1;
   filter:grayscale(100%);
   transition:transform .4s ease, filter .4s ease;
 }
+
 
 .final-videos video:hover{
   transform:scale(1.08);
@@ -686,3 +693,5 @@ opacity: 1;
   color:#aaa;
   letter-spacing:2px;
 }
+
+
