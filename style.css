@@ -1,3 +1,4 @@
+
 html, body {
   margin: 0;
   height: 100%;
@@ -103,13 +104,8 @@ body {
   transition: opacity 0.6s ease;
   padding-right: 160px;
   z-index: 2;
-
-  pointer-events: none;
 }
 
-.panel.active{
-  pointer-events: auto;
-}
 
 .panel img {
   max-width: 700px;
@@ -275,12 +271,20 @@ opacity: 1;
   filter .4s ease,
   transform .4s ease;
 
+}
+
+.logo-link:hover img{
+  filter:
+    invert(1)
+    drop-shadow(0 0 12px #63ff7a)
+    brightness(1.2);
+
+  transform:scale(1.02);
+}
 
 .logo-link:hover {
   opacity: 1;
 }
-
-
 
 
 .video-page {
