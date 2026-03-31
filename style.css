@@ -723,3 +723,32 @@ opacity: 1;
   content:" ]";
 }
 
+
+.contact-link{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+
+  font-size:12px;
+  font-family:monospace;
+  color:white;
+  text-decoration:none;
+
+  background:black;
+  padding:6px 10px;
+  border-radius:2px;
+
+  opacity:0.85;
+  z-index:20;
+
+  transition:
+    letter-spacing .3s ease,
+    background .3s ease,
+    color .3s ease;
+}
+
+.contact-link:hover{
+  letter-spacing:2px;
+  background:white;
+  color:black;
+}
