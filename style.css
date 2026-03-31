@@ -103,8 +103,13 @@ body {
   transition: opacity 0.6s ease;
   padding-right: 160px;
   z-index: 2;
+
+  pointer-events: none;
 }
 
+.panel.active{
+  pointer-events: auto;
+}
 
 .panel img {
   max-width: 700px;
