@@ -275,20 +275,28 @@ opacity: 1;
   filter .4s ease,
   transform .4s ease;
 
+
+
+.logo-link::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0%;
+  height:1px;
+  background:white;
+  transition:width .4s ease;
 }
 
-.logo-link:hover img{
-  filter:
-    invert(1)
-    drop-shadow(0 0 12px #63ff7a)
-    brightness(1.2);
-
-  transform:scale(1.02);
+.logo-link:hover::after{
+  width:100%;
 }
 
 .logo-link:hover {
   opacity: 1;
 }
+
+
 
 
 .video-page {
