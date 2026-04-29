@@ -1,27 +1,57 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  color: white;
-  font-family: monospace;
-  overflow: hidden;
+body {
+    margin: 0;
+    overflow: hidden;
+    background: black;
+    cursor: none; /* ocultamos cursor real */
 }
 
-#ascii {
-  white-space: pre;
-  font-size: 12px;
-  line-height: 12px;
-  padding: 10px;
+/* canvas ocupa toda la pantalla */
+canvas {
+    display: block;
 }
 
-#start {
-  position: fixed;
-  inset: 0;
-  background: black;
-  color: white;
-  font-family: monospace;
-  font-size: 24px;
-  border: none;
-  cursor: pointer;
-  z-index: 100;
+/* burbuja de mensaje */
+#mensaje {
+    position: absolute;
+    color: white;
+    background: rgba(0,0,0,0.8);
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-family: monospace;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#instrucciones {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 12px;
+    backdrop-filter: blur(5px);
+    z-index: 5;
+    max-width: 200px;
+}
+
+/* botón cerrar */
+#instrucciones span {
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+#instrucciones span:hover {
+    opacity: 1;
+}
+
+#instrucciones {
+    transition: opacity 1s ease;
 }
