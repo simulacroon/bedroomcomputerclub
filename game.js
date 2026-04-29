@@ -1,152 +1,160 @@
-const URL = "https://teachablemachine.withgoogle.com/models/ncNl-zz7h/";
+const canvas = document.getElementById("lienzo");
+const ctx = canvas.getContext("2d");
 
-let model, webcam;
-let lastGesture = "";
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-const asciiEl = document.getElementById("ascii");
+let mouse = { x: 0, y: 0 };
 
-const badChars = "@#$%&*+=-:/\\|{}[]<>░▒▓█";
+let hue = 0;
+let historial = [];
 
-const poems = [
-`el cuerpo recuerda
-antes que la máquina
-el gesto abre
-la señal fluye`,
+// velocidad
+let velocidad = 0;
+let ultimoX = window.innerWidth / 2;
+let ultimoY = window.innerHeight / 2;
 
-`no controles
-respira
-la imagen
-te reconoce`,
-
-`la cámara observa
-pero eres tú
-quien activa
-el organismo`
+// frases extra
+const frasesExtra = [
+    "Glimmers of Hope",
+    "Ultra Villain",
+    "Obsessive Compulsion",
+    "Dangerous Games",
+    "Im The One You Want",
+    "Gloves Off",
+    "Dirt",
+    "Kiss the Ring",
+    "Might Jump…",
+    "A Moving Blur",
+    "Come Home",
 ];
 
-// -------- INIT --------
-async function init() {
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
+// detectar movimiento
+function analizarMovimiento() {
 
-  console.log("cargando modelo...");
-  model = await tmImage.load(modelURL, metadataURL);
-  console.log("modelo cargado");
+    if (historial.length < 10) return "indefinido";
 
-  webcam = new tmImage.Webcam(320, 240, true);
-  await webcam.setup();
-  await webcam.play();
+    let cambiosDireccion = 0;
 
-  document.body.appendChild(webcam.canvas);
-  webcam.canvas.style.display = "none";
+    for (let i = 2; i < historial.length; i++) {
 
-  requestAnimationFrame(loop);
-}
+        let dx1 = historial[i-1].x - historial[i-2].x;
+        let dy1 = historial[i-1].y - historial[i-2].y;
 
-// -------- LOOP --------
-async function loop() {
-  webcam.update();
+        let dx2 = historial[i].x - historial[i-1].x;
+        let dy2 = historial[i].y - historial[i-1].y;
 
-  const prediction = await model.predict(webcam.canvas);
+        // normalizar vectores
+        let mag1 = Math.sqrt(dx1*dx1 + dy1*dy1);
+        let mag2 = Math.sqrt(dx2*dx2 + dy2*dy2);
 
-  for (let i = 0; i < prediction.length; i++) {
-    console.log(
-      prediction[i].className,
-      prediction[i].probability.toFixed(2)
-    );
+        if (mag1 === 0 || mag2 === 0) continue;
 
-    if (prediction[i].className === "mal" && prediction[i].probability > 0.9) {
-    generateBrokenAscii();
+        let dot = (dx1 * dx2 + dy1 * dy2) / (mag1 * mag2);
+
+        // si cambia bastante dirección
+        if (dot < 0.7) {
+            cambiosDireccion++;
+        }
     }
 
-    if (prediction[i].className === "bien" && prediction[i].probability > 0.9) {
-    generatePoem();
+    if (cambiosDireccion < 3) return "recto";
+    if (cambiosDireccion < 8) return "curvo";
+
+    return "caotico";
+}
+
+// movimiento del mouse
+window.addEventListener("mousemove", (e) => {
+
+    let dx = e.clientX - ultimoX;
+    let dy = e.clientY - ultimoY;
+
+    let nuevaVelocidad = Math.sqrt(dx * dx + dy * dy);
+
+    // suavizado
+    velocidad = velocidad * 0.8 + nuevaVelocidad * 0.2;
+
+    ultimoX = e.clientX;
+    ultimoY = e.clientY;
+
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+
+    // guardar historial correctamente
+    historial.push({ x: mouse.x, y: mouse.y });
+
+    if (historial.length > 20) {
+        historial.shift();
     }
 
-    if (prediction[i].className === "stop" && prediction[i].probability > 0.9) {
-    clearScreen();
-    }
-
-  }
-
-  requestAnimationFrame(loop);
-}
-
-
-
-// -------- GESTOS --------
-function react(gesture) {
-  if (gesture === "mal") showBrokenAscii();
-  if (gesture === "bien") showPoem();
-  if (gesture === "stop") fadeOut();
-}
-
-// -------- VISUALES --------
-function showBrokenAscii() {
-  let output = "";
-  const cols = Math.floor(window.innerWidth / 8);
-  const rows = Math.floor(window.innerHeight / 12);
-
-  for (let y = 0; y < rows; y++) {
-    for (let x = 0; x < cols; x++) {
-      output += badChars[Math.floor(Math.random() * badChars.length)];
-    }
-    output += "\n";
-  }
-
-  asciiEl.style.opacity = 1;
-  asciiEl.innerText = output;
-}
-
-function showPoem() {
-  const poem = poems[Math.floor(Math.random() * poems.length)];
-  const repeat = Math.floor(window.innerHeight / 60);
-
-  asciiEl.style.opacity = 1;
-  asciiEl.innerText = poem.repeat(repeat);
-}
-
-function fadeOut() {
-  asciiEl.style.transition = "opacity 1.2s ease";
-  asciiEl.style.opacity = 0;
-
-  setTimeout(() => {
-    asciiEl.innerText = "";
-    asciiEl.style.transition = "";
-  }, 1200);
-}
-
-// -------- BOTÓN --------
-document.getElementById("start").addEventListener("click", async () => {
-  document.getElementById("start").style.display = "none";
-  await init();
+    dibujar();
 });
 
+// pincel
+function dibujar() {
 
+    let size = 10;
 
-function generateBrokenAscii() {
-  let output = "";
-  const badChars = "@#$%&*+=-:/\\|{}[]<>";
+    let saturacion = Math.min(100, 80 + velocidad);
 
-  for (let i = 0; i < 2000; i++) {
-    output += badChars.charAt(Math.floor(Math.random() * badChars.length));
-    if (i % 80 === 0) output += "\n";
-  }
+    ctx.fillStyle = `hsl(${hue}, ${saturacion}%, 60%)`;
 
-  document.getElementById("ascii").innerText = output;
+    ctx.fillRect(
+        Math.floor(mouse.x / size) * size,
+        Math.floor(mouse.y / size) * size,
+        size,
+        size
+    );
+
+    hue += 1;
+    if (hue > 360) hue = 0;
 }
 
-function generatePoem() {
-  const poems = [
-    "la pantalla respira\ncomo un animal lento\n",
-    "datos caen\ncomo lluvia artificial\n",
-    "el gesto abre\nun poema eléctrico\n"
-  ];
+// click → mensaje
+window.addEventListener("click", (e) => {
 
-  let poem = poems[Math.floor(Math.random() * poems.length)];
-  document.getElementById("ascii").innerText = poem.repeat(30);
+    let mensaje = document.getElementById("mensaje");
+
+    let tipo = analizarMovimiento();
+
+    let texto = "";
+
+    if (tipo === "recto") {
+        texto = "hummmmmm";
+    } 
+    else if (tipo === "curvo") {
+        texto = "ayyyy";
+    } 
+    else if (tipo === "caotico") {
+        texto = "o o";
+    } 
+    else {
+        texto = "uiii";
+    }
+
+    // añadir frase artística
+    let extra = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
+
+    mensaje.innerText = texto + " — " + extra;
+
+    mensaje.style.left = e.clientX + "px";
+    mensaje.style.top = e.clientY + "px";
+
+    mensaje.style.opacity = 1;
+
+    setTimeout(() => {
+        mensaje.style.opacity = 0;
+    }, 2000);
+});
+
+function cerrarInstrucciones() {
+    document.getElementById("instrucciones").style.display = "none";
 }
 
-function clearScreen() {
-  document.getElementById("ascii").innerText = "";
-}
+window.onload = () => {
+    setTimeout(() => {
+        let el = document.getElementById("instrucciones");
+        if (el) el.style.opacity = 0;
+    }, 5000);
+};
