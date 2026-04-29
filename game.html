@@ -1,33 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Gesture ASCII Game</title>
-  
-  <nav class="ascii-nav">
-    <a href="index.html" class="nav-box">home</a>
-    <a href="game.html" class="nav-box">game</a>
-    <a href="video.html" class="nav-box">video</a>
-  </nav>
-
-  
-  <!-- p5 -->
-  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
-
-  <!-- Teachable Machine -->
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
-
-  <link rel="stylesheet" href="game.css">
+<meta charset="UTF-8">
+<title>Oráculo Pincel</title>
+<link rel="stylesheet" href="orakulo.css">
 </head>
-
 <body>
-   <button id="start">
-  activar organismo
-   </button>
+
+<canvas id="lienzo"></canvas>
+
+<div id="mensaje"></div>
 
 
-  <div id="ascii"></div>
-  <script src="game.js"></script>
+<div id="instrucciones">
+    <p>
+        mueve el cursor<br>
+        dibuja sin pensar<br>
+        haz clic para revelar
+    </p>
+    <span onclick="cerrarInstrucciones()">×</span>
+</div>
+
+
+
+<script src="orakulo.js"></script>
+
 </body>
 </html>
-
