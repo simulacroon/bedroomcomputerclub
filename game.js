@@ -145,7 +145,7 @@ window.addEventListener("click", (e) => {
 
     setTimeout(() => {
         mensaje.style.opacity = 0;
-    }, 2000);
+    }, 8000);
 });
 
 function cerrarInstrucciones() {
