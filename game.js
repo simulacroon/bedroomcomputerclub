@@ -16,17 +16,17 @@ let ultimoY = window.innerHeight / 2;
 
 // frases extra
 const frasesExtra = [
-    "Glimmers of Hope",
-    "Ultra Villain",
-    "Obsessive Compulsion",
-    "Dangerous Games",
-    "Im The One You Want",
-    "Gloves Off",
-    "Dirt",
-    "Kiss the Ring",
-    "Might Jump…",
-    "A Moving Blur",
-    "Come Home",
+    "Glimmers of Hope . ' - cierra los ojos, la señal está en los párpados ",
+    "Ultra Villain . ' - trescientas lenguas de viaje submarino en la madrugada",
+    "Obsessive Compulsion . ' - no va a pasar ",
+    "Dangerous Games  . ' - cuánto te vas a arriesgar?",
+    "I'm The One You Want  . ' -hmmmm, hmmmm, hmmm, gurl yo soy",
+    "Gloves Off . '  la ambición, la justa y sana ¿te la presto?",
+    "Dirt  . ' sueño para dormir, hambre para soñar ",
+    "Kiss the Ring . ' - no llores más, el viento traerá colores y luz que te harán soñar.",
+    "Might Jump… . ' - ¿sabías que podías reclamar al soñador del sueño?",
+    "A Moving Blur . ' - es tan difícil encontrarte, la niebla que has adquirido, te ha convertido en un mentirosx ",
+    "Come Home  . ' - en mis sueños solo quiero sentirlo",
 ];
 
 // detectar movimiento
