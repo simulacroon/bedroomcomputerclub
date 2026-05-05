@@ -20,6 +20,11 @@ let ultimoY = window.innerHeight / 2;
 let ultimoTap = 0;
 let delayDobleTap = 300;
 
+// contador distorsión
+let contadorDobleTap = 0;
+let distorsionActiva = false;
+let tiempoDistorsion = 0;
+
 // respiración
 let tiempo = 0;
 
@@ -33,26 +38,59 @@ let colorExpansion = "white";
 // autónomo
 let ultimoAutoMensaje = 0;
 let cooldownAuto = 7000;
-let umbralQuietudExpansion = 2000;
-let umbralQuietudAuto = 6000;
 
 // audio
+let musica = null;
+let musicaActiva = false;
 let audioCtx = null;
 
 // frases
 const frasesExtra = [
-    "cierra los ojos, la señal está en los párpados",
-    "trescientas lenguas de viaje submarino",
-    "no va a pasar",
-    "cuánto te vas a arriesgar?",
-    "yo soy lo que buscas",
-    "la ambición es prestada",
-    "hambre para soñar",
-    "el viento traerá luz",
-    "puedes reclamar el sueño",
-    "la niebla te cambia",
-    "vuelve a casa"
+    "Glimmers of Hope . ' - cierra los ojos, la señal está en los párpados ",
+    "Ultra Villain . ' - trescientas lenguas de viaje submarino en la madrugada",
+    "Obsessive Compulsion . ' - no va a pasar ",
+    "Dangerous Games  . ' - cuánto te vas a arriesgar?",
+    "I'm The One You Want  . ' -hmmmm, hmmmm, hmmm, gurl yo soy",
+    "Gloves Off . '  la ambición, la justa y sana ¿te la presto?",
+    "Dirt  . ' sueño para dormir, hambre para soñar ",
+    "Kiss the Ring . ' - no llores más, el viento traerá colores y luz que te harán soñar.",
+    "Might Jump… . ' - ¿sabías que podías reclamar al soñador del sueño?",
+    "A Moving Blur . ' - es tan difícil encontrarte, la niebla que has adquirido, te ha convertido en un mentirosx ",
+    "Come Home  . ' - en mis sueños solo quiero sentirlo"
 ];
+
+// =======================
+// AUDIO
+// =======================
+
+function iniciarMusica() {
+    if (!musica) {
+        musica = new Audio("audio/track.mp3");
+        musica.loop = true;
+        musica.volume = 0;
+    }
+    musica.play();
+}
+
+function reproducirSonido() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+
+    osc.frequency.value = 200 + Math.random() * 300;
+
+    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 1);
+}
 
 // =======================
 // MOVIMIENTO
@@ -75,7 +113,6 @@ function mover(x, y) {
     historial.push({ x, y });
     if (historial.length > 20) historial.shift();
 
-    // reset quietud
     ultimoMovimientoTiempo = Date.now();
     modoExpansion = false;
 
@@ -88,12 +125,12 @@ window.addEventListener("mousemove", (e) => {
 
 window.addEventListener("touchmove", (e) => {
     e.preventDefault();
-    let touch = e.touches[0];
-    mover(touch.clientX, touch.clientY);
+    let t = e.touches[0];
+    mover(t.clientX, t.clientY);
 }, { passive: false });
 
 // =======================
-// DIBUJO (RESPIRA)
+// DIBUJO
 // =======================
 
 function dibujar() {
@@ -101,9 +138,33 @@ function dibujar() {
     let baseSize = 10;
 
     tiempo += 0.05;
-    let pulso = Math.sin(tiempo) * 2;
 
-    // expansión
+    // 🔥 DISTORSIÓN
+    if (distorsionActiva) {
+
+        if (Date.now() > tiempoDistorsion) {
+            distorsionActiva = false;
+        }
+
+        let ruido = Math.sin(tiempo * 10) * 10;
+        let size = baseSize + ruido;
+
+        let offsetX = (Math.random() - 0.5) * 20;
+        let offsetY = (Math.random() - 0.5) * 20;
+
+        ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+        ctx.fillRect(
+            Math.floor((mouse.x + offsetX) / baseSize) * baseSize,
+            Math.floor((mouse.y + offsetY) / baseSize) * baseSize,
+            size,
+            size
+        );
+
+        return;
+    }
+
+    // 🌫️ EXPANSIÓN
     if (modoExpansion) {
 
         let size = baseSize * 2.5;
@@ -120,13 +181,11 @@ function dibujar() {
         return;
     }
 
-    // normal
+    // NORMAL
+    let pulso = Math.sin(tiempo) * 2;
     let size = baseSize + pulso;
 
-    let saturacion = Math.min(100, 80 + velocidad);
-    let luz = 60 + Math.sin(tiempo) * 10;
-
-    ctx.fillStyle = `hsl(${hue}, ${saturacion}%, ${luz}%)`;
+    ctx.fillStyle = `hsl(${hue}, 80%, 60%)`;
 
     ctx.fillRect(
         Math.floor(mouse.x / baseSize) * baseSize,
@@ -140,19 +199,16 @@ function dibujar() {
 }
 
 // =======================
-// MENSAJES
+// MENSAJE
 // =======================
 
 function lanzarMensaje(x, y) {
 
     let mensaje = document.getElementById("mensaje");
 
-    let textos = ["hummmmmm", "ayyyy", "o o", "uiii"];
-    let texto = textos[Math.floor(Math.random() * textos.length)];
+    let texto = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
 
-    let extra = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
-
-    mensaje.innerText = texto + " — " + extra;
+    mensaje.innerText = texto;
 
     mensaje.style.left = x + "px";
     mensaje.style.top = y + "px";
@@ -160,7 +216,7 @@ function lanzarMensaje(x, y) {
 
     setTimeout(() => {
         mensaje.style.opacity = 0;
-    }, 8000);
+    }, 5000);
 }
 
 // =======================
@@ -172,7 +228,24 @@ function detectarDobleTap(x, y) {
     let ahora = Date.now();
 
     if (ahora - ultimoTap < delayDobleTap) {
+
+        contadorDobleTap++;
         lanzarMensaje(x, y);
+
+        if (contadorDobleTap === 3) {
+
+            distorsionActiva = true;
+            tiempoDistorsion = Date.now() + 5000;
+
+            reproducirSonido();
+
+            contadorDobleTap = 0;
+        }
+    }
+
+    if (!musica) {
+        iniciarMusica();
+        musica.pause();
     }
 
     ultimoTap = ahora;
@@ -183,64 +256,25 @@ window.addEventListener("click", (e) => {
 });
 
 window.addEventListener("touchstart", (e) => {
-    let touch = e.touches[0];
-    detectarDobleTap(touch.clientX, touch.clientY);
+    let t = e.touches[0];
+    detectarDobleTap(t.clientX, t.clientY);
 });
 
 // =======================
-// SONIDO
-// =======================
-
-function reproducirSonido() {
-
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-
-    let osc = audioCtx.createOscillator();
-    let gain = audioCtx.createGain();
-
-    osc.type = "sine";
-    osc.frequency.value = 200 + Math.random() * 300;
-
-    gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 1.5);
-}
-
-// =======================
-// MENSAJE AUTÓNOMO
-// =======================
-
-function mensajeAutonomo() {
-
-    let x = Math.random() * window.innerWidth;
-    let y = Math.random() * window.innerHeight;
-
-    lanzarMensaje(x, y);
-    reproducirSonido();
-}
-
-// =======================
-// QUIETUD
+// QUIETUD + MÚSICA
 // =======================
 
 function detectarQuietud() {
 
     let ahora = Date.now();
-    let tiempoQuieto = ahora - ultimoMovimientoTiempo;
+    let quieto = ahora - ultimoMovimientoTiempo;
 
     // expansión
-    if (tiempoQuieto > umbralQuietudExpansion && !modoExpansion) {
+    if (quieto > 2000 && !modoExpansion) {
 
         modoExpansion = true;
 
-        let h = Math.floor(Math.random() * 360);
+        let h = Math.random() * 360;
         colorExpansion = `hsl(${h}, 90%, 60%)`;
 
         setTimeout(() => {
@@ -248,13 +282,24 @@ function detectarQuietud() {
         }, 3000);
     }
 
-    // autónomo
-    if (
-        tiempoQuieto > umbralQuietudAuto &&
-        ahora - ultimoAutoMensaje > cooldownAuto
-    ) {
-        mensajeAutonomo();
-        ultimoAutoMensaje = ahora;
+    // música
+    if (quieto > 2000) {
+
+        if (!musicaActiva) {
+            iniciarMusica();
+            musicaActiva = true;
+        }
+
+        if (musica.volume < 0.5) musica.volume += 0.01;
+
+    } else {
+
+        if (musica && musica.volume > 0) musica.volume -= 0.02;
+
+        if (musica && musica.volume <= 0) {
+            musica.pause();
+            musicaActiva = false;
+        }
     }
 
     requestAnimationFrame(detectarQuietud);
@@ -265,14 +310,3 @@ function detectarQuietud() {
 // =======================
 
 detectarQuietud();
-
-window.onload = () => {
-    setTimeout(() => {
-        let el = document.getElementById("instrucciones");
-        if (el) el.style.opacity = 0;
-    }, 5000);
-};
-
-function cerrarInstrucciones() {
-    document.getElementById("instrucciones").style.display = "none";
-}
