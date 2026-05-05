@@ -16,6 +16,17 @@ let velocidad = 0;
 let ultimoX = window.innerWidth / 2;
 let ultimoY = window.innerHeight / 2;
 
+// doble tap
+let ultimoTap = 0;
+let delayDobleTap = 300;
+
+// respiración
+let tiempo = 0;
+
+// color fijo
+let colorFijo = null;
+let tiempoColorFijo = 0;
+
 // frases
 const frasesExtra = [
      "Glimmers of Hope . ' - cierra los ojos, la señal está en los párpados ",
@@ -31,7 +42,7 @@ const frasesExtra = [
     "Come Home  . ' - en mis sueños solo quiero sentirlo"
 ];
 
-// detectar movimiento
+// analizar gesto
 function analizarMovimiento() {
 
     if (historial.length < 10) return "indefinido";
@@ -61,7 +72,7 @@ function analizarMovimiento() {
     return "caotico";
 }
 
-// movimiento universal
+// mover
 function mover(x, y) {
 
     let dx = x - ultimoX;
@@ -98,27 +109,54 @@ window.addEventListener("touchmove", (e) => {
 
 }, { passive: false });
 
-// pincel
+// dibujar (RESPIRACIÓN AQUÍ)
 function dibujar() {
 
-    let size = 10;
+    let baseSize = 10;
 
-    let saturacion = Math.min(100, 80 + velocidad);
+    // respiración (onda suave)
+    tiempo += 0.05;
+    let pulso = Math.sin(tiempo) * 3; // tamaño fluctúa
 
-    ctx.fillStyle = `hsl(${hue}, ${saturacion}%, 60%)`;
+    let size = baseSize + pulso;
+
+    // color
+    if (colorFijo && Date.now() < tiempoColorFijo) {
+
+        ctx.fillStyle = colorFijo;
+
+    } else {
+
+        let saturacion = Math.min(100, 80 + velocidad);
+        let luz = 60 + Math.sin(tiempo) * 10; // respira también en luz
+
+        ctx.fillStyle = `hsl(${hue}, ${saturacion}%, ${luz}%)`;
+
+        hue++;
+        if (hue > 360) hue = 0;
+    }
 
     ctx.fillRect(
-        Math.floor(mouse.x / size) * size,
-        Math.floor(mouse.y / size) * size,
+        Math.floor(mouse.x / baseSize) * baseSize,
+        Math.floor(mouse.y / baseSize) * baseSize,
         size,
         size
     );
-
-    hue++;
-    if (hue > 360) hue = 0;
 }
 
-// mensaje
+// doble tap
+function detectarDobleTap(x, y) {
+
+    let ahora = new Date().getTime();
+
+    if (ahora - ultimoTap < delayDobleTap) {
+        lanzarMensaje(x, y);
+    }
+
+    ultimoTap = ahora;
+}
+
+// mensaje + activar estado
 function lanzarMensaje(x, y) {
 
     let mensaje = document.getElementById("mensaje");
@@ -132,6 +170,11 @@ function lanzarMensaje(x, y) {
         "uiii";
 
     let extra = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
+
+    // activar color fijo
+    let nuevoHue = Math.floor(Math.random() * 360);
+    colorFijo = `hsl(${nuevoHue}, 90%, 60%)`;
+    tiempoColorFijo = Date.now() + 3000;
 
     mensaje.innerText = texto + " — " + extra;
 
@@ -147,15 +190,13 @@ function lanzarMensaje(x, y) {
 
 // click PC
 window.addEventListener("click", (e) => {
-    lanzarMensaje(e.clientX, e.clientY);
+    detectarDobleTap(e.clientX, e.clientY);
 });
 
 // touch móvil
 window.addEventListener("touchstart", (e) => {
-
     let touch = e.touches[0];
-    lanzarMensaje(touch.clientX, touch.clientY);
-
+    detectarDobleTap(touch.clientX, touch.clientY);
 });
 
 // instrucciones
@@ -169,7 +210,3 @@ window.onload = () => {
         if (el) el.style.opacity = 0;
     }, 5000);
 };
-
-
-
-
