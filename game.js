@@ -1,5 +1,6 @@
 const canvas = document.getElementById("lienzo");
 const ctx = canvas.getContext("2d");
+document.body.style.touchAction = "none";
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
@@ -64,11 +65,36 @@ function analizarMovimiento() {
     return "caotico";
 }
 
+
+function mover(x, y) {
+
+    let dx = x - ultimoX;
+    let dy = y - ultimoY;
+
+    let nuevaVelocidad = Math.sqrt(dx * dx + dy * dy);
+
+    velocidad = velocidad * 0.8 + nuevaVelocidad * 0.2;
+
+    ultimoX = x;
+    ultimoY = y;
+
+    mouse.x = x;
+    mouse.y = y;
+
+    historial.push({ x: mouse.x, y: mouse.y });
+
+    if (historial.length > 20) historial.shift();
+
+    dibujar();
+}
+
+
 // movimiento del mouse
 window.addEventListener("mousemove", (e) => {
+    mover(e.clientX, e.clientY);
+});
 
-    let dx = e.clientX - ultimoX;
-    let dy = e.clientY - ultimoY;
+
 
     let nuevaVelocidad = Math.sqrt(dx * dx + dy * dy);
 
@@ -112,7 +138,7 @@ function dibujar() {
 }
 
 // click → mensaje
-window.addEventListener("click", (e) => {
+function lanzarMensaje(x, y) {
 
     let mensaje = document.getElementById("mensaje");
 
@@ -120,33 +146,37 @@ window.addEventListener("click", (e) => {
 
     let texto = "";
 
-    if (tipo === "recto") {
-        texto = "hummmmmm";
-    } 
-    else if (tipo === "curvo") {
-        texto = "ayyyy";
-    } 
-    else if (tipo === "caotico") {
-        texto = "o o";
-    } 
-    else {
-        texto = "uiii";
-    }
+    if (tipo === "recto") texto = "hummmmmm";
+    else if (tipo === "curvo") texto = "ayyyy";
+    else if (tipo === "caotico") texto = "o o";
+    else texto = "uiii";
 
-    // añadir frase artística
     let extra = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
 
     mensaje.innerText = texto + " — " + extra;
 
-    mensaje.style.left = e.clientX + "px";
-    mensaje.style.top = e.clientY + "px";
+    mensaje.style.left = x + "px";
+    mensaje.style.top = y + "px";
 
     mensaje.style.opacity = 1;
 
     setTimeout(() => {
         mensaje.style.opacity = 0;
     }, 8000);
+}
+
+window.addEventListener("click", (e) => {
+    lanzarMensaje(e.clientX, e.clientY);
 });
+
+window.addEventListener("touchstart", (e) => {
+
+    let touch = e.touches[0];
+
+    lanzarMensaje(touch.clientX, touch.clientY);
+
+});
+
 
 function cerrarInstrucciones() {
     document.getElementById("instrucciones").style.display = "none";
@@ -158,3 +188,18 @@ window.onload = () => {
         if (el) el.style.opacity = 0;
     }, 5000);
 };
+
+
+window.addEventListener("touchmove", (e) => {
+
+    e.preventDefault(); // evita scroll
+
+    let touch = e.touches[0];
+
+    mover(touch.clientX, touch.clientY);
+
+}, { passive: false });
+
+
+
+
