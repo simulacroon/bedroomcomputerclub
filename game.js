@@ -1,5 +1,6 @@
 const canvas = document.getElementById("lienzo");
 const ctx = canvas.getContext("2d");
+
 document.body.style.touchAction = "none";
 
 canvas.width = window.innerWidth;
@@ -15,19 +16,19 @@ let velocidad = 0;
 let ultimoX = window.innerWidth / 2;
 let ultimoY = window.innerHeight / 2;
 
-// frases extra
+// frases
 const frasesExtra = [
-    "Glimmers of Hope . ' - cierra los ojos, la señal está en los párpados ",
-    "Ultra Villain . ' - trescientas lenguas de viaje submarino en la madrugada",
-    "Obsessive Compulsion . ' - no va a pasar ",
-    "Dangerous Games  . ' - cuánto te vas a arriesgar?",
-    "I'm The One You Want  . ' -hmmmm, hmmmm, hmmm, gurl yo soy",
-    "Gloves Off . '  la ambición, la justa y sana ¿te la presto?",
-    "Dirt  . ' sueño para dormir, hambre para soñar ",
-    "Kiss the Ring . ' - no llores más, el viento traerá colores y luz que te harán soñar.",
-    "Might Jump… . ' - ¿sabías que podías reclamar al soñador del sueño?",
-    "A Moving Blur . ' - es tan difícil encontrarte, la niebla que has adquirido, te ha convertido en un mentirosx ",
-    "Come Home  . ' - en mis sueños solo quiero sentirlo",
+    "Glimmers of Hope...",
+    "Ultra Villain...",
+    "Obsessive Compulsion...",
+    "Dangerous Games...",
+    "I'm The One You Want...",
+    "Gloves Off...",
+    "Dirt...",
+    "Kiss the Ring...",
+    "Might Jump…",
+    "A Moving Blur...",
+    "Come Home..."
 ];
 
 // detectar movimiento
@@ -45,7 +46,6 @@ function analizarMovimiento() {
         let dx2 = historial[i].x - historial[i-1].x;
         let dy2 = historial[i].y - historial[i-1].y;
 
-        // normalizar vectores
         let mag1 = Math.sqrt(dx1*dx1 + dy1*dy1);
         let mag2 = Math.sqrt(dx2*dx2 + dy2*dy2);
 
@@ -53,19 +53,15 @@ function analizarMovimiento() {
 
         let dot = (dx1 * dx2 + dy1 * dy2) / (mag1 * mag2);
 
-        // si cambia bastante dirección
-        if (dot < 0.7) {
-            cambiosDireccion++;
-        }
+        if (dot < 0.7) cambiosDireccion++;
     }
 
     if (cambiosDireccion < 3) return "recto";
     if (cambiosDireccion < 8) return "curvo";
-
     return "caotico";
 }
 
-
+// movimiento universal
 function mover(x, y) {
 
     let dx = x - ultimoX;
@@ -81,41 +77,26 @@ function mover(x, y) {
     mouse.x = x;
     mouse.y = y;
 
-    historial.push({ x: mouse.x, y: mouse.y });
+    historial.push({ x, y });
 
     if (historial.length > 20) historial.shift();
 
     dibujar();
 }
 
-
-// movimiento del mouse
+// mouse
 window.addEventListener("mousemove", (e) => {
     mover(e.clientX, e.clientY);
 });
 
+// touch
+window.addEventListener("touchmove", (e) => {
+    e.preventDefault();
 
+    let touch = e.touches[0];
+    mover(touch.clientX, touch.clientY);
 
-    let nuevaVelocidad = Math.sqrt(dx * dx + dy * dy);
-
-    // suavizado
-    velocidad = velocidad * 0.8 + nuevaVelocidad * 0.2;
-
-    ultimoX = e.clientX;
-    ultimoY = e.clientY;
-
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-
-    // guardar historial correctamente
-    historial.push({ x: mouse.x, y: mouse.y });
-
-    if (historial.length > 20) {
-        historial.shift();
-    }
-
-    dibujar();
-});
+}, { passive: false });
 
 // pincel
 function dibujar() {
@@ -133,23 +114,22 @@ function dibujar() {
         size
     );
 
-    hue += 1;
+    hue++;
     if (hue > 360) hue = 0;
 }
 
-// click → mensaje
+// mensaje
 function lanzarMensaje(x, y) {
 
     let mensaje = document.getElementById("mensaje");
 
     let tipo = analizarMovimiento();
 
-    let texto = "";
-
-    if (tipo === "recto") texto = "hummmmmm";
-    else if (tipo === "curvo") texto = "ayyyy";
-    else if (tipo === "caotico") texto = "o o";
-    else texto = "uiii";
+    let texto =
+        tipo === "recto" ? "hummmmmm" :
+        tipo === "curvo" ? "ayyyy" :
+        tipo === "caotico" ? "o o" :
+        "uiii";
 
     let extra = frasesExtra[Math.floor(Math.random() * frasesExtra.length)];
 
@@ -165,19 +145,20 @@ function lanzarMensaje(x, y) {
     }, 8000);
 }
 
+// click PC
 window.addEventListener("click", (e) => {
     lanzarMensaje(e.clientX, e.clientY);
 });
 
+// touch móvil
 window.addEventListener("touchstart", (e) => {
 
     let touch = e.touches[0];
-
     lanzarMensaje(touch.clientX, touch.clientY);
 
 });
 
-
+// instrucciones
 function cerrarInstrucciones() {
     document.getElementById("instrucciones").style.display = "none";
 }
@@ -188,17 +169,6 @@ window.onload = () => {
         if (el) el.style.opacity = 0;
     }, 5000);
 };
-
-
-window.addEventListener("touchmove", (e) => {
-
-    e.preventDefault(); // evita scroll
-
-    let touch = e.touches[0];
-
-    mover(touch.clientX, touch.clientY);
-
-}, { passive: false });
 
 
 
