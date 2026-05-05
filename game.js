@@ -65,7 +65,7 @@ const frasesExtra = [
 
 function iniciarMusica() {
     if (!musica) {
-        musica = new Audio("audio/track.mp3");
+        musica = new Audio("soni/track.mp3");
         musica.loop = true;
         musica.volume = 0;
     }
