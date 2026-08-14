@@ -774,38 +774,39 @@ opacity: 1;
 }
 
 /* ==================================================
-   SIMULACROON // AUDIO SYSTEM
+   KINKYCUIR // FLOATING ASCII PLAYER
 ================================================== */
 
-.signal-player {
+.kinky-player {
 
   position: fixed;
 
   left: 25px;
   bottom: 25px;
 
-  width: 340px;
+  width: 285px;
 
-  padding: 16px;
+  padding: 12px 14px;
 
   box-sizing: border-box;
 
   background: rgba(0, 0, 0, 0.94);
 
-  border: 1px solid #63ff7a;
-
   color: white;
+
+  border: 1px solid rgba(255,255,255,.7);
 
   font-family: monospace;
 
   z-index: 9998;
 
   box-shadow:
-    0 0 20px rgba(99, 255, 122, 0.12);
+    0 0 12px rgba(99,255,122,.08);
 
   transition:
+    border-color .3s ease,
     box-shadow .3s ease,
-    border-color .3s ease;
+    opacity .3s ease;
 
 }
 
@@ -814,7 +815,7 @@ opacity: 1;
    PARTE SUPERIOR
 ========================= */
 
-.signal-top {
+.kinky-player-top {
 
   display: flex;
 
@@ -822,120 +823,112 @@ opacity: 1;
 
   align-items: center;
 
-  font-size: 9px;
+  font-size: 10px;
 
   letter-spacing: 1px;
 
   color: #63ff7a;
 
-  margin-bottom: 8px;
-
 }
 
-#signalIndicator {
 
-  font-size: 14px;
+#kinkyIndicator {
 
-  color: #63ff7a;
+  font-size: 13px;
 
 }
 
 
 /* =========================
-   ASCII
+   LÍNEAS ASCII
 ========================= */
 
-.signal-ascii {
+.kinky-player-line {
+
+  margin: 6px 0;
+
+  color: #63ff7a;
+
+  opacity: .55;
 
   font-size: 9px;
 
   letter-spacing: 1px;
-
-  color: #63ff7a;
-
-  opacity: .5;
 
   overflow: hidden;
 
   white-space: nowrap;
 
-  margin-bottom: 15px;
+}
+
+
+.bottom-line {
+
+  margin-top: 8px;
+
+  margin-bottom: 0;
 
 }
 
 
 /* =========================
-   TRANSMISSION
+   NOMBRE
 ========================= */
 
-.signal-transmission {
+.kinky-player-name {
 
-  font-size: 11px;
+  font-size: 16px;
 
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+
+  margin-top: 9px;
+
+}
+
+
+.kinky-player-transmission {
+
+  margin-top: 6px;
 
   color: #63ff7a;
-
-  margin-bottom: 8px;
-
-}
-
-
-.signal-title {
-
-  font-size: 20px;
-
-  line-height: 1.1;
-
-  margin-bottom: 6px;
-
-  text-transform: lowercase;
-
-}
-
-
-.signal-description {
-
-  font-size: 10px;
-
-  opacity: .5;
-
-  line-height: 1.5;
-
-  margin-bottom: 15px;
-
-}
-
-
-/* =========================
-   DATOS
-========================= */
-
-.signal-data {
-
-  display: flex;
-
-  justify-content: space-between;
 
   font-size: 9px;
 
+  letter-spacing: 2px;
+
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.kinky-player-title {
+
+  margin-top: 5px;
+
+  font-size: 12px;
+
+  line-height: 1.3;
+
+  min-height: 30px;
+
+}
+
+
+/* =========================
+   SIGNAL
+========================= */
+
+.kinky-player-signal {
+
+  margin-top: 7px;
+
   color: #63ff7a;
 
-  opacity: .7;
-
-  margin-bottom: 12px;
-
-}
-
-#signalBars {
+  font-size: 10px;
 
   letter-spacing: -1px;
-
-}
-
-#signalStatus {
-
-  color: white;
 
 }
 
@@ -944,37 +937,36 @@ opacity: 1;
    CONTROLES
 ========================= */
 
-.signal-controls {
+.kinky-player-controls {
 
   display: flex;
 
   align-items: center;
 
-  gap: 7px;
+  gap: 6px;
+
+  margin-top: 10px;
 
 }
 
 
-/* BOTONES */
-
-.signal-button {
-
-  width: 28px;
-  height: 28px;
-
-  padding: 0;
+.kinky-player-button {
 
   background: transparent;
 
-  border: 1px solid rgba(255,255,255,.7);
-
   color: white;
+
+  border: 1px solid rgba(255,255,255,.7);
 
   font-family: monospace;
 
-  font-size: 11px;
+  font-size: 9px;
+
+  padding: 5px 9px;
 
   cursor: pointer;
+
+  min-width: 30px;
 
   transition:
     background .2s ease,
@@ -984,7 +976,7 @@ opacity: 1;
 }
 
 
-.signal-button:hover {
+.kinky-player-button:hover {
 
   background: #63ff7a;
 
@@ -995,39 +987,59 @@ opacity: 1;
 }
 
 
-.signal-play {
+.kinky-play {
+
+  color: #63ff7a;
 
   border-color: #63ff7a;
 
-  color: #63ff7a;
+  min-width: 52px;
 
 }
 
 
 /* =========================
-   BARRA
+   PROGRESO
 ========================= */
 
-.signal-progress-box {
+.kinky-player-progress {
 
-  flex: 1;
+  display: flex;
 
-  height: 5px;
+  align-items: center;
 
-  background: rgba(255,255,255,.2);
+  gap: 7px;
 
-  position: relative;
+  margin-top: 10px;
 
-  cursor: pointer;
+  font-size: 8px;
+
+  opacity: .7;
 
 }
 
 
-.signal-progress {
+.kinky-progress-container {
+
+  flex: 1;
+
+  height: 3px;
+
+  background: rgba(255,255,255,.25);
+
+  cursor: pointer;
+
+  position: relative;
+
+}
+
+
+.kinky-progress {
 
   position: absolute;
 
   left: 0;
+
   top: 0;
 
   width: 0%;
@@ -1039,38 +1051,25 @@ opacity: 1;
 }
 
 
-/* =========================
-   TIEMPO
-========================= */
+#kinkyCurrent,
+#kinkyDuration {
 
-#signalTime {
-
-  font-size: 9px;
-
-  min-width: 35px;
-
-  text-align: right;
-
-  opacity: .7;
+  min-width: 31px;
 
 }
 
 
 /* =========================
-   FOOTER
+   STATUS
 ========================= */
 
-.signal-bottom {
+.kinky-player-status {
 
   display: flex;
 
   justify-content: space-between;
 
-  margin-top: 13px;
-
-  padding-top: 8px;
-
-  border-top: 1px solid rgba(255,255,255,.2);
+  margin-top: 8px;
 
   font-size: 8px;
 
@@ -1081,53 +1080,37 @@ opacity: 1;
 }
 
 
-.signal-ascii-bottom {
+#kinkyStatus {
 
   color: #63ff7a;
-
-  opacity: .4;
-
-  font-size: 8px;
-
-  margin-top: 8px;
-
-  white-space: nowrap;
-
-  overflow: hidden;
 
 }
 
 
 /* =========================
-   CUANDO ESTÁ ACTIVO
+   ACTIVO
 ========================= */
 
-.signal-player.active {
+.kinky-player.playing {
 
-  border-color: white;
+  border-color: #63ff7a;
 
   box-shadow:
-    0 0 25px rgba(99,255,122,.22);
+    0 0 18px rgba(99,255,122,.18);
 
 }
 
 
-.signal-player.active #signalIndicator {
+.kinky-player.playing
+#kinkyIndicator {
 
   animation:
-    signalBlink .8s steps(2) infinite;
+    kinkyBlink .7s steps(2) infinite;
 
 }
 
 
-.signal-player.active #signalStatus {
-
-  color: #63ff7a;
-
-}
-
-
-@keyframes signalBlink {
+@keyframes kinkyBlink {
 
   0% {
     opacity: .2;
@@ -1146,13 +1129,15 @@ opacity: 1;
 
 @media (max-width: 700px) {
 
-  .signal-player {
+  .kinky-player {
 
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
+    left: 12px;
 
-    width: auto;
+    bottom: 12px;
+
+    width: 265px;
+
+    padding: 10px 12px;
 
   }
 
