@@ -137,39 +137,23 @@ const kinkyEpisodes = [
 
   {
     number: "001",
-
-    title:
-      "Bondage y Consentimiento",
-
-    file:
-      "audio/cap1.aac"
+    title: "Bondage y Consentimiento",
+    file: "audio/cap1.m4a"
   },
-
 
   {
     number: "002",
-
-    title:
-      "Derecho al placer disca",
-
-    file:
-      "audio/cap2.aac"
+    title: "Derecho al placer disca",
+    file: "audio/cap2.m4a"
   },
-
 
   {
     number: "003",
-
-    title:
-      "Punto G — guía",
-
-    file:
-      "audio/cap3.aac"
+    title: "Punto G — guía",
+    file: "audio/cap3.m4a"
   }
 
 ];
-
-
 const kinkyAudio =
   document.getElementById("kinkyAudio");
 
