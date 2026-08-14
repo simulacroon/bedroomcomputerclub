@@ -9,94 +9,143 @@
 
 </head>
 
-  <!-- =========================
-     SIMULACROON AUDIO SYSTEM
-========================= -->
+<!-- =========================
+       KINKYCUIR AUDIO PLAYER
+  ========================= -->
 
-<div class="signal-player" id="signalPlayer">
+  <div class="kinky-player" id="kinkyPlayer">
 
-  <div class="signal-top">
-    <span>SIMULACROON // AUDIO SYSTEM</span>
-    <span id="signalIndicator">○</span>
-  </div>
+    <div class="kinky-player-top">
 
-  <div class="signal-ascii">
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  </div>
+      <span>^ AUDIO ^</span>
 
-  <div class="signal-transmission">
-    <span>TRANSMISSION_</span><span id="episodeNumber">001</span>
-  </div>
+      <span id="kinkyIndicator">○</span>
 
-  <div class="signal-title" id="episodeTitle">
-    memoria de un sistema
-  </div>
-
-  <div class="signal-description" id="episodeDescription">
-    registro de campo // señal desconocida
-  </div>
-
-  <div class="signal-data">
-
-    <div>
-      SIGNAL:
-      <span id="signalBars">
-        ███████░░░
-      </span>
     </div>
 
-    <div>
-      STATUS:
-      <span id="signalStatus">
+
+    <div class="kinky-player-line">
+      ----------------------------
+    </div>
+
+
+    <div class="kinky-player-name">
+      KINKYCUIR
+    </div>
+
+
+    <div class="kinky-player-transmission">
+
+      TRANSMISSION_
+      <span id="kinkyNumber">001</span>
+
+    </div>
+
+
+    <div
+      class="kinky-player-title"
+      id="kinkyTitle"
+    >
+      Bondage y Consentimiento
+    </div>
+
+
+    <div
+      class="kinky-player-signal"
+      id="kinkySignal"
+    >
+      ░░░░░░░░░░
+    </div>
+
+
+    <div class="kinky-player-controls">
+
+      <button
+        id="kinkyPrev"
+        class="kinky-player-button"
+        aria-label="Capítulo anterior"
+      >
+        &lt;
+      </button>
+
+
+      <button
+        id="kinkyPlay"
+        class="kinky-player-button kinky-play"
+      >
+        PLAY
+      </button>
+
+
+      <button
+        id="kinkyNext"
+        class="kinky-player-button"
+        aria-label="Siguiente capítulo"
+      >
+        &gt;
+      </button>
+
+    </div>
+
+
+    <div class="kinky-player-progress">
+
+      <span id="kinkyCurrent">
+        00:00
+      </span>
+
+
+      <div
+        class="kinky-progress-container"
+        id="kinkyProgressContainer"
+      >
+
+        <div
+          class="kinky-progress"
+          id="kinkyProgress"
+        ></div>
+
+      </div>
+
+
+      <span id="kinkyDuration">
+        00:00
+      </span>
+
+    </div>
+
+
+    <div class="kinky-player-status">
+
+      <span id="kinkyStatus">
         STANDBY
       </span>
+
+      <span>
+        [ AUDIO ]
+      </span>
+
     </div>
 
-  </div>
 
-  <audio id="signalAudio"></audio>
-
-  <div class="signal-controls">
-
-    <button id="prevEpisode" class="signal-button">
-      ◀
-    </button>
-
-    <button id="playSignal" class="signal-button signal-play">
-      ▶
-    </button>
-
-    <button id="nextEpisode" class="signal-button">
-      ▶
-    </button>
-
-    <div class="signal-progress-box" id="signalProgressBox">
-      <div class="signal-progress" id="signalProgress"></div>
+    <div class="kinky-player-line bottom-line">
+      _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
     </div>
 
-    <span id="signalTime">
-      00:00
-    </span>
+
+    <!-- AUDIO REAL -->
+
+    <audio id="kinkyAudio">
+
+      <source
+        src="audio/cap1.aac"
+        type="audio/aac"
+      >
+
+    </audio>
 
   </div>
 
-  <div class="signal-bottom">
-
-    <span id="signalText">
-      WAITING FOR SIGNAL...
-    </span>
-
-    <span>
-      [ AUDIO ]
-    </span>
-
-  </div>
-
-  <div class="signal-ascii-bottom">
-    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-  </div>
-
-</div>
 
 <body class="video-page">
 
