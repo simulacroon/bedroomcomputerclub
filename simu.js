@@ -128,10 +128,10 @@ document.querySelectorAll(".reveal").forEach(el=>{
 });
 
 
+
 /* ==================================================
    KINKYCUIR // FLOATING ASCII AUDIO PLAYER
 ================================================== */
-
 
 const kinkyEpisodes = [
 
@@ -154,49 +154,28 @@ const kinkyEpisodes = [
   }
 
 ];
-const kinkyAudio =
-  document.getElementById("kinkyAudio");
 
-const kinkyPlayer =
-  document.getElementById("kinkyPlayer");
 
-const kinkyPlay =
-  document.getElementById("kinkyPlay");
+const kinkyAudio = document.getElementById("kinkyAudio");
+const kinkyPlayer = document.getElementById("kinkyPlayer");
 
-const kinkyPrev =
-  document.getElementById("kinkyPrev");
+const kinkyPlay = document.getElementById("kinkyPlay");
+const kinkyPrev = document.getElementById("kinkyPrev");
+const kinkyNext = document.getElementById("kinkyNext");
 
-const kinkyNext =
-  document.getElementById("kinkyNext");
+const kinkyNumber = document.getElementById("kinkyNumber");
+const kinkyTitle = document.getElementById("kinkyTitle");
 
-const kinkyNumber =
-  document.getElementById("kinkyNumber");
+const kinkyIndicator = document.getElementById("kinkyIndicator");
+const kinkySignal = document.getElementById("kinkySignal");
+const kinkyStatus = document.getElementById("kinkyStatus");
 
-const kinkyTitle =
-  document.getElementById("kinkyTitle");
+const kinkyCurrent = document.getElementById("kinkyCurrent");
+const kinkyDuration = document.getElementById("kinkyDuration");
 
-const kinkyIndicator =
-  document.getElementById("kinkyIndicator");
-
-const kinkySignal =
-  document.getElementById("kinkySignal");
-
-const kinkyStatus =
-  document.getElementById("kinkyStatus");
-
-const kinkyCurrent =
-  document.getElementById("kinkyCurrent");
-
-const kinkyDuration =
-  document.getElementById("kinkyDuration");
-
-const kinkyProgress =
-  document.getElementById("kinkyProgress");
-
+const kinkyProgress = document.getElementById("kinkyProgress");
 const kinkyProgressContainer =
-  document.getElementById(
-    "kinkyProgressContainer"
-  );
+  document.getElementById("kinkyProgressContainer");
 
 
 let kinkyCurrentEpisode = 0;
@@ -208,58 +187,33 @@ let kinkyCurrentEpisode = 0;
 
 function loadKinkyEpisode(index) {
 
+  const episode = kinkyEpisodes[index];
+
   kinkyCurrentEpisode = index;
-
-  const episode =
-    kinkyEpisodes[index];
-
 
   kinkyAudio.pause();
 
+  kinkyAudio.src = episode.file;
 
-  kinkyAudio.src =
-    episode.file;
+  kinkyAudio.load();
 
+  kinkyNumber.textContent = episode.number;
+  kinkyTitle.textContent = episode.title;
 
-  kinkyNumber.textContent =
-    episode.number;
+  kinkyCurrent.textContent = "00:00";
+  kinkyDuration.textContent = "00:00";
 
+  kinkyProgress.style.width = "0%";
 
-  kinkyTitle.textContent =
-    episode.title;
+  kinkySignal.textContent = "░░░░░░░░░░";
 
+  kinkyStatus.textContent = "LOADING";
 
-  kinkyCurrent.textContent =
-    "00:00";
+  kinkyIndicator.textContent = "○";
 
+  kinkyPlay.textContent = "PLAY";
 
-  kinkyDuration.textContent =
-    "00:00";
-
-
-  kinkyProgress.style.width =
-    "0%";
-
-
-  kinkySignal.textContent =
-    "░░░░░░░░░░";
-
-
-  kinkyStatus.textContent =
-    "STANDBY";
-
-
-  kinkyIndicator.textContent =
-    "○";
-
-
-  kinkyPlay.textContent =
-    "PLAY";
-
-
-  kinkyPlayer.classList.remove(
-    "playing"
-  );
+  kinkyPlayer.classList.remove("playing");
 
 }
 
@@ -268,299 +222,210 @@ function loadKinkyEpisode(index) {
    PLAY / PAUSE
 ================================================== */
 
-kinkyPlay.addEventListener(
-  "click",
-  () => {
+kinkyPlay.addEventListener("click", async () => {
 
-    if (kinkyAudio.paused) {
+  if (kinkyAudio.paused) {
 
-      kinkyAudio.play()
-        .catch(error => {
+    try {
 
-          console.log(
-            "No se pudo reproducir el audio:",
-            error
-          );
+      await kinkyAudio.play();
 
-        });
+    } catch (error) {
 
-    } else {
+      console.error("ERROR DE AUDIO:", error);
 
-      kinkyAudio.pause();
+      kinkyStatus.textContent = "ERROR";
 
     }
 
+  } else {
+
+    kinkyAudio.pause();
+
   }
-);
+
+});
+
+
+/* ==================================================
+   AUDIO LISTO
+================================================== */
+
+kinkyAudio.addEventListener("loadedmetadata", () => {
+
+  kinkyDuration.textContent =
+    kinkyFormatTime(kinkyAudio.duration);
+
+  kinkyStatus.textContent = "READY";
+
+});
 
 
 /* ==================================================
    PLAY
 ================================================== */
 
-kinkyAudio.addEventListener(
-  "play",
-  () => {
+kinkyAudio.addEventListener("play", () => {
 
-    kinkyPlay.textContent =
-      "PAUSE";
+  kinkyPlay.textContent = "PAUSE";
 
+  kinkyStatus.textContent = "ONLINE";
 
-    kinkyStatus.textContent =
-      "ONLINE";
+  kinkyIndicator.textContent = "●";
 
+  kinkyPlayer.classList.add("playing");
 
-    kinkyIndicator.textContent =
-      "●";
-
-
-    kinkyPlayer.classList.add(
-      "playing"
-    );
-
-  }
-);
+});
 
 
 /* ==================================================
    PAUSE
 ================================================== */
 
-kinkyAudio.addEventListener(
-  "pause",
-  () => {
+kinkyAudio.addEventListener("pause", () => {
 
-    kinkyPlay.textContent =
-      "PLAY";
+  kinkyPlay.textContent = "PLAY";
 
+  kinkyStatus.textContent = "PAUSED";
 
-    kinkyStatus.textContent =
-      "PAUSED";
+  kinkyIndicator.textContent = "○";
 
+  kinkyPlayer.classList.remove("playing");
 
-    kinkyIndicator.textContent =
-      "○";
-
-
-    kinkyPlayer.classList.remove(
-      "playing"
-    );
-
-  }
-);
+});
 
 
 /* ==================================================
-   METADATA / DURACIÓN
+   ERROR
 ================================================== */
 
-kinkyAudio.addEventListener(
-  "loadedmetadata",
-  () => {
+kinkyAudio.addEventListener("error", () => {
 
-    kinkyDuration.textContent =
-      kinkyFormatTime(
-        kinkyAudio.duration
-      );
+  console.error(
+    "No se pudo cargar:",
+    kinkyAudio.src
+  );
 
-  }
-);
+  kinkyStatus.textContent = "AUDIO ERROR";
+
+});
 
 
 /* ==================================================
    PROGRESO
 ================================================== */
 
-kinkyAudio.addEventListener(
-  "timeupdate",
-  () => {
+kinkyAudio.addEventListener("timeupdate", () => {
 
-    if (
-      !Number.isFinite(
-        kinkyAudio.duration
-      )
-    ) {
-
-      return;
-
-    }
-
-
-    const percentage =
-      (
-        kinkyAudio.currentTime /
-        kinkyAudio.duration
-      ) * 100;
-
-
-    kinkyProgress.style.width =
-      percentage + "%";
-
-
-    kinkyCurrent.textContent =
-      kinkyFormatTime(
-        kinkyAudio.currentTime
-      );
-
-
-    /* =========================
-       SEÑAL ASCII
-    ========================= */
-
-
-    const totalBars = 10;
-
-
-    const activeBars =
-      Math.floor(
-        percentage / 10
-      );
-
-
-    kinkySignal.textContent =
-      "█".repeat(activeBars) +
-      "░".repeat(
-        totalBars - activeBars
-      );
-
+  if (!Number.isFinite(kinkyAudio.duration)) {
+    return;
   }
-);
+
+  const percentage =
+    (kinkyAudio.currentTime /
+    kinkyAudio.duration) * 100;
+
+  kinkyProgress.style.width =
+    percentage + "%";
+
+  kinkyCurrent.textContent =
+    kinkyFormatTime(kinkyAudio.currentTime);
+
+
+  const totalBars = 10;
+
+  const activeBars =
+    Math.floor(percentage / 10);
+
+  kinkySignal.textContent =
+    "█".repeat(activeBars) +
+    "░".repeat(totalBars - activeBars);
+
+});
 
 
 /* ==================================================
-   CLICK EN LA BARRA
+   CLICK EN BARRA
 ================================================== */
 
-kinkyProgressContainer.addEventListener(
-  "click",
-  (event) => {
+kinkyProgressContainer.addEventListener("click", (event) => {
 
-    if (
-      !Number.isFinite(
-        kinkyAudio.duration
-      )
-    ) {
-
-      return;
-
-    }
-
-
-    const rect =
-      kinkyProgressContainer
-      .getBoundingClientRect();
-
-
-    const position =
-      event.clientX -
-      rect.left;
-
-
-    const percentage =
-      position /
-      rect.width;
-
-
-    kinkyAudio.currentTime =
-      percentage *
-      kinkyAudio.duration;
-
+  if (!Number.isFinite(kinkyAudio.duration)) {
+    return;
   }
-);
+
+  const rect =
+    kinkyProgressContainer.getBoundingClientRect();
+
+  const position =
+    event.clientX - rect.left;
+
+  const percentage =
+    position / rect.width;
+
+  kinkyAudio.currentTime =
+    percentage * kinkyAudio.duration;
+
+});
 
 
 /* ==================================================
    ANTERIOR
 ================================================== */
 
-kinkyPrev.addEventListener(
-  "click",
-  () => {
+kinkyPrev.addEventListener("click", () => {
 
-    kinkyCurrentEpisode--;
+  kinkyCurrentEpisode--;
 
-
-    if (
-      kinkyCurrentEpisode < 0
-    ) {
-
-      kinkyCurrentEpisode =
-        kinkyEpisodes.length - 1;
-
-    }
-
-
-    loadKinkyEpisode(
-      kinkyCurrentEpisode
-    );
-
+  if (kinkyCurrentEpisode < 0) {
+    kinkyCurrentEpisode =
+      kinkyEpisodes.length - 1;
   }
-);
+
+  loadKinkyEpisode(kinkyCurrentEpisode);
+
+});
 
 
 /* ==================================================
    SIGUIENTE
 ================================================== */
 
-kinkyNext.addEventListener(
-  "click",
-  () => {
+kinkyNext.addEventListener("click", () => {
 
-    kinkyCurrentEpisode++;
+  kinkyCurrentEpisode++;
 
-
-    if (
-      kinkyCurrentEpisode >=
-      kinkyEpisodes.length
-    ) {
-
-      kinkyCurrentEpisode = 0;
-
-    }
-
-
-    loadKinkyEpisode(
-      kinkyCurrentEpisode
-    );
-
+  if (
+    kinkyCurrentEpisode >=
+    kinkyEpisodes.length
+  ) {
+    kinkyCurrentEpisode = 0;
   }
-);
+
+  loadKinkyEpisode(kinkyCurrentEpisode);
+
+});
 
 
 /* ==================================================
-   CUANDO TERMINA
+   FINAL DEL CAPÍTULO
 ================================================== */
 
-kinkyAudio.addEventListener(
-  "ended",
-  () => {
+kinkyAudio.addEventListener("ended", () => {
 
-    kinkyStatus.textContent =
-      "COMPLETE";
+  kinkyStatus.textContent = "COMPLETE";
 
+  kinkyIndicator.textContent = "○";
 
-    kinkyIndicator.textContent =
-      "○";
+  kinkyPlay.textContent = "PLAY";
 
+  kinkyPlayer.classList.remove("playing");
 
-    kinkyPlay.textContent =
-      "PLAY";
+  kinkyProgress.style.width = "0%";
 
+  kinkyCurrent.textContent = "00:00";
 
-    kinkyPlayer.classList.remove(
-      "playing"
-    );
-
-
-    kinkyProgress.style.width =
-      "0%";
-
-
-    kinkyCurrent.textContent =
-      "00:00";
-
-  }
-);
+});
 
 
 /* ==================================================
@@ -569,35 +434,20 @@ kinkyAudio.addEventListener(
 
 function kinkyFormatTime(seconds) {
 
-  if (
-    !Number.isFinite(seconds)
-  ) {
-
+  if (!Number.isFinite(seconds)) {
     return "00:00";
-
   }
-
 
   const minutes =
     Math.floor(seconds / 60);
 
-
   const secondsRest =
     Math.floor(seconds % 60);
 
-
   return (
-
-    String(minutes)
-      .padStart(2, "0")
-
-    +
-
+    String(minutes).padStart(2, "0") +
     ":" +
-
-    String(secondsRest)
-      .padStart(2, "0")
-
+    String(secondsRest).padStart(2, "0")
   );
 
 }
