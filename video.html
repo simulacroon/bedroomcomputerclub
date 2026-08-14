@@ -9,6 +9,95 @@
 
 </head>
 
+  <!-- =========================
+     SIMULACROON AUDIO SYSTEM
+========================= -->
+
+<div class="signal-player" id="signalPlayer">
+
+  <div class="signal-top">
+    <span>SIMULACROON // AUDIO SYSTEM</span>
+    <span id="signalIndicator">○</span>
+  </div>
+
+  <div class="signal-ascii">
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  </div>
+
+  <div class="signal-transmission">
+    <span>TRANSMISSION_</span><span id="episodeNumber">001</span>
+  </div>
+
+  <div class="signal-title" id="episodeTitle">
+    memoria de un sistema
+  </div>
+
+  <div class="signal-description" id="episodeDescription">
+    registro de campo // señal desconocida
+  </div>
+
+  <div class="signal-data">
+
+    <div>
+      SIGNAL:
+      <span id="signalBars">
+        ███████░░░
+      </span>
+    </div>
+
+    <div>
+      STATUS:
+      <span id="signalStatus">
+        STANDBY
+      </span>
+    </div>
+
+  </div>
+
+  <audio id="signalAudio"></audio>
+
+  <div class="signal-controls">
+
+    <button id="prevEpisode" class="signal-button">
+      ◀
+    </button>
+
+    <button id="playSignal" class="signal-button signal-play">
+      ▶
+    </button>
+
+    <button id="nextEpisode" class="signal-button">
+      ▶
+    </button>
+
+    <div class="signal-progress-box" id="signalProgressBox">
+      <div class="signal-progress" id="signalProgress"></div>
+    </div>
+
+    <span id="signalTime">
+      00:00
+    </span>
+
+  </div>
+
+  <div class="signal-bottom">
+
+    <span id="signalText">
+      WAITING FOR SIGNAL...
+    </span>
+
+    <span>
+      [ AUDIO ]
+    </span>
+
+  </div>
+
+  <div class="signal-ascii-bottom">
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  </div>
+
+</div>
+
 <body class="video-page">
 
   <nav class="ascii-nav">
