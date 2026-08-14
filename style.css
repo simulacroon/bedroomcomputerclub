@@ -772,3 +772,388 @@ opacity: 1;
   background:white;
   color:black;
 }
+
+/* ==================================================
+   SIMULACROON // AUDIO SYSTEM
+================================================== */
+
+.signal-player {
+
+  position: fixed;
+
+  left: 25px;
+  bottom: 25px;
+
+  width: 340px;
+
+  padding: 16px;
+
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.94);
+
+  border: 1px solid #63ff7a;
+
+  color: white;
+
+  font-family: monospace;
+
+  z-index: 9998;
+
+  box-shadow:
+    0 0 20px rgba(99, 255, 122, 0.12);
+
+  transition:
+    box-shadow .3s ease,
+    border-color .3s ease;
+
+}
+
+
+/* =========================
+   PARTE SUPERIOR
+========================= */
+
+.signal-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  color: #63ff7a;
+
+  margin-bottom: 8px;
+
+}
+
+#signalIndicator {
+
+  font-size: 14px;
+
+  color: #63ff7a;
+
+}
+
+
+/* =========================
+   ASCII
+========================= */
+
+.signal-ascii {
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  color: #63ff7a;
+
+  opacity: .5;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  margin-bottom: 15px;
+
+}
+
+
+/* =========================
+   TRANSMISSION
+========================= */
+
+.signal-transmission {
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: #63ff7a;
+
+  margin-bottom: 8px;
+
+}
+
+
+.signal-title {
+
+  font-size: 20px;
+
+  line-height: 1.1;
+
+  margin-bottom: 6px;
+
+  text-transform: lowercase;
+
+}
+
+
+.signal-description {
+
+  font-size: 10px;
+
+  opacity: .5;
+
+  line-height: 1.5;
+
+  margin-bottom: 15px;
+
+}
+
+
+/* =========================
+   DATOS
+========================= */
+
+.signal-data {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  font-size: 9px;
+
+  color: #63ff7a;
+
+  opacity: .7;
+
+  margin-bottom: 12px;
+
+}
+
+#signalBars {
+
+  letter-spacing: -1px;
+
+}
+
+#signalStatus {
+
+  color: white;
+
+}
+
+
+/* =========================
+   CONTROLES
+========================= */
+
+.signal-controls {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+}
+
+
+/* BOTONES */
+
+.signal-button {
+
+  width: 28px;
+  height: 28px;
+
+  padding: 0;
+
+  background: transparent;
+
+  border: 1px solid rgba(255,255,255,.7);
+
+  color: white;
+
+  font-family: monospace;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease;
+
+}
+
+
+.signal-button:hover {
+
+  background: #63ff7a;
+
+  color: black;
+
+  border-color: #63ff7a;
+
+}
+
+
+.signal-play {
+
+  border-color: #63ff7a;
+
+  color: #63ff7a;
+
+}
+
+
+/* =========================
+   BARRA
+========================= */
+
+.signal-progress-box {
+
+  flex: 1;
+
+  height: 5px;
+
+  background: rgba(255,255,255,.2);
+
+  position: relative;
+
+  cursor: pointer;
+
+}
+
+
+.signal-progress {
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 0%;
+
+  height: 100%;
+
+  background: #63ff7a;
+
+}
+
+
+/* =========================
+   TIEMPO
+========================= */
+
+#signalTime {
+
+  font-size: 9px;
+
+  min-width: 35px;
+
+  text-align: right;
+
+  opacity: .7;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.signal-bottom {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 13px;
+
+  padding-top: 8px;
+
+  border-top: 1px solid rgba(255,255,255,.2);
+
+  font-size: 8px;
+
+  letter-spacing: 1px;
+
+  opacity: .5;
+
+}
+
+
+.signal-ascii-bottom {
+
+  color: #63ff7a;
+
+  opacity: .4;
+
+  font-size: 8px;
+
+  margin-top: 8px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+}
+
+
+/* =========================
+   CUANDO ESTÁ ACTIVO
+========================= */
+
+.signal-player.active {
+
+  border-color: white;
+
+  box-shadow:
+    0 0 25px rgba(99,255,122,.22);
+
+}
+
+
+.signal-player.active #signalIndicator {
+
+  animation:
+    signalBlink .8s steps(2) infinite;
+
+}
+
+
+.signal-player.active #signalStatus {
+
+  color: #63ff7a;
+
+}
+
+
+@keyframes signalBlink {
+
+  0% {
+    opacity: .2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .signal-player {
+
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+
+    width: auto;
+
+  }
+
+}
