@@ -372,6 +372,83 @@
 
 </section>
 
+    <!-- =========================
+     VIDEO FRAGMENTATION
+========================= -->
+
+<section class="fragment-section reveal">
+
+  <div class="fragment-header">
+
+    <span>^ SIGNAL ^</span>
+
+    <span>FRAME / FRAGMENTATION</span>
+
+  </div>
+
+
+  <div class="fragment-intro">
+
+    <h2>
+      imagen.<br>
+      memoria.<br>
+      desplazamiento.
+    </h2>
+
+    <p>
+      una imagen puede permanecer<br>
+      mientras su estructura se desplaza.
+    </p>
+
+  </div>
+
+
+  <div class="fragment-stage">
+
+    <!-- VIDEO ORIGINAL OCULTO -->
+    <video
+      id="fragmentVideo"
+      muted
+      loop
+      autoplay
+      playsinline
+      preload="auto"
+    >
+      <source
+        src="video/fragmento.mp4"
+        type="video/mp4"
+      >
+    </video>
+
+
+    <!-- CANVAS INTERACTIVO -->
+
+    <canvas
+      id="fragmentCanvas"
+    ></canvas>
+
+
+    <div class="fragment-crosshair">
+      +
+    </div>
+
+  </div>
+
+
+  <div class="fragment-footer">
+
+    <span>
+      MOVE / TO DECODE
+    </span>
+
+    <span id="fragmentFrame">
+      FRAME_000
+    </span>
+
+  </div>
+
+</section>
+
 <footer class="final-section reveal">
 
   <div class="final-videos">
