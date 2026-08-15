@@ -1144,224 +1144,325 @@ opacity: 1;
 }
 
 
-
-
-
 /* ==================================================
-   SIMULACROON // MULTIPLE VIDEO FRAME
+   FRAGMENTO
+   SPATIAL VIDEO MEMORY
 ================================================== */
 
-.interactive-frame-section {
+.fragmento-section {
+
+  position: relative;
 
   width: 100%;
   min-height: 100vh;
 
+  margin: 180px 0 120px 0;
+
   display: flex;
   flex-direction: column;
 
-  align-items: center;
   justify-content: center;
-
-  padding: 160px 0;
-
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.interactive-frame-header {
-
-  width: min(1100px, 85vw);
-
-  display: flex;
-  justify-content: space-between;
-
-  font-family: monospace;
-  font-size: 10px;
-
-  color: #63ff7a;
-
-  letter-spacing: 2px;
-
-  opacity: .65;
-
-  margin-bottom: 30px;
-
-}
-
-
-/* =========================
-   ESCENA
-========================= */
-
-.interactive-frame {
-
-  width: 100%;
-  height: 600px;
-
-  position: relative;
-
-  perspective: 1200px;
+  align-items: center;
 
   overflow: hidden;
 
-  cursor: none;
+  background: #000;
 
 }
 
 
-/* =========================
-   MUNDO 3D
-========================= */
+/* ==================================================
+   HEADER
+================================================== */
 
-.frame-world {
+.fragmento-header {
 
-  position: absolute;
+  width: 90%;
 
-  width: 760px;
-  height: 480px;
+  display: flex;
 
-  left: 50%;
-  top: 50%;
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 35px;
+
+  font-family: monospace;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: white;
+
+  position: relative;
+
+  z-index: 50;
+
+}
+
+
+.fragmento-label {
+
+  color: #63ff7a;
+
+}
+
+
+.fragmento-info {
+
+  opacity: .5;
+
+}
+
+
+/* ==================================================
+   STAGE 3D
+================================================== */
+
+.fragmento-stage {
+
+  position: relative;
+
+  width: min(1100px, 90vw);
+
+  height: min(650px, 65vw);
+
+  min-height: 430px;
+
+  perspective: 1200px;
+
+  perspective-origin: center center;
 
   transform-style: preserve-3d;
 
-  transform:
-    translate(-50%, -50%);
+  overflow: visible;
 
 }
 
 
-/* =========================
-   PLANOS
-========================= */
+/* ==================================================
+   VIDEO FUENTE
+================================================== */
 
-.frame-plane {
+#fragmentoVideo {
 
   position: absolute;
 
-  width: 760px;
-  height: 480px;
+  width: 1px;
+  height: 1px;
 
-  left: 0;
-  top: 0;
-
-  transform-style: preserve-3d;
-
-}
-
-
-/* =========================
-   VIDEOS
-========================= */
-
-.frame-plane video {
-
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
+  opacity: 0;
 
   pointer-events: none;
 
 }
 
 
-/* =========================
-   REPETICIÓN ESPACIAL
-========================= */
+/* ==================================================
+   FRAMES
+================================================== */
 
-.frame-01 {
+.fragmento-frame {
 
-  transform:
-    translate3d(-360px, 0, -360px)
-    rotateY(-10deg);
+  position: absolute;
 
-  opacity: .35;
+  left: 50%;
+  top: 50%;
+
+  width: 420px;
+  height: 236px;
+
+  object-fit: cover;
+
+  display: block;
+
+  transform-style: preserve-3d;
+
+  transform-origin: center center;
+
+  pointer-events: none;
+
+  border: 1px solid rgba(255,255,255,.15);
+
+  box-sizing: border-box;
+
+  will-change: transform;
+
+  background: #000;
 
 }
 
-.frame-02 {
+
+/* ==================================================
+   CAPAS
+================================================== */
+
+.fragmento-frame:nth-child(2) {
+  opacity: 1;
+}
+
+.fragmento-frame:nth-child(3) {
+  opacity: .92;
+}
+
+.fragmento-frame:nth-child(4) {
+  opacity: .82;
+}
+
+.fragmento-frame:nth-child(5) {
+  opacity: .72;
+}
+
+.fragmento-frame:nth-child(6) {
+  opacity: .62;
+}
+
+.fragmento-frame:nth-child(7) {
+  opacity: .52;
+}
+
+.fragmento-frame:nth-child(8) {
+  opacity: .42;
+}
+
+
+/* ==================================================
+   CROSSHAIR
+================================================== */
+
+.fragmento-crosshair {
+
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
 
   transform:
-    translate3d(-240px, 0, -240px)
-    rotateY(-8deg);
+    translate(-50%, -50%);
+
+  color: #63ff7a;
+
+  font-family: monospace;
+
+  font-size: 20px;
+
+  opacity: .5;
+
+  pointer-events: none;
+
+  z-index: 100;
+
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.fragmento-footer {
+
+  width: 90%;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 30px;
+
+  font-family: monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 2px;
+
+  color: white;
 
   opacity: .45;
 
 }
 
-.frame-03 {
+
+/* ==================================================
+   LÍNEA ASCII DECORATIVA
+================================================== */
+
+.fragmento-stage::before {
+
+  content:
+    "------------------------------------------------------------";
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: -30px;
 
   transform:
-    translate3d(-120px, 0, -120px)
-    rotateY(-6deg);
-
-  opacity: .60;
-
-}
-
-.frame-04 {
-
-  transform:
-    translate3d(0, 0, 0)
-    rotateY(-4deg);
-
-  opacity: 1;
-
-}
-
-.frame-05 {
-
-  transform:
-    translate3d(120px, 0, 120px)
-    rotateY(-2deg);
-
-  opacity: .75;
-
-}
-
-.frame-06 {
-
-  transform:
-    translate3d(240px, 0, 240px)
-    rotateY(1deg);
-
-  opacity: .55;
-
-}
-
-.frame-07 {
-
-  transform:
-    translate3d(360px, 0, 360px)
-    rotateY(4deg);
-
-  opacity: .4;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.interactive-frame-footer {
-
-  margin-top: 25px;
+    translateX(-50%);
 
   font-family: monospace;
 
-  font-size: 10px;
-
-  letter-spacing: 2px;
+  font-size: 9px;
 
   color: #63ff7a;
 
-  opacity: .6;
+  opacity: .35;
+
+  white-space: nowrap;
 
 }
+
+
+/* ==================================================
+   HOVER
+================================================== */
+
+.fragmento-section:hover
+.fragmento-frame {
+
+  border-color:
+    rgba(99,255,122,.22);
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width: 700px) {
+
+  .fragmento-stage {
+
+    width: 100vw;
+
+    height: 500px;
+
+    perspective: 900px;
+
+  }
+
+
+  .fragmento-frame {
+
+    width: 300px;
+
+    height: 169px;
+
+  }
+
+
+  .fragmento-header,
+  .fragmento-footer {
+
+    width: 90%;
+
+    font-size: 8px;
+
+  }
+
+}
+
+
+
