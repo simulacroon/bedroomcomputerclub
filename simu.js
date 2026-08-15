@@ -459,470 +459,110 @@ function kinkyFormatTime(seconds) {
 
 loadKinkyEpisode(0);
 
-
 /* ==================================================
-   SIMULACROON
-   VIDEO FRAGMENTATION SYSTEM
+   SIMULACROON // MULTIPLE VIDEO FRAME
 ================================================== */
 
+const frameWorld =
+  document.getElementById("frameWorld");
 
-const fragmentVideo =
-  document.getElementById("fragmentVideo");
-
-const fragmentCanvas =
-  document.getElementById("fragmentCanvas");
-
-const fragmentFrame =
-  document.getElementById("fragmentFrame");
+const frameScene =
+  document.querySelector(".interactive-frame");
 
 
-if (
-  fragmentVideo &&
-  fragmentCanvas
-) {
+if (frameWorld && frameScene) {
 
+  let targetX = 0;
+  let targetY = 0;
 
-  const ctx =
-    fragmentCanvas.getContext("2d");
-
-
-  /* =========================
-     CONFIGURACIÓN
-  ========================= */
-
-  const fragmentColumns = 5;
-
-  const fragmentRows = 4;
-
-  const fragmentCount =
-    fragmentColumns * fragmentRows;
-
-
-  /*
-    intensidad de desplazamiento
-  */
-
-  const displacement = 90;
-
-
-  /*
-    profundidad
-  */
-
-  const depth = 1;
+  let currentX = 0;
+  let currentY = 0;
 
 
   /* =========================
      MOUSE
   ========================= */
 
-  let fragmentMouseX = 0.5;
-
-  let fragmentMouseY = 0.5;
-
-
-  let smoothMouseX = 0.5;
-
-  let smoothMouseY = 0.5;
-
-
-  fragmentCanvas.addEventListener(
+  frameScene.addEventListener(
     "mousemove",
     (event) => {
 
       const rect =
-        fragmentCanvas.getBoundingClientRect();
+        frameScene.getBoundingClientRect();
 
 
-      fragmentMouseX =
+      const mouseX =
         (event.clientX - rect.left) /
         rect.width;
 
 
-      fragmentMouseY =
+      const mouseY =
         (event.clientY - rect.top) /
         rect.height;
 
+
+      /*
+       * El mouse desplaza
+       * el conjunto de imágenes.
+       */
+
+      targetX =
+        (mouseX - 0.5) * 180;
+
+
+      targetY =
+        (mouseY - 0.5) * 80;
+
     }
   );
 
 
-  fragmentCanvas.addEventListener(
+  /* =========================
+     VOLVER AL CENTRO
+  ========================= */
+
+  frameScene.addEventListener(
     "mouseleave",
     () => {
 
-      fragmentMouseX = 0.5;
-
-      fragmentMouseY = 0.5;
+      targetX = 0;
+      targetY = 0;
 
     }
   );
 
 
   /* =========================
-     RESIZE
+     ANIMACIÓN
   ========================= */
 
-  function resizeFragmentCanvas() {
+  function animateFrameWorld() {
 
-    const rect =
-      fragmentCanvas.getBoundingClientRect();
+    currentX +=
+      (targetX - currentX) * 0.06;
 
 
-    const dpr =
-      window.devicePixelRatio || 1;
+    currentY +=
+      (targetY - currentY) * 0.06;
 
 
-    fragmentCanvas.width =
-      rect.width * dpr;
-
-
-    fragmentCanvas.height =
-      rect.height * dpr;
-
-
-    ctx.setTransform(
-      dpr,
-      0,
-      0,
-      dpr,
-      0,
-      0
-    );
-
-  }
-
-
-  window.addEventListener(
-    "resize",
-    resizeFragmentCanvas
-  );
-
-
-  resizeFragmentCanvas();
-
-
-  /* =========================
-     DRAW
-  ========================= */
-
-  function drawFragments() {
-
-
-    if (
-      fragmentVideo.readyState <
-      2
-    ) {
-
-      requestAnimationFrame(
-        drawFragments
-      );
-
-      return;
-
-    }
-
-
-    const width =
-      fragmentCanvas.clientWidth;
-
-
-    const height =
-      fragmentCanvas.clientHeight;
-
-
-    /*
-      suavizar movimiento
-    */
-
-    smoothMouseX +=
-      (
-        fragmentMouseX -
-        smoothMouseX
-      ) * 0.08;
-
-
-    smoothMouseY +=
-      (
-        fragmentMouseY -
-        smoothMouseY
-      ) * 0.08;
-
-
-    /*
-      limpiar canvas
-    */
-
-    ctx.clearRect(
-      0,
-      0,
-      width,
-      height
-    );
-
-
-    /*
-      dimensiones de cada fragmento
-    */
-
-    const cellWidth =
-      width /
-      fragmentColumns;
-
-
-    const cellHeight =
-      height /
-      fragmentRows;
-
-
-    /*
-      dimensiones reales del video
-    */
-
-    const videoWidth =
-      fragmentVideo.videoWidth;
-
-
-    const videoHeight =
-      fragmentVideo.videoHeight;
-
-
-    /*
-      recorrer fragmentos
-    */
-
-    let fragmentIndex = 0;
-
-
-    for (
-      let row = 0;
-      row < fragmentRows;
-      row++
-    ) {
-
-
-      for (
-        let col = 0;
-        col < fragmentColumns;
-        col++
-      ) {
-
-
-        /*
-          posición original
-        */
-
-        const sourceX =
-          (col / fragmentColumns) *
-          videoWidth;
-
-
-        const sourceY =
-          (row / fragmentRows) *
-          videoHeight;
-
-
-        const sourceWidth =
-          videoWidth /
-          fragmentColumns;
-
-
-        const sourceHeight =
-          videoHeight /
-          fragmentRows;
-
-
-        /*
-          posición del fragmento
-        */
-
-        const originalX =
-          col *
-          cellWidth;
-
-
-        const originalY =
-          row *
-          cellHeight;
-
-
-        /*
-          distancia respecto al mouse
-        */
-
-        const centerX =
-          col /
-          (fragmentColumns - 1);
-
-
-        const centerY =
-          row /
-          (fragmentRows - 1);
-
-
-        const distanceX =
-          centerX -
-          smoothMouseX;
-
-
-        const distanceY =
-          centerY -
-          smoothMouseY;
-
-
-        /*
-          profundidad
-        */
-
-        const force =
-          1 -
-          Math.sqrt(
-            distanceX * distanceX +
-            distanceY * distanceY
-          );
-
-
-        /*
-          desplazamiento
-        */
-
-        const moveX =
-          distanceX *
-          displacement *
-          force;
-
-
-        const moveY =
-          distanceY *
-          displacement *
-          force;
-
-
-        /*
-          pequeño movimiento adicional
-        */
-
-        const floatX =
-          Math.sin(
-            performance.now() * 0.0008 +
-            fragmentIndex
-          ) * 3;
-
-
-        const floatY =
-          Math.cos(
-            performance.now() * 0.0007 +
-            fragmentIndex
-          ) * 3;
-
-
-        /*
-          posición final
-        */
-
-        const drawX =
-          originalX +
-          moveX +
-          floatX;
-
-
-        const drawY =
-          originalY +
-          moveY +
-          floatY;
-
-
-        /*
-          dibujar fragmento
-        */
-
-        ctx.drawImage(
-
-          fragmentVideo,
-
-          sourceX,
-          sourceY,
-          sourceWidth,
-          sourceHeight,
-
-          drawX,
-          drawY,
-
-          cellWidth,
-          cellHeight
-
-        );
-
-
-        /*
-          líneas de separación
-        */
-
-        ctx.strokeStyle =
-          "rgba(255,255,255,.15)";
-
-        ctx.lineWidth = 1;
-
-
-        ctx.strokeRect(
-          drawX,
-          drawY,
-          cellWidth,
-          cellHeight
-        );
-
-
-        fragmentIndex++;
-
-      }
-
-    }
-
-
-    /*
-      número de frame aproximado
-    */
-
-    const frame =
-      Math.floor(
-        fragmentVideo.currentTime *
-        24
-      );
-
-
-    fragmentFrame.textContent =
-      "FRAME_" +
-      String(frame)
-        .padStart(3, "0");
+    frameWorld.style.transform = `
+      translate(
+        calc(-50% + ${currentX}px),
+        calc(-50% + ${currentY}px)
+      )
+      rotateX(${-currentY * 0.025}deg)
+      rotateY(${currentX * 0.025}deg)
+    `;
 
 
     requestAnimationFrame(
-      drawFragments
+      animateFrameWorld
     );
 
   }
 
 
-  fragmentVideo.addEventListener(
-    "loadeddata",
-    () => {
-
-      drawFragments();
-
-    }
-  );
-
-
-  /*
-    por si el video ya estaba cargado
-  */
-
-  if (
-    fragmentVideo.readyState >= 2
-  ) {
-
-    drawFragments();
-
-  }
+  animateFrameWorld();
 
 }
