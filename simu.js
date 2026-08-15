@@ -482,7 +482,7 @@ if (fragmentoStage && fragmentoVideo) {
      CONFIGURACIÓN
   ================================================== */
 
-  const FRAME_COUNT = 7;
+  const FRAME_COUNT = 9;
 
   /*
     Distancia entre las capas.
@@ -491,7 +491,7 @@ if (fragmentoStage && fragmentoVideo) {
     más separadas estarán en profundidad.
   */
 
-  const Z_SPACING = 70;
+  const Z_SPACING = 55;
 
 
   /*
@@ -499,14 +499,14 @@ if (fragmentoStage && fragmentoVideo) {
     por el mouse.
   */
 
-  const MOUSE_X_INFLUENCE = 180;
+  const MOUSE_X_INFLUENCE = 260;
 
 
   /*
     Movimiento vertical.
   */
 
-  const MOUSE_Y_INFLUENCE = 100;
+  const MOUSE_Y_INFLUENCE = 130;
 
 
   /*
