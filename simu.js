@@ -460,10 +460,9 @@ function kinkyFormatTime(seconds) {
 loadKinkyEpisode(0);
 
 
-
 /* ==================================================
    FRAGMENTO
-   SPATIAL VIDEO MEMORY // FLAT PLANES
+   SPATIAL VIDEO MEMORY
 ================================================== */
 
 const fragmentoStage =
@@ -479,47 +478,55 @@ if (fragmentoStage && fragmentoVideo) {
      CONFIGURACIÓN
   ================================================== */
 
-  const FRAME_COUNT = 7;
+  const FRAME_COUNT = 9;
 
-  // Separación horizontal entre planos
-  const GAP = 78;
+  /*
+    Distancia entre las capas.
 
-  // Profundidad entre planos
-  const DEPTH = 65;
+    Mientras mayor sea este número,
+    más separadas estarán en profundidad.
+  */
 
-  // Cuánto sigue el mouse cada capa
-  const MOUSE_X = 145;
-  const MOUSE_Y = 55;
+  const Z_SPACING = 55;
 
-  // Suavidad del movimiento
-  const SMOOTHNESS = 0.055;
+
+  /*
+    Movimiento horizontal provocado
+    por el mouse.
+  */
+
+  const MOUSE_X_INFLUENCE = 260;
+
+
+  /*
+    Movimiento vertical.
+  */
+
+  const MOUSE_Y_INFLUENCE = 130;
+
+
+  /*
+    Qué tan suave es el movimiento.
+
+    0.02 = muy lento
+    0.05 = suave
+    0.10 = rápido
+  */
+
+  const SMOOTHNESS = 0.045;
+
+
+  /*
+    Separación inicial de las imágenes.
+  */
+
+  const BASE_X = 0;
+
+  const BASE_Y = 0;
 
 
   /* ==================================================
-     POSICIONES BASE
-  ================================================== */
-
-  const offsets = [
-
-    { x: 0,   y: 0 },
-
-    { x: 18,  y: -8 },
-
-    { x: 40,  y: 7 },
-
-    { x: 63,  y: -5 },
-
-    { x: 88,  y: 10 },
-
-    { x: 116, y: -7 },
-
-    { x: 145, y: 5 }
-
-  ];
-
-
-  /* ==================================================
-     CREAR LAS SUPERFICIES
+     CREAR CANVAS
   ================================================== */
 
   const frames = [];
@@ -530,30 +537,41 @@ if (fragmentoStage && fragmentoVideo) {
     const canvas =
       document.createElement("canvas");
 
+
     canvas.classList.add(
       "fragmento-frame"
     );
 
-    canvas.width = 960;
-    canvas.height = 540;
+
+    canvas.width = 840;
+    canvas.height = 472;
+
+
+    fragmentoStage.appendChild(
+      canvas
+    );
+
 
     const ctx =
       canvas.getContext("2d");
 
-    fragmentoStage.appendChild(canvas);
-
 
     frames.push({
 
-      canvas,
-      ctx,
+      canvas: canvas,
+
+      ctx: ctx,
 
       index: i,
 
       x: 0,
+
       y: 0,
 
+      z: -(i * Z_SPACING),
+
       targetX: 0,
+
       targetY: 0
 
     });
@@ -566,9 +584,12 @@ if (fragmentoStage && fragmentoVideo) {
   ================================================== */
 
   let mouseX = 0;
+
   let mouseY = 0;
 
+
   let targetMouseX = 0;
+
   let targetMouseY = 0;
 
 
@@ -594,59 +615,54 @@ if (fragmentoStage && fragmentoVideo) {
 
 
   /* ==================================================
-     DIBUJAR EL MISMO FRAME EN TODOS
+     DIBUJAR VIDEO
   ================================================== */
 
-  function drawFragmento() {
+  function drawVideo() {
 
     if (
       fragmentoVideo.readyState >= 2 &&
       fragmentoVideo.videoWidth > 0
     ) {
 
-      frames.forEach(frame => {
+      frames.forEach(
+        (frame) => {
 
-        const ctx = frame.ctx;
+          frame.ctx.drawImage(
 
-        ctx.clearRect(
-          0,
-          0,
-          frame.canvas.width,
-          frame.canvas.height
-        );
+            fragmentoVideo,
 
+            0,
+            0,
 
-        ctx.drawImage(
+            frame.canvas.width,
+            frame.canvas.height
 
-          fragmentoVideo,
+          );
 
-          0,
-          0,
-
-          frame.canvas.width,
-          frame.canvas.height
-
-        );
-
-      });
+        }
+      );
 
     }
 
 
     requestAnimationFrame(
-      drawFragmento
+      drawVideo
     );
 
   }
 
 
   /* ==================================================
-     MOVIMIENTO
+     ANIMACIÓN
   ================================================== */
 
   function animateFragmento() {
 
-    /* suavizar mouse */
+    /*
+      Suavizamos el movimiento
+      del mouse.
+    */
 
     mouseX +=
       (
@@ -663,106 +679,88 @@ if (fragmentoStage && fragmentoVideo) {
     frames.forEach(
       (frame) => {
 
-        const i =
-          frame.index;
-
-
         /*
-          0 = primer plano
-          6 = fondo
+          Cada frame tiene una
+          sensibilidad diferente.
+
+          Los frames del fondo
+          se mueven menos.
         */
 
         const depthFactor =
-          1 - (
-            i /
+          1 -
+          (
+            frame.index /
             FRAME_COUNT
           );
 
 
         /*
-          POSICIÓN BASE
-        */
-
-        const baseX =
-          offsets[i].x;
-
-
-        const baseY =
-          offsets[i].y;
-
-
-        /*
-          PARALAJE
-
-          El primer plano se mueve
-          mucho más que el fondo.
+          Movimiento horizontal.
         */
 
         frame.targetX =
-          baseX +
-          mouseX *
-          MOUSE_X *
-          depthFactor;
-
-
-        frame.targetY =
-          baseY +
-          mouseY *
-          MOUSE_Y *
-          depthFactor;
+          BASE_X +
+          (
+            mouseX *
+            MOUSE_X_INFLUENCE *
+            depthFactor
+          );
 
 
         /*
-          MOVIMIENTO SUAVE
+          Movimiento vertical.
+        */
+
+        frame.targetY =
+          BASE_Y +
+          (
+            mouseY *
+            MOUSE_Y_INFLUENCE *
+            depthFactor
+          );
+
+
+        /*
+          Movimiento suave.
         */
 
         frame.x +=
           (
             frame.targetX -
             frame.x
-          ) * SMOOTHNESS;
+          ) *
+          SMOOTHNESS;
 
 
         frame.y +=
           (
             frame.targetY -
             frame.y
-          ) * SMOOTHNESS;
+          ) *
+          SMOOTHNESS;
 
 
         /*
-          PROFUNDIDAD
+          Posición 3D.
 
-          NO ROTAMOS.
+          IMPORTANTE:
 
-          Cada canvas es una
-          superficie completamente plana.
+          No hay rotateX.
+          No hay rotateY.
+          No hay rotateZ.
+
+          Las imágenes permanecen
+          completamente planas.
         */
-
-        const z =
-          -(i * DEPTH);
-
 
         frame.canvas.style.transform =
 
           `translate3d(
             calc(-50% + ${frame.x}px),
             calc(-50% + ${frame.y}px),
-            ${z}px
+            ${frame.z}px
           )`;
-
-
-        /*
-          OPACIDAD
-
-          El fondo se desvanece
-          ligeramente.
-        */
-
-        frame.canvas.style.opacity =
-          1 - (
-            i * 0.075
-          );
 
       }
     );
@@ -776,12 +774,18 @@ if (fragmentoStage && fragmentoVideo) {
 
 
   /* ==================================================
-     AUTOPLAY
+     INICIAR
   ================================================== */
 
   fragmentoVideo
     .play()
     .catch(() => {
+
+      /*
+        Si el navegador bloquea
+        autoplay, esperamos una
+        interacción del usuario.
+      */
 
       window.addEventListener(
         "click",
@@ -798,11 +802,7 @@ if (fragmentoStage && fragmentoVideo) {
     });
 
 
-  /* ==================================================
-     INICIAR
-  ================================================== */
-
-  drawFragmento();
+  drawVideo();
 
   animateFragmento();
 
