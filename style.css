@@ -1147,28 +1147,22 @@ opacity: 1;
 
 
 
-
 /* ==================================================
-   VIDEO FRAGMENTATION
+   SIMULACROON // MULTIPLE VIDEO FRAME
 ================================================== */
 
-.fragment-section {
-
-  position: relative;
+.interactive-frame-section {
 
   width: 100%;
-
   min-height: 100vh;
 
-  padding: 160px 60px;
+  display: flex;
+  flex-direction: column;
 
-  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
 
-  background: #000;
-
-  color: white;
-
-  overflow: hidden;
+  padding: 160px 0;
 
 }
 
@@ -1177,15 +1171,188 @@ opacity: 1;
    HEADER
 ========================= */
 
-.fragment-header {
+.interactive-frame-header {
+
+  width: min(1100px, 85vw);
 
   display: flex;
-
   justify-content: space-between;
 
-  align-items: center;
+  font-family: monospace;
+  font-size: 10px;
+
+  color: #63ff7a;
+
+  letter-spacing: 2px;
+
+  opacity: .65;
+
+  margin-bottom: 30px;
+
+}
+
+
+/* =========================
+   ESCENA
+========================= */
+
+.interactive-frame {
 
   width: 100%;
+  height: 600px;
+
+  position: relative;
+
+  perspective: 1200px;
+
+  overflow: hidden;
+
+  cursor: none;
+
+}
+
+
+/* =========================
+   MUNDO 3D
+========================= */
+
+.frame-world {
+
+  position: absolute;
+
+  width: 760px;
+  height: 480px;
+
+  left: 50%;
+  top: 50%;
+
+  transform-style: preserve-3d;
+
+  transform:
+    translate(-50%, -50%);
+
+}
+
+
+/* =========================
+   PLANOS
+========================= */
+
+.frame-plane {
+
+  position: absolute;
+
+  width: 760px;
+  height: 480px;
+
+  left: 0;
+  top: 0;
+
+  transform-style: preserve-3d;
+
+}
+
+
+/* =========================
+   VIDEOS
+========================= */
+
+.frame-plane video {
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+
+}
+
+
+/* =========================
+   REPETICIÓN ESPACIAL
+========================= */
+
+.frame-01 {
+
+  transform:
+    translate3d(-360px, 0, -360px)
+    rotateY(-10deg);
+
+  opacity: .35;
+
+}
+
+.frame-02 {
+
+  transform:
+    translate3d(-240px, 0, -240px)
+    rotateY(-8deg);
+
+  opacity: .45;
+
+}
+
+.frame-03 {
+
+  transform:
+    translate3d(-120px, 0, -120px)
+    rotateY(-6deg);
+
+  opacity: .60;
+
+}
+
+.frame-04 {
+
+  transform:
+    translate3d(0, 0, 0)
+    rotateY(-4deg);
+
+  opacity: 1;
+
+}
+
+.frame-05 {
+
+  transform:
+    translate3d(120px, 0, 120px)
+    rotateY(-2deg);
+
+  opacity: .75;
+
+}
+
+.frame-06 {
+
+  transform:
+    translate3d(240px, 0, 240px)
+    rotateY(1deg);
+
+  opacity: .55;
+
+}
+
+.frame-07 {
+
+  transform:
+    translate3d(360px, 0, 360px)
+    rotateY(4deg);
+
+  opacity: .4;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.interactive-frame-footer {
+
+  margin-top: 25px;
 
   font-family: monospace;
 
@@ -1195,269 +1362,6 @@ opacity: 1;
 
   color: #63ff7a;
 
-  opacity: .7;
-
-}
-
-
-.fragment-header span:first-child::before {
-
-  content: "^^^^^^ ";
-
-}
-
-
-.fragment-header span:last-child::after {
-
-  content: " -------";
-
-}
-
-
-/* =========================
-   INTRO
-========================= */
-
-.fragment-intro {
-
-  position: absolute;
-
-  left: 60px;
-
-  top: 260px;
-
-  z-index: 10;
-
-  pointer-events: none;
-
-}
-
-
-.fragment-intro h2 {
-
-  margin: 0;
-
-  font-size: 32px;
-
-  line-height: .95;
-
-  font-weight: normal;
-
-  letter-spacing: -1px;
-
-}
-
-
-.fragment-intro p {
-
-  margin-top: 25px;
-
-  font-size: 11px;
-
-  line-height: 1.6;
-
-  opacity: .5;
-
-}
-
-
-/* =========================
-   STAGE
-========================= */
-
-.fragment-stage {
-
-  position: relative;
-
-  width: 900px;
-
-  height: 600px;
-
-  margin: 40px auto 0 auto;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  overflow: visible;
-
-}
-
-
-/* VIDEO REAL */
-
-#fragmentVideo {
-
-  position: absolute;
-
-  width: 900px;
-
-  height: 600px;
-
-  object-fit: cover;
-
-  opacity: 0;
-
-  pointer-events: none;
-
-}
-
-
-/* CANVAS */
-
-#fragmentCanvas {
-
-  position: absolute;
-
-  width: 900px;
-
-  height: 600px;
-
-  left: 0;
-
-  top: 0;
-
-  display: block;
-
-  cursor: crosshair;
-
-}
-
-
-/* =========================
-   CROSSHAIR
-========================= */
-
-.fragment-crosshair {
-
-  position: absolute;
-
-  left: 50%;
-
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  color: white;
-
-  font-family: monospace;
-
-  font-size: 20px;
-
-  opacity: .35;
-
-  pointer-events: none;
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-.fragment-footer {
-
-  width: 900px;
-
-  margin: 20px auto 0 auto;
-
-  display: flex;
-
-  justify-content: space-between;
-
-  font-family: monospace;
-
-  font-size: 9px;
-
-  letter-spacing: 2px;
-
-  color: #63ff7a;
-
   opacity: .6;
-
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 1000px) {
-
-  .fragment-stage {
-
-    width: 80vw;
-
-    height: 55vw;
-
-  }
-
-
-  #fragmentVideo,
-  #fragmentCanvas {
-
-    width: 100%;
-
-    height: 100%;
-
-  }
-
-
-  .fragment-footer {
-
-    width: 80vw;
-
-  }
-
-
-  .fragment-intro {
-
-    left: 30px;
-
-  }
-
-}
-
-
-@media (max-width: 700px) {
-
-  .fragment-section {
-
-    padding: 120px 20px;
-
-  }
-
-
-  .fragment-intro {
-
-    position: relative;
-
-    left: auto;
-
-    top: auto;
-
-    margin-top: 50px;
-
-    margin-bottom: 20px;
-
-  }
-
-
-  .fragment-stage {
-
-    width: 100%;
-
-    height: 70vw;
-
-  }
-
-
-  .fragment-footer {
-
-    width: 100%;
-
-  }
 
 }
