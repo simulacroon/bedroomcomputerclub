@@ -1,3 +1,6 @@
+(() => {
+
+
 /* =========================================================
    MUJER SALIENDO DEL PSICOANALISTA
 
@@ -2684,6 +2687,58 @@ if (enterOverlay) {
 
 
 /* =========================================================
+   ACTIVACIÓN DE LA PIEZA DENTRO DE VIDEO.HTML
+========================================================= */
+
+const remediosSection =
+    document.getElementById(
+        "remediosSection"
+    );
+
+
+let remediosActive =
+    false;
+
+
+/*
+    La pieza solamente responde
+    al teclado cuando una parte
+    importante de ella está visible.
+*/
+
+const remediosObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    remediosActive =
+                        entry.isIntersecting;
+
+                }
+            );
+
+        },
+
+        {
+            threshold: .35
+        }
+
+    );
+
+
+if (remediosSection) {
+
+    remediosObserver.observe(
+        remediosSection
+    );
+
+}
+
+
+/* =========================================================
    TECLADO
 ========================================================= */
 
@@ -2692,8 +2747,23 @@ window.addEventListener(
     event => {
 
         /*
-            ENTER
+            Si estamos fuera de la
+            pieza, no hacemos nada.
+
+            Esto evita interferir
+            con Simulacroon.
         */
+
+        if (!remediosActive) {
+
+            return;
+
+        }
+
+
+        /* =========================
+           ENTER
+        ========================= */
 
         if (
             event.code ===
@@ -2707,9 +2777,9 @@ window.addEventListener(
         }
 
 
-        /*
-            SPACE
-        */
+        /* =========================
+           SPACE
+        ========================= */
 
         if (
             event.code ===
@@ -2742,6 +2812,11 @@ window.addEventListener(
                 audioContext.resume();
 
             }
+
         }
+
     }
 );
+
+
+ })();
