@@ -445,7 +445,7 @@ const mistClouds = [];
 
 for (
     let i = 0;
-    i < 560;
+    i < 220;
     i++
 ) {
 
@@ -458,31 +458,27 @@ for (
 
 function drawMist() {
 
-    ctx.clearRect(
-        0,
-        0,
-        innerWidth,
-        innerHeight
-    );
+    if (remediosActive) {
 
+        ctx.clearRect(
+            0,
+            0,
+            mistCanvas.clientWidth,
+            mistCanvas.clientHeight
+        );
 
-    mistClouds.forEach(
-        cloud => {
+        mistClouds.forEach(
+            cloud => {
+                cloud.update();
+                cloud.draw();
+            }
+        );
 
-            cloud.update();
-            cloud.draw();
+    }
 
-        }
-    );
-
-
-    requestAnimationFrame(
-        drawMist
-    );
+    requestAnimationFrame(drawMist);
 }
-
-
-drawMist();
+   
 
 
 /* =========================================================
