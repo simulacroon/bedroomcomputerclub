@@ -55,6 +55,28 @@ let montageLocked = false;
 
 const ctx = mistCanvas.getContext("2d");
 const feetCtx = feetMistCanvas.getContext("2d");
+   
+
+   if (
+    !sky ||
+    !enterOverlay ||
+    !mistCanvas ||
+    !feet ||
+    !feetMistCanvas ||
+    !blackout ||
+    !subtitle ||
+    !architectureStage ||
+    !architectureDoors ||
+    !architectureNoise
+) {
+
+    console.warn(
+        "Remedios: faltan elementos HTML necesarios."
+    );
+
+    return;
+}
+   
 
 
 function resizeCanvas() {
@@ -2434,35 +2456,33 @@ function enter05ArchitectureNoise() {
         comienzan a desaparecer.
     */
 
-    document
-        .querySelectorAll(
-            ".arch-door"
-        )
-        .forEach(
-            (
-                door,
-                index
-            ) => {
+   architectureDoors
+    .querySelectorAll(
+        ".arch-door"
+    )
+    .forEach(
+        (
+            door,
+            index
+        ) => {
 
-                setTimeout(
-                    () => {
+            setTimeout(
+                () => {
 
-                        door
-                            .classList
-                            .add(
-                                "fade"
-                            );
+                    door
+                        .classList
+                        .add(
+                            "fade"
+                        );
 
-                    },
+                },
 
-                    index *
-                    110
+                index * 110
 
-                );
+            );
 
-            }
-        );
-
+        }
+    );
 
     /*
         Cantidad de fragmentos.
