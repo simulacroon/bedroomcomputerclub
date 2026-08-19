@@ -1686,7 +1686,7 @@ function enter01() {
 
 
     setSubtitle(
-        "la tempestad comienza como una presencia"
+        "Todo es visible y todo es elusivo, "
     );
 }
 
@@ -1716,7 +1716,7 @@ function enter02() {
 
 
     setSubtitle(
-        "el horizonte se abre"
+        "todo está cerca y todo es intocable."
     );
 }
 
@@ -1857,7 +1857,7 @@ function enter03() {
 
 
     setSubtitle(
-        "la tempestad desaparece"
+        "La luz hace del muro indiferente un espectral teatro de reflejos."
     );
 }
 
@@ -2260,7 +2260,7 @@ function enter04Architecture() {
 
 
     setSubtitle(
-        "el espacio comienza a construirse"
+        "en el muro la sombra del fuego"
     );
 }
 
@@ -2587,7 +2587,7 @@ function enter05ArchitectureNoise() {
 
 
     setSubtitle(
-        "la arquitectura pierde su forma"
+        "en el fuego tu sombra y la mía"
     );
 }
 
