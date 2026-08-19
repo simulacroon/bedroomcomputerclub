@@ -482,7 +482,8 @@ function drawMist() {
 
     requestAnimationFrame(drawMist);
 }
-   
+
+drawMist();
 
 
 /* =========================================================
@@ -956,21 +957,20 @@ for (
 
 }
 
-
 function drawFeetMist() {
 
-    feetCtx.clearRect(
-        0,
-        0,
-        innerWidth,
-        innerHeight
-    );
-
-
     if (
+        remediosActive &&
         state >= 3 &&
         state < 4
     ) {
+
+        feetCtx.clearRect(
+            0,
+            0,
+            feetMistCanvas.clientWidth,
+            feetMistCanvas.clientHeight
+        );
 
         footClouds.forEach(
             cloud => {
@@ -980,8 +980,8 @@ function drawFeetMist() {
 
             }
         );
-    }
 
+    }
 
     requestAnimationFrame(
         drawFeetMist
@@ -990,6 +990,8 @@ function drawFeetMist() {
 
 
 drawFeetMist();
+
+
 
 /* =========================================================
    AUDIO — SISTEMA DE CAPAS
