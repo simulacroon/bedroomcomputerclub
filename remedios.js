@@ -81,7 +81,11 @@ const feetCtx = feetMistCanvas.getContext("2d");
 
 function resizeCanvas() {
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr =
+    Math.min(
+        window.devicePixelRatio || 1,
+        1.25
+    );
 
     mistCanvas.width = innerWidth * dpr;
     mistCanvas.height = innerHeight * dpr;
