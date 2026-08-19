@@ -473,6 +473,47 @@ const fragmentoVideo =
 
 
 if (fragmentoStage && fragmentoVideo) {
+   
+   let fragmentoActive = false;
+
+
+const fragmentoObserver =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    fragmentoActive =
+                        entry.isIntersecting;
+
+                    if (fragmentoActive) {
+
+                        fragmentoVideo
+                            .play()
+                            .catch(() => {});
+
+                    }
+
+                    else {
+
+                        fragmentoVideo.pause();
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold: 0.1
+        }
+    );
+
+
+fragmentoObserver.observe(
+    fragmentoStage
+);
 
   /* ==================================================
      CONFIGURACIÓN
@@ -618,46 +659,52 @@ if (fragmentoStage && fragmentoVideo) {
      DIBUJAR VIDEO
   ================================================== */
 
-  function drawVideo() {
+ function drawVideo() {
 
     if (
-      fragmentoVideo.readyState >= 2 &&
-      fragmentoVideo.videoWidth > 0
+        fragmentoActive &&
+        fragmentoVideo.readyState >= 2 &&
+        fragmentoVideo.videoWidth > 0
     ) {
 
-      frames.forEach(
-        (frame) => {
+        frames.forEach(
+            frame => {
 
-          frame.ctx.drawImage(
+                frame.ctx.drawImage(
+                    fragmentoVideo,
+                    0,
+                    0,
+                    frame.canvas.width,
+                    frame.canvas.height
+                );
 
-            fragmentoVideo,
-
-            0,
-            0,
-
-            frame.canvas.width,
-            frame.canvas.height
-
-          );
-
-        }
-      );
+            }
+        );
 
     }
 
-
     requestAnimationFrame(
-      drawVideo
+        drawVideo
     );
 
-  }
+}
 
 
   /* ==================================================
      ANIMACIÓN
   ================================================== */
 
-  function animateFragmento() {
+ if (!fragmentoActive) {
+
+    requestAnimationFrame(
+        animateFragmento
+    );
+
+    return;
+
+}
+   
+   function animateFragmento() {
 
     /*
       Suavizamos el movimiento
@@ -777,29 +824,6 @@ if (fragmentoStage && fragmentoVideo) {
      INICIAR
   ================================================== */
 
-  fragmentoVideo
-    .play()
-    .catch(() => {
-
-      /*
-        Si el navegador bloquea
-        autoplay, esperamos una
-        interacción del usuario.
-      */
-
-      window.addEventListener(
-        "click",
-        () => {
-
-          fragmentoVideo.play();
-
-        },
-        {
-          once: true
-        }
-      );
-
-    });
 
 
   drawVideo();
