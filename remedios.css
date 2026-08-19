@@ -78,9 +78,9 @@
 
     font-size:
         clamp(
-            28px,
-            4vw,
-            58px
+            11px,
+            1.2vw,
+            16px
         );
 
     font-weight: normal;
