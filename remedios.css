@@ -131,7 +131,7 @@
    VENTANA DEL CIELO
 ========================================================= */
 
-.sky {
+.remedios-section .sky {
 
     position: absolute;
 
@@ -164,7 +164,7 @@
    Solo contiene cielo.
 ========================================================= */
 
-.sky-texture {
+.remedios-section .sky-texture {
 
     position: absolute;
 
@@ -378,7 +378,7 @@
    EXPANSIÓN CONTINUA DEL CIELO
 ========================================================= */
 
-.sky.expand {
+.remedios-section .sky.expand {
 
     animation:
         skyWindowExpand
@@ -495,7 +495,7 @@
    PIES
 ========================================= */
 
-.feet {
+.remedios-section .feet {
 
     position: absolute;
 
@@ -554,7 +554,7 @@
    APARICIÓN DE PIES
 ========================================= */
 
-.feet.reveal {
+.remedios-section .feet.reveal {
 
     animation:
         feetReveal
@@ -740,7 +740,7 @@
    original de cada recorte.
 ========================================================= */
 
-.arch-door {
+.remedios-section .arch-door {
 
     position: absolute;
 
@@ -815,7 +815,7 @@
    PUERTA VISIBLE
 ========================================================= */
 
-.arch-door.visible {
+.remedios-section .arch-door.visible {
 
     opacity: 1;
 
@@ -834,7 +834,7 @@
    mientras aparecen los fragmentos.
 ========================================================= */
 
-.arch-door.fade {
+.remedios-section .arch-door.fade {
 
     opacity: .07;
 
@@ -875,7 +875,7 @@
    sobre obra.jpg y despedida.jpg.
 ========================================================= */
 
-.arch-chip {
+.remedios-section .arch-chip {
 
     position: absolute;
 
@@ -919,7 +919,7 @@
    FRAGMENTO VISIBLE
 ========================================================= */
 
-.arch-chip.visible {
+.remedios-section .arch-chip.visible {
 
     opacity: .76;
 
@@ -937,7 +937,7 @@
    reciben esta clase.
 ========================================================= */
 
-.arch-chip.flicker {
+.remedios-section .arch-chip.flicker {
 
     animation-name:
         architectureFlicker;
@@ -1010,7 +1010,7 @@
    y contrastados.
 ========================================================= */
 
-.arch-chip.micro {
+.remedios-section .arch-chip.micro {
 
     filter:
         saturate(.55)
@@ -1078,7 +1078,7 @@
 
 
 
-.instruction-line {
+.remedios-section .instruction-line {
 
     font-size: 13px;
 
@@ -1093,7 +1093,7 @@
 
 
 
-.instruction-line span {
+.remedios-section .instruction-line span {
 
     margin-left: 10px;
 
