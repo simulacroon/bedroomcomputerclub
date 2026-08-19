@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <title>Video</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="remedios.css">
 
 </head>
   
@@ -301,6 +302,182 @@
    </div>
    </div>
 
+ <!-- =====================================================
+     MUJER SALIENDO DEL PSICOANALISTA
+===================================================== -->
+
+<section
+  class="remedios-section reveal"
+  id="remediosSection"
+>
+
+  <div class="remedios-title">
+
+    <span>
+      INTERACTIVE VIDEO
+    </span>
+
+    <h2>
+      Mujer saliendo del psicoanalista
+    </h2>
+
+    <span>
+      REMEDIOS VARO / REAL TIME EDITING
+    </span>
+
+  </div>
+
+
+  <div
+    class="remedios-stage"
+    id="remediosStage"
+  >
+
+
+    <!-- =====================================================
+         ESCENA VISUAL
+    ====================================================== -->
+
+    <section id="visual">
+
+
+      <!-- =================================================
+           TEMPESTAD
+      ================================================== -->
+
+      <div
+        id="sky"
+        class="sky"
+      >
+
+        <div class="sky-texture"></div>
+
+
+        <button
+          id="enterOverlay"
+          type="button"
+        >
+
+          <span class="enter-key">
+            ENTER
+          </span>
+
+          <span class="enter-label">
+            iniciar
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <!-- BRUMA PRINCIPAL -->
+
+      <canvas id="mistCanvas"></canvas>
+
+
+      <!-- PIES -->
+
+      <div
+        id="feet"
+        class="feet"
+      ></div>
+
+
+      <!-- BRUMA LOCAL DE LOS PIES -->
+
+      <canvas id="feetMistCanvas"></canvas>
+
+
+      <!-- NEGRO ENTRE ESCENAS -->
+
+      <div id="blackout"></div>
+
+
+      <!-- =================================================
+           ARQUITECTURA
+      ================================================== -->
+
+      <section id="architectureStage">
+
+        <div id="architectureDoors"></div>
+
+        <div id="architectureNoise"></div>
+
+      </section>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         INSTRUCCIONES
+    ====================================================== -->
+
+    <aside id="instructions">
+
+      <div class="instruction-line">
+
+        ENTER
+
+        <span>
+          continuar montaje
+        </span>
+
+      </div>
+
+
+      <div class="instruction-line">
+
+        SPACE
+
+        <span>
+          pausar / continuar sonido
+        </span>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         SUBTÍTULOS
+    ====================================================== -->
+
+    <div id="subtitles">
+
+      <p id="subtitleText"></p>
+
+    </div>
+
+
+    <!-- =====================================================
+         SONIDO
+    ====================================================== -->
+
+    <div id="soundInfo">
+
+      SOUND ON
+
+    </div>
+
+
+  </div>
+
+</section>
+
+    <div class="ascii-divider reveal">
+
+  <div class="divider-line-1 reveal">
+    ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+  </div>
+
+  <div class="divider-line-2 reveal">
+    _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  </div>
+
+</div>
+
     
     
  <section class="feudalismo-section reveal">
@@ -462,6 +639,8 @@
     
     <div id="cursor"></div>
     <script src="simu.js"></script>
+    <script src="remedios.js"></script>
+    
   
 
 
