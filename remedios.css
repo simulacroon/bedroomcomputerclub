@@ -1,28 +1,110 @@
-/* =========================================
-   RESET
-========================================= */
-
-* {
-    box-sizing: border-box;
-}
 
 
-html,
-body {
+
+
+/* =========================================================
+   CONTENEDOR REMEDIOS DENTRO DE SIMULACROON
+========================================================= */
+
+.remedios-section {
+
+    position: relative;
 
     width: 100%;
-    height: 100%;
 
-    margin: 0;
+    padding:
+        180px
+        0
+        160px;
 
     background: #000;
 
+    color: white;
+
+    box-sizing: border-box;
+
 }
 
 
-body {
+.remedios-title {
+
+    width:
+        min(
+            1200px,
+            88vw
+        );
+
+    margin:
+        0
+        auto
+        45px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+    font-family:
+        monospace;
+
+}
+
+
+.remedios-title span {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color:
+        #63ff7a;
+
+    opacity: .65;
+
+}
+
+
+.remedios-title h2 {
+
+    margin: 0;
+
+    max-width: 600px;
+
+    font-family:
+        monospace;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            58px
+        );
+
+    font-weight: normal;
+
+    line-height: .95;
+
+}
+
+
+/* =========================================================
+   ESCENARIO
+========================================================= */
+
+.remedios-stage {
+
+    position: relative;
+
+    width: 100vw;
+
+    height: 100vh;
 
     overflow: hidden;
+
+    background: #000;
 
     font-family:
         Arial,
@@ -31,24 +113,6 @@ body {
 
 }
 
-
-
-/* =========================================
-   ESCENARIO
-========================================= */
-
-#stage {
-
-    position: relative;
-
-    width: 100vw;
-    height: 100vh;
-
-    overflow: hidden;
-
-    background: #000;
-
-}
 
 
 #visual {
