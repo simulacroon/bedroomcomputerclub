@@ -2,105 +2,95 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#c8c7cc">
   <title>Simulacroon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
 
-<body class="home">
-
-
-
-<nav class="ascii-nav">
-
-  <a href="index.html" class="nav-box">home</a>
-  <a href="game.html" class="nav-box">game</a>
-  <a href="video.html" class="nav-box">video</a>
-  <a href="smlcrn.html" class="logo-link">
-  <img src="img/logo.png" alt="smlcrn">
-</a>
-
-
-</nav>
-
-
-<div class="background-elements">
-
-  <img src="img/lanza1.png" class="bg-float f1">
-  <img src="img/lanza2.png" class="bg-float f2">
-  <img src="img/lanza3.png" class="bg-float f3">
-  <img src="img/lanza4.png" class="bg-float f4">
-
-  <img src="img/onda.png" class="bg-wave">
-
-</div>
-
-  <audio id="sound" src="soni/montefuji.mp3" loop preload="auto"></audio>
-
-  <section class="panel hidden">
-     <div class="panel-wrap">
-    <img src="img/2.png">
-       <div class="text-top">
-      abre la puerta
+<body class="home is-intro">
+  <div class="intro" id="intro" aria-label="Inicializando Bedroom Computer Club">
+    <div class="intro-corners" aria-hidden="true">
+      <span>BEDROOM COMPUTER CLUB</span>
+      <span>SYS.01 / SIGNAL</span>
     </div>
 
-    <div class="text-bottom">
-      este podría ser el lugar
+    <div class="intro-core">
+      <p class="intro-status" id="introStatus">iniciando oscilación</p>
+      <div class="voltage-readout">
+        <span id="voltageValue">0.00</span><small> V</small>
+      </div>
+      <svg class="intro-wave" viewBox="0 0 600 120" role="img" aria-label="Onda de voltaje en calibración">
+        <path id="voltageWave" d="M0 60 L600 60"></path>
+      </svg>
+      <div class="intro-progress" aria-hidden="true"><span id="introProgress"></span></div>
     </div>
 
+    <button class="intro-skip" id="introSkip" type="button">entrar →</button>
   </div>
-       
-  </section>
 
-  <section class="panel hidden">
-    <img src="img/2.png">
-  </section>
+  <main class="site-shell" id="siteContent">
+    <nav class="ascii-nav" aria-label="Navegación principal">
+      <a href="index.html" class="nav-box" aria-current="page">home</a>
+      <a href="game.html" class="nav-box">game</a>
+      <a href="video.html" class="nav-box">video</a>
+      <a href="smlcrn.html" class="logo-link">
+        <img src="img/logo.png" alt="smlcrn">
+      </a>
+    </nav>
 
-  <section class="panel hidden">
-    <img src="img/3.png">
-  </section>
+    <div class="background-elements" aria-hidden="true">
+      <img src="img/lanza1.png" class="bg-float f1" alt="">
+      <img src="img/lanza2.png" class="bg-float f2" alt="">
+      <img src="img/lanza3.png" class="bg-float f3" alt="">
+      <img src="img/lanza4.png" class="bg-float f4" alt="">
+      <img src="img/onda.png" class="bg-wave" alt="">
+    </div>
 
-  <section class="panel hidden">
-    <img src="img/4.png">
-  </section>
+    <audio id="sound" src="soni/montefuji.mp3" loop preload="auto"></audio>
 
-  <section class="panel hidden">
-    <img src="img/5.png">
-  </section>
+    <div class="panels" aria-live="polite">
+      <section class="panel hidden">
+        <div class="panel-wrap">
+          <img src="img/2.png" alt="Abre la puerta — este podría ser el lugar">
+          <div class="text-top">abre la puerta</div>
+          <div class="text-bottom">este podría ser el lugar</div>
+          <div class="panel-instruction">scroll para abrir · clic para silencio</div>
+        </div>
+      </section>
 
-  <section class="panel hidden">
-    <img src="img/6.png">
-  </section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/2.png" alt="Imagen 2"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/3.png" alt="Imagen 3"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/4.png" alt="Imagen 4"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/5.png" alt="Imagen 5"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/6.png" alt="Imagen 6"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/7.png" alt="Imagen 7"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/8.png" alt="Imagen 8"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/9.png" alt="Imagen 9"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+      <section class="panel hidden"><div class="panel-wrap"><img src="img/1.png" alt="Imagen 1"><div class="panel-instruction">scroll para abrir · clic para silencio</div></div></section>
+    </div>
 
-  <section class="panel hidden">
-    <img src="img/7.png">
-  </section>
+    <button class="pages-trigger" id="pagesTrigger" type="button" aria-expanded="false" aria-controls="pagesMenu">otras páginas +</button>
+    <div class="pages-menu" id="pagesMenu" aria-hidden="true">
+      <button class="pages-close" id="pagesClose" type="button" aria-label="Cerrar listado">cerrar ×</button>
+      <p>[ DIRECTORIO / BCC ]</p>
+      <a href="game.html"><span>01</span> game</a>
+      <a href="video.html"><span>02</span> video</a>
+      <a href="smlcrn.html"><span>03</span> simulacroon</a>
+      <a href="mailto:lauraparui@gmail.com"><span>04</span> enviar mensaje</a>
+    </div>
 
-  <section class="panel hidden">
-    <img src="img/8.png">
-  </section>
-
-  <section class="panel hidden">
-    <img src="img/9.png">
-  </section>
-
-   <section class="panel hidden">
-    <img src="img/1.png">
-  </section>
-
-  <div id="cursor"></div>
+    <a href="mailto:lauraparui@gmail.com" class="contact-link">&gt;&gt; enviar mensaje</a>
+    <div id="cursor" aria-hidden="true"></div>
+  </main>
 
   <script src="simu.js"></script>
-
-  
-<a href="mailto:lauraparui@gmail.com" class="contact-link">
-  >> enviar mensaje
-</a>
-
-  
 </body>
 </html>
+
 
 
 
