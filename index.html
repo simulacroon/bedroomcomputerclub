@@ -19,12 +19,12 @@
     </div>
 
     <div class="intro-core">
-      <p class="intro-status" id="introStatus">iniciando oscilación</p>
+      <p class="intro-status" id="introStatus">midiendo frecuencias</p>
       <div class="voltage-readout">
-        <span id="voltageValue">0.00</span><small> V</small>
+        <span id="voltageValue">0.00</span><small> Hz</small>
       </div>
-      <svg class="intro-wave" viewBox="0 0 600 120" role="img" aria-label="Onda de voltaje en calibración">
-        <path id="voltageWave" d="M0 60 L600 60"></path>
+      <svg class="intro-wave" viewBox="0 0 360 260" role="img" aria-label="Curva luminosa de Lissajous en calibración">
+        <path id="voltageWave" d="M180 130"></path>
       </svg>
       <div class="intro-progress" aria-hidden="true"><span id="introProgress"></span></div>
     </div>
@@ -37,6 +37,8 @@
       <a href="index.html" class="nav-box" aria-current="page">home</a>
       <a href="game.html" class="nav-box">game</a>
       <a href="video.html" class="nav-box">video</a>
+      <a href="elearning.html" class="nav-box">E-learning</a>
+      <a href="sound.html" class="nav-box">Sound</a>
       <a href="smlcrn.html" class="logo-link">
         <img src="img/logo.png" alt="smlcrn">
       </a>
@@ -79,19 +81,18 @@
       <p>[ DIRECTORIO / BCC ]</p>
       <a href="game.html"><span>01</span> game</a>
       <a href="video.html"><span>02</span> video</a>
-      <a href="smlcrn.html"><span>03</span> simulacroon</a>
-      <a href="mailto:lauraparui@gmail.com"><span>04</span> enviar mensaje</a>
+      <a href="elearning.html"><span>03</span> E-learning</a>
+      <a href="sound.html"><span>04</span> Sound</a>
+      <a href="smlcrn.html"><span>05</span> simulacroon</a>
+      <a href="mailto:lauraparui@gmail.com"><span>06</span> enviar mensaje</a>
     </div>
 
     <a href="mailto:lauraparui@gmail.com" class="contact-link">&gt;&gt; enviar mensaje</a>
-    <div id="cursor" aria-hidden="true"></div>
+    <div id="cursor" aria-hidden="true">
+      <span id="cursorLabel">scroll para abrir<br>clic para silencio</span>
+    </div>
   </main>
 
   <script src="simu.js"></script>
 </body>
 </html>
-
-
-
-
-
