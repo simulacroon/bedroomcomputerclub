@@ -1,8 +1,8 @@
-const panels = document.querySelectorAll('.panel');
-const audio = document.getElementById('sound');
-const cursor = document.getElementById('cursor');
+const panels = document.querySelectorAll(".panel");
+const audio = document.getElementById("sound");
+const cursor = document.getElementById("cursor");
 
-const isHome = document.body.classList.contains('home');
+const isHome = document.body.classList.contains("home");
 
 let index = 0;
 let isScrolling = false;
@@ -14,12 +14,12 @@ let touchStartY = 0;
 INTRO: CALIBRACIÓN DE SEÑAL
 ========================= */
 
-const intro = document.getElementById('intro');
-const introSkip = document.getElementById('introSkip');
-const introStatus = document.getElementById('introStatus');
-const voltageValue = document.getElementById('voltageValue');
-const voltageWave = document.getElementById('voltageWave');
-const introProgress = document.getElementById('introProgress');
+const intro = document.getElementById("intro");
+const introSkip = document.getElementById("introSkip");
+const introStatus = document.getElementById("introStatus");
+const voltageValue = document.getElementById("voltageValue");
+const voltageWave = document.getElementById("voltageWave");
+const introProgress = document.getElementById("introProgress");
 
 
 if (isHome && intro) {
@@ -36,10 +36,10 @@ if (isHome && intro) {
 
     introFinished = true;
 
-    document.body.classList.remove('is-intro');
-    document.body.classList.add('intro-complete');
+    document.body.classList.remove("is-intro");
+    document.body.classList.add("intro-complete");
 
-    intro.setAttribute('aria-hidden', 'true');
+    intro.setAttribute("aria-hidden", "true");
 
     setTimeout(() => {
       intro.remove();
@@ -52,12 +52,14 @@ if (isHome && intro) {
 
     if (introFinished) return;
 
-    const elapsed = now - introStart;
+    const elapsed =
+      now - introStart;
 
-    const progress = Math.min(
-      elapsed / introDuration,
-      1
-    );
+    const progress =
+      Math.min(
+        elapsed / introDuration,
+        1
+      );
 
     const measuredFrequency = (
       36 +
@@ -70,9 +72,14 @@ if (isHome && intro) {
     const points = [];
 
 
-    /* Curva de Lissajous: relación 3:2 */
+    /* Curva de Lissajous:
+       relación de frecuencias 3:2 */
 
-    for (let step = 0; step <= 420; step++) {
+    for (
+      let step = 0;
+      step <= 420;
+      step++
+    ) {
 
       const angle =
         (step / 420) *
@@ -97,7 +104,7 @@ if (isHome && intro) {
         92;
 
       points.push(
-        `${step === 0 ? 'M' : 'L'}${x.toFixed(2)} ${y.toFixed(2)}`
+        `${step === 0 ? "M" : "L"}${x.toFixed(2)} ${y.toFixed(2)}`
       );
 
     }
@@ -107,8 +114,8 @@ if (isHome && intro) {
       measuredFrequency;
 
     voltageWave.setAttribute(
-      'd',
-      points.join(' ')
+      "d",
+      points.join(" ")
     );
 
     introProgress.style.width =
@@ -118,17 +125,17 @@ if (isHome && intro) {
     if (progress < 0.38) {
 
       introStatus.textContent =
-        'midiendo frecuencias';
+        "midiendo frecuencias";
 
     } else if (progress < 0.78) {
 
       introStatus.textContent =
-        'comparando fase 3:2';
+        "comparando fase 3:2";
 
     } else {
 
       introStatus.textContent =
-        'frecuencia estable';
+        "frecuencia estable";
 
     }
 
@@ -152,7 +159,7 @@ if (isHome && intro) {
 
 
   introSkip.addEventListener(
-    'click',
+    "click",
     finishIntro
   );
 
@@ -172,10 +179,16 @@ if (isHome && panels.length > 0) {
   function showPanel(i) {
 
     panels.forEach((panel) => {
-      panel.classList.remove('active');
+
+      panel.classList.remove(
+        "active"
+      );
+
     });
 
-    panels[i].classList.add('active');
+    panels[i].classList.add(
+      "active"
+    );
 
   }
 
@@ -184,20 +197,21 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    'click',
+    "click",
     (event) => {
 
       if (
         document.body.classList.contains(
-          'is-intro'
+          "is-intro"
         )
       ) {
         return;
       }
 
+
       if (
         event.target.closest(
-          'a, button, .pages-menu'
+          "a, button, .pages-menu"
         )
       ) {
         return;
@@ -236,24 +250,34 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    'wheel',
+    "wheel",
     (event) => {
 
       if (
         document.body.classList.contains(
-          'is-intro'
+          "is-intro"
         )
       ) {
         return;
       }
 
-      if (!audioUnlocked) return;
 
-      if (audio.paused) {
-        audio.play();
+      if (!audioUnlocked) {
+        return;
       }
 
-      if (isScrolling) return;
+
+      if (audio.paused) {
+
+        audio.play();
+
+      }
+
+
+      if (isScrolling) {
+        return;
+      }
+
 
       isScrolling = true;
 
@@ -293,13 +317,15 @@ if (isHome && panels.length > 0) {
     if (
       isScrolling ||
       document.body.classList.contains(
-        'is-intro'
+        "is-intro"
       )
     ) {
       return;
     }
 
+
     isScrolling = true;
+
 
     index = Math.max(
       0,
@@ -309,7 +335,9 @@ if (isHome && panels.length > 0) {
       )
     );
 
+
     showPanel(index);
+
 
     setTimeout(() => {
 
@@ -325,11 +353,12 @@ if (isHome && panels.length > 0) {
   ========================= */
 
   window.addEventListener(
-    'touchstart',
+    "touchstart",
     (event) => {
 
       touchStartY =
-        event.changedTouches[0].clientY;
+        event.changedTouches[0]
+          .clientY;
 
     },
     {
@@ -339,12 +368,14 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    'touchend',
+    "touchend",
     (event) => {
 
       const distance =
         touchStartY -
-        event.changedTouches[0].clientY;
+        event.changedTouches[0]
+          .clientY;
+
 
       if (Math.abs(distance) < 45) {
         return;
@@ -384,17 +415,22 @@ DIRECTORIO DE PÁGINAS
 
 const pagesTrigger =
   document.getElementById(
-    'pagesTrigger'
+    "pagesTrigger"
   );
 
 const pagesMenu =
   document.getElementById(
-    'pagesMenu'
+    "pagesMenu"
   );
 
 const pagesClose =
   document.getElementById(
-    'pagesClose'
+    "pagesClose"
+  );
+
+const mobileMenuTrigger =
+  document.getElementById(
+    "mobileMenuTrigger"
   );
 
 
@@ -407,30 +443,40 @@ if (
   function setPagesMenu(open) {
 
     pagesMenu.classList.toggle(
-      'is-open',
+      "is-open",
       open
     );
 
     pagesMenu.setAttribute(
-      'aria-hidden',
+      "aria-hidden",
       String(!open)
     );
 
     pagesTrigger.setAttribute(
-      'aria-expanded',
+      "aria-expanded",
       String(open)
     );
+
+
+    if (mobileMenuTrigger) {
+
+      mobileMenuTrigger.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+    }
 
   }
 
 
   pagesTrigger.addEventListener(
-    'click',
+    "click",
     () => {
 
       setPagesMenu(
         !pagesMenu.classList.contains(
-          'is-open'
+          "is-open"
         )
       );
 
@@ -438,8 +484,26 @@ if (
   );
 
 
+  if (mobileMenuTrigger) {
+
+    mobileMenuTrigger.addEventListener(
+      "click",
+      () => {
+
+        setPagesMenu(
+          !pagesMenu.classList.contains(
+            "is-open"
+          )
+        );
+
+      }
+    );
+
+  }
+
+
   pagesClose.addEventListener(
-    'click',
+    "click",
     () => {
 
       setPagesMenu(false);
@@ -449,10 +513,10 @@ if (
 
 
   document.addEventListener(
-    'keydown',
+    "keydown",
     (event) => {
 
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
 
         setPagesMenu(false);
 
@@ -479,7 +543,7 @@ let currentY = mouseY;
 
 
 window.addEventListener(
-  'mousemove',
+  "mousemove",
   (event) => {
 
     mouseX = event.clientX;
@@ -501,11 +565,12 @@ function moveCursor() {
       (mouseY - currentY) *
       0.15;
 
+
     cursor.style.left =
-      currentX + 'px';
+      currentX + "px";
 
     cursor.style.top =
-      currentY + 'px';
+      currentY + "px";
 
   }
 
@@ -526,7 +591,7 @@ TEXTO DENTRO DEL CURSOR
 
 const cursorLabel =
   document.getElementById(
-    'cursorLabel'
+    "cursorLabel"
   );
 
 
@@ -537,15 +602,17 @@ if (
 ) {
 
   document
-    .querySelectorAll('.panel-wrap')
+    .querySelectorAll(
+      ".panel-wrap"
+    )
     .forEach((panelWrap) => {
 
       panelWrap.addEventListener(
-        'mouseenter',
+        "mouseenter",
         () => {
 
           cursor.classList.add(
-            'over-panel'
+            "over-panel"
           );
 
         }
@@ -553,11 +620,11 @@ if (
 
 
       panelWrap.addEventListener(
-        'mouseleave',
+        "mouseleave",
         () => {
 
           cursor.classList.remove(
-            'over-panel'
+            "over-panel"
           );
 
         }
@@ -569,12 +636,12 @@ if (
 
 
 /* =========================
-VIDEOS CIRCULARES SCROLL
+VIDEOS CIRCULARES
 ========================= */
 
 const circleVideos =
   document.querySelectorAll(
-    '.circle-video'
+    ".circle-video"
   );
 
 
@@ -588,10 +655,11 @@ const circleObserver =
           const video =
             entry.target;
 
+
           if (entry.isIntersecting) {
 
             video.classList.add(
-              'visible'
+              "visible"
             );
 
             video.play();
@@ -623,7 +691,7 @@ circleVideos.forEach(
 
 
 /* =========================
-REVEAL ELEMENTS
+ELEMENTOS REVEAL
 ========================= */
 
 const observer =
@@ -636,7 +704,7 @@ const observer =
           if (entry.isIntersecting) {
 
             entry.target.classList.add(
-              'visible'
+              "visible"
             );
 
           }
@@ -652,7 +720,9 @@ const observer =
 
 
 document
-  .querySelectorAll('.reveal')
+  .querySelectorAll(
+    ".reveal"
+  )
   .forEach((element) => {
 
     observer.observe(element);
@@ -667,21 +737,24 @@ KINKYCUIR // FLOATING ASCII AUDIO PLAYER
 const kinkyEpisodes = [
 
   {
-    number: '001',
-    title: 'Bondage y Consentimiento',
-    file: 'audio/cap1.m4a'
+    number: "001",
+    title:
+      "Bondage y Consentimiento",
+    file: "audio/cap1.m4a"
   },
 
   {
-    number: '002',
-    title: 'Derecho al placer disca',
-    file: 'audio/cap2.m4a'
+    number: "002",
+    title:
+      "Derecho al placer disca",
+    file: "audio/cap2.m4a"
   },
 
   {
-    number: '003',
-    title: 'Punto G — guía',
-    file: 'audio/cap3.m4a'
+    number: "003",
+    title:
+      "Punto G — guía",
+    file: "audio/cap3.m4a"
   }
 
 ];
@@ -689,72 +762,72 @@ const kinkyEpisodes = [
 
 const kinkyAudio =
   document.getElementById(
-    'kinkyAudio'
+    "kinkyAudio"
   );
 
 const kinkyPlayer =
   document.getElementById(
-    'kinkyPlayer'
+    "kinkyPlayer"
   );
 
 const kinkyPlay =
   document.getElementById(
-    'kinkyPlay'
+    "kinkyPlay"
   );
 
 const kinkyPrev =
   document.getElementById(
-    'kinkyPrev'
+    "kinkyPrev"
   );
 
 const kinkyNext =
   document.getElementById(
-    'kinkyNext'
+    "kinkyNext"
   );
 
 const kinkyNumber =
   document.getElementById(
-    'kinkyNumber'
+    "kinkyNumber"
   );
 
 const kinkyTitle =
   document.getElementById(
-    'kinkyTitle'
+    "kinkyTitle"
   );
 
 const kinkyIndicator =
   document.getElementById(
-    'kinkyIndicator'
+    "kinkyIndicator"
   );
 
 const kinkySignal =
   document.getElementById(
-    'kinkySignal'
+    "kinkySignal"
   );
 
 const kinkyStatus =
   document.getElementById(
-    'kinkyStatus'
+    "kinkyStatus"
   );
 
 const kinkyCurrent =
   document.getElementById(
-    'kinkyCurrent'
+    "kinkyCurrent"
   );
 
 const kinkyDuration =
   document.getElementById(
-    'kinkyDuration'
+    "kinkyDuration"
   );
 
 const kinkyProgress =
   document.getElementById(
-    'kinkyProgress'
+    "kinkyProgress"
   );
 
 const kinkyProgressContainer =
   document.getElementById(
-    'kinkyProgressContainer'
+    "kinkyProgressContainer"
   );
 
 
@@ -779,8 +852,10 @@ if (
     const episode =
       kinkyEpisodes[index];
 
+
     kinkyCurrentEpisode =
       index;
+
 
     kinkyAudio.pause();
 
@@ -789,35 +864,40 @@ if (
 
     kinkyAudio.load();
 
+
     kinkyNumber.textContent =
       episode.number;
 
     kinkyTitle.textContent =
       episode.title;
 
+
     kinkyCurrent.textContent =
-      '00:00';
+      "00:00";
 
     kinkyDuration.textContent =
-      '00:00';
+      "00:00";
+
 
     kinkyProgress.style.width =
-      '0%';
+      "0%";
+
 
     kinkySignal.textContent =
-      '░░░░░░░░░░';
+      "░░░░░░░░░░";
 
     kinkyStatus.textContent =
-      'LOADING';
+      "LOADING";
 
     kinkyIndicator.textContent =
-      '○';
+      "○";
 
     kinkyPlay.textContent =
-      'PLAY';
+      "PLAY";
+
 
     kinkyPlayer.classList.remove(
-      'playing'
+      "playing"
     );
 
   }
@@ -828,7 +908,7 @@ if (
   ================================================== */
 
   kinkyPlay.addEventListener(
-    'click',
+    "click",
     async () => {
 
       if (kinkyAudio.paused) {
@@ -840,12 +920,12 @@ if (
         } catch (error) {
 
           console.error(
-            'ERROR DE AUDIO:',
+            "ERROR DE AUDIO:",
             error
           );
 
           kinkyStatus.textContent =
-            'ERROR';
+            "ERROR";
 
         }
 
@@ -864,7 +944,7 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'loadedmetadata',
+    "loadedmetadata",
     () => {
 
       kinkyDuration.textContent =
@@ -873,31 +953,31 @@ if (
         );
 
       kinkyStatus.textContent =
-        'READY';
+        "READY";
 
     }
   );
 
 
   /* ==================================================
-  PLAY
+  REPRODUCIENDO
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'play',
+    "play",
     () => {
 
       kinkyPlay.textContent =
-        'PAUSE';
+        "PAUSE";
 
       kinkyStatus.textContent =
-        'ONLINE';
+        "ONLINE";
 
       kinkyIndicator.textContent =
-        '●';
+        "●";
 
       kinkyPlayer.classList.add(
-        'playing'
+        "playing"
       );
 
     }
@@ -905,24 +985,24 @@ if (
 
 
   /* ==================================================
-  PAUSE
+  PAUSA
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'pause',
+    "pause",
     () => {
 
       kinkyPlay.textContent =
-        'PLAY';
+        "PLAY";
 
       kinkyStatus.textContent =
-        'PAUSED';
+        "PAUSED";
 
       kinkyIndicator.textContent =
-        '○';
+        "○";
 
       kinkyPlayer.classList.remove(
-        'playing'
+        "playing"
       );
 
     }
@@ -934,16 +1014,16 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'error',
+    "error",
     () => {
 
       console.error(
-        'No se pudo cargar:',
+        "No se pudo cargar:",
         kinkyAudio.src
       );
 
       kinkyStatus.textContent =
-        'AUDIO ERROR';
+        "AUDIO ERROR";
 
     }
   );
@@ -954,7 +1034,7 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'timeupdate',
+    "timeupdate",
     () => {
 
       if (
@@ -975,7 +1055,7 @@ if (
 
 
       kinkyProgress.style.width =
-        percentage + '%';
+        percentage + "%";
 
 
       kinkyCurrent.textContent =
@@ -993,8 +1073,8 @@ if (
 
 
       kinkySignal.textContent =
-        '█'.repeat(activeBars) +
-        '░'.repeat(
+        "█".repeat(activeBars) +
+        "░".repeat(
           totalBars - activeBars
         );
 
@@ -1007,7 +1087,7 @@ if (
   ================================================== */
 
   kinkyProgressContainer.addEventListener(
-    'click',
+    "click",
     (event) => {
 
       if (
@@ -1043,11 +1123,11 @@ if (
 
 
   /* ==================================================
-  ANTERIOR
+  CAPÍTULO ANTERIOR
   ================================================== */
 
   kinkyPrev.addEventListener(
-    'click',
+    "click",
     () => {
 
       kinkyCurrentEpisode--;
@@ -1072,11 +1152,11 @@ if (
 
 
   /* ==================================================
-  SIGUIENTE
+  CAPÍTULO SIGUIENTE
   ================================================== */
 
   kinkyNext.addEventListener(
-    'click',
+    "click",
     () => {
 
       kinkyCurrentEpisode++;
@@ -1105,27 +1185,27 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    'ended',
+    "ended",
     () => {
 
       kinkyStatus.textContent =
-        'COMPLETE';
+        "COMPLETE";
 
       kinkyIndicator.textContent =
-        '○';
+        "○";
 
       kinkyPlay.textContent =
-        'PLAY';
+        "PLAY";
 
       kinkyPlayer.classList.remove(
-        'playing'
+        "playing"
       );
 
       kinkyProgress.style.width =
-        '0%';
+        "0%";
 
       kinkyCurrent.textContent =
-        '00:00';
+        "00:00";
 
     }
   );
@@ -1140,7 +1220,7 @@ if (
     if (
       !Number.isFinite(seconds)
     ) {
-      return '00:00';
+      return "00:00";
     }
 
 
@@ -1159,12 +1239,12 @@ if (
     return (
       String(minutes).padStart(
         2,
-        '0'
+        "0"
       ) +
-      ':' +
+      ":" +
       String(secondsRest).padStart(
         2,
-        '0'
+        "0"
       )
     );
 
@@ -1172,7 +1252,7 @@ if (
 
 
   /* ==================================================
-  INICIAR
+  INICIAR REPRODUCTOR
   ================================================== */
 
   loadKinkyEpisode(0);
@@ -1181,18 +1261,17 @@ if (
 
 
 /* ==================================================
-FRAGMENTO
-SPATIAL VIDEO MEMORY
+FRAGMENTO // SPATIAL VIDEO MEMORY
 ================================================== */
 
 const fragmentoStage =
   document.getElementById(
-    'fragmentoStage'
+    "fragmentoStage"
   );
 
 const fragmentoVideo =
   document.getElementById(
-    'fragmentoVideo'
+    "fragmentoVideo"
   );
 
 
@@ -1266,12 +1345,12 @@ if (
 
     const canvas =
       document.createElement(
-        'canvas'
+        "canvas"
       );
 
 
     canvas.classList.add(
-      'fragmento-frame'
+      "fragmento-frame"
     );
 
 
@@ -1285,7 +1364,7 @@ if (
 
 
     const context =
-      canvas.getContext('2d');
+      canvas.getContext("2d");
 
 
     frames.push({
@@ -1312,7 +1391,7 @@ if (
 
 
   /* ==================================================
-  MOUSE
+  CONTROL DEL MOUSE
   ================================================== */
 
   let fragmentMouseX = 0;
@@ -1323,7 +1402,7 @@ if (
 
 
   window.addEventListener(
-    'mousemove',
+    "mousemove",
     (event) => {
 
       targetMouseX =
@@ -1509,7 +1588,7 @@ if (
 
 
   /* ==================================================
-  INICIAR
+  INICIAR VIDEO
   ================================================== */
 
   fragmentoVideo
@@ -1523,7 +1602,7 @@ if (
       */
 
       window.addEventListener(
-        'click',
+        "click",
         () => {
 
           fragmentoVideo.play();
@@ -1541,7 +1620,6 @@ if (
   animateFragmento();
 
 }
-
 
 
 
