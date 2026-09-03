@@ -1143,6 +1143,79 @@ opacity: 1;
 }
 
 /* ==================================================
+   CORRECCIÓN FINAL WEB — INTRO + LOGO SMLCRN
+   Debe permanecer al final del archivo.
+================================================== */
+
+@media (min-width: 1025px) {
+
+  .home .intro-core {
+    width: 220px;
+    transform: scale(1);
+  }
+
+  .home .intro-status {
+    margin: 0 0 5px;
+    font-size: 6px;
+    line-height: 1;
+    letter-spacing: .2em;
+  }
+
+  .home .voltage-readout {
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+
+  .home .voltage-readout small {
+    font-size: 6px;
+    letter-spacing: .05em;
+  }
+
+  .home .intro-wave {
+    width: 115px;
+    height: 84px;
+    margin: 3px auto 5px;
+  }
+
+  .home .intro-wave path {
+    stroke-width: .55;
+    filter:
+      drop-shadow(0 0 1px #fff)
+      drop-shadow(0 0 3px #69ffbd)
+      drop-shadow(0 0 7px rgba(38, 255, 160, .72));
+  }
+
+  .home .intro-progress {
+    width: 105px;
+    margin: 0 auto;
+  }
+
+  /* Centro exacto de la onda circular ubicada a la izquierda */
+  .home .ascii-nav .logo-link {
+    position: fixed;
+    top: 39%;
+    left: 28%;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+  }
+
+  .home .ascii-nav .logo-link img {
+    display: block;
+    width: 135px;
+    max-width: none;
+    height: auto;
+  }
+
+  .home .ascii-nav .logo-link:hover img {
+    transform: scale(1.04);
+  }
+}
+
+/* ==================================================
    AJUSTES WEB — SEPTIEMBRE 2026
 ================================================== */
 
@@ -1984,6 +2057,77 @@ body.home {
   }
 
 }
+
+/* ==================================================
+   OVERRIDE FINAL WEB: INTRO COMPACTA + SMLCRN
+================================================== */
+
+@media (min-width: 1025px) {
+  .home .intro-core {
+    width: 220px;
+  }
+
+  .home .intro-status {
+    margin: 0 0 5px;
+    font-size: 6px;
+    line-height: 1;
+    letter-spacing: .2em;
+  }
+
+  .home .voltage-readout {
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: -.03em;
+  }
+
+  .home .voltage-readout small {
+    font-size: 6px;
+  }
+
+  .home .intro-wave {
+    width: 115px;
+    height: 84px;
+    margin: 3px auto 5px;
+  }
+
+  .home .intro-wave path {
+    stroke-width: .55;
+    filter:
+      drop-shadow(0 0 1px #fff)
+      drop-shadow(0 0 3px #69ffbd)
+      drop-shadow(0 0 7px rgba(38, 255, 160, .72));
+  }
+
+  .home .intro-progress {
+    width: 105px;
+    margin: 0 auto;
+  }
+
+  .home .ascii-nav .logo-link {
+    position: fixed;
+    top: 39%;
+    left: 28%;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+  }
+
+  .home .ascii-nav .logo-link img {
+    display: block;
+    width: 135px;
+    max-width: none;
+    height: auto;
+  }
+
+  .home .ascii-nav .logo-link:hover img {
+    transform: scale(1.04);
+  }
+}
+
+
+
 
 
 
