@@ -2513,6 +2513,7 @@ body.home {
     top: 24%;
     left: calc(28% - 190px);
     width: 380px;
+    z-index: 1;
     opacity: .42;
     filter:
       brightness(1.2)
@@ -2531,48 +2532,49 @@ body.home {
 
   /* Las cuatro lanzas orbitan el círculo */
   .home .bg-float {
-    width: 190px;
+    width: 420px;
+    z-index: 3;
     opacity: 1;
     animation: orbitPulse 5.5s ease-in-out infinite;
     mix-blend-mode: normal;
     filter:
-      brightness(1.75)
-      contrast(1.28)
-      saturate(1.6)
-      drop-shadow(0 0 4px rgba(255,255,255,.8))
-      drop-shadow(0 0 10px rgba(92,255,224,.9))
-      drop-shadow(0 0 22px rgba(82,241,221,.55));
+      brightness(.78)
+      contrast(2.05)
+      saturate(5)
+      drop-shadow(0 0 2px rgba(0,238,255,1))
+      drop-shadow(0 0 7px rgba(0,238,255,.9))
+      drop-shadow(0 0 17px rgba(75,255,211,.68));
   }
 
   .home .f1 {
-    top: 12%;
-    left: calc(28% - 95px);
+    top: 5%;
+    left: calc(28% - 210px);
     transform: rotate(90deg);
   }
 
   .home .f2 {
-    top: 42%;
-    left: calc(28% - 355px);
+    top: 31%;
+    left: calc(28% - 480px);
     transform: none;
     animation-delay: -1.3s;
   }
 
   .home .f3 {
-    top: 42%;
-    left: calc(28% + 165px);
+    top: 31%;
+    left: calc(28% + 55px);
     transform: rotate(180deg);
     animation-delay: -2.6s;
   }
 
   .home .f4 {
-    top: 68%;
-    left: calc(28% - 95px);
+    top: 56%;
+    left: calc(28% - 210px);
     transform: rotate(-90deg);
     animation-delay: -3.9s;
   }
 
   @keyframes orbitPulse {
-    0%, 100% { opacity: .78; }
+    0%, 100% { opacity: .9; }
     50% { opacity: 1; }
   }
 
@@ -2608,19 +2610,25 @@ body.home {
   }
 
   .home .text-top {
-    top: -24px;
+    top: -27px;
     left: 10px;
-    font-size: 16px;
+    z-index: 8;
+    font-size: 18px;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
+    text-shadow: 0 1px 5px rgba(60,65,82,.34);
   }
 
   .home .text-bottom {
     right: 10px;
-    bottom: -24px;
-    font-size: 16px;
+    bottom: -27px;
+    z-index: 8;
+    font-size: 18px;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
+    text-shadow: 0 1px 5px rgba(60,65,82,.34);
   }
 
   /* Cursor verde siempre por encima de la obra */
@@ -2638,6 +2646,8 @@ body.home {
       inset 0 0 24px rgba(255,255,255,.12);
   }
 }
+
+
 
 
 
