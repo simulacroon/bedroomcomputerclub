@@ -44,6 +44,20 @@
       </a>
     </nav>
 
+    <header class="mobile-signal-header" aria-label="Estado de señal">
+      <span>SIGNAL 01</span>
+      <span>440 Hz</span>
+      <span id="mobileSignalStatus">ONLINE</span>
+    </header>
+
+    <div class="desktop-orbit-data" aria-hidden="true">
+      SIGNAL 01&nbsp;&nbsp;·&nbsp;&nbsp;440 Hz
+    </div>
+
+    <button class="mobile-menu-trigger" id="mobileMenuTrigger" type="button" aria-expanded="false" aria-controls="pagesMenu">
+      MENU +
+    </button>
+
     <div class="background-elements" aria-hidden="true">
       <img src="img/lanza1.png" class="bg-float f1" alt="">
       <img src="img/lanza2.png" class="bg-float f2" alt="">
@@ -53,6 +67,10 @@
     </div>
 
     <audio id="sound" src="soni/montefuji.mp3" loop preload="auto"></audio>
+
+    <div class="mobile-touch-indicator" aria-hidden="true">
+      <span>scroll / silencio</span>
+    </div>
 
     <div class="panels" aria-live="polite">
       <section class="panel hidden">
