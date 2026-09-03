@@ -1143,6 +1143,160 @@ opacity: 1;
 }
 
 /* ==================================================
+   AJUSTES WEB — SEPTIEMBRE 2026
+================================================== */
+
+@media (min-width: 1025px) {
+
+  /* Intro compacta y curva de Lissajous neón */
+  .intro-core {
+    width: 360px;
+  }
+
+  .intro-status {
+    margin-bottom: 4px;
+    color: #fff;
+    font-size: 8px;
+    font-weight: 400;
+    letter-spacing: .22em;
+    opacity: .88;
+  }
+
+  .voltage-readout {
+    color: #fff;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: .08em;
+  }
+
+  .voltage-readout small {
+    font-size: 8px;
+  }
+
+  .intro-wave {
+    width: 300px;
+    height: 216px;
+    margin: 8px auto 7px;
+  }
+
+  .intro-wave path {
+    stroke: #aaffd3;
+    stroke-width: 1.35;
+    filter:
+      drop-shadow(0 0 2px #fff)
+      drop-shadow(0 0 5px #69ffbd)
+      drop-shadow(0 0 12px #26ffa0)
+      drop-shadow(0 0 24px rgba(38, 255, 160, .9));
+  }
+
+  .intro-progress {
+    width: 180px;
+    margin: 0 auto;
+    opacity: .65;
+  }
+
+  /* Cinco enlaces distribuidos sin afectar el logo central */
+  .home .ascii-nav {
+    justify-content: center;
+    gap: clamp(32px, 5vw, 86px);
+  }
+
+  /* SMLCRN exactamente en el centro de la pantalla */
+  .home .logo-link {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 7;
+  }
+
+  .home .logo-link img {
+    width: 180px;
+  }
+
+  .home .logo-link:hover img {
+    transform: scale(1.035);
+  }
+
+  /* Cursor verde estable: no cambia de color sobre el fondo */
+  .home #cursor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 180px;
+    height: 180px;
+    padding: 24px;
+    color: #08110a;
+    background: rgba(164, 234, 164, .82);
+    mix-blend-mode: normal;
+    box-shadow:
+      0 0 20px rgba(164, 234, 164, .22),
+      inset 0 0 22px rgba(255, 255, 255, .12);
+  }
+
+  #cursorLabel {
+    font: 8px/1.45 "Space Mono", monospace;
+    letter-spacing: .06em;
+    text-align: center;
+    text-transform: lowercase;
+    opacity: 0;
+    transform: scale(.82);
+    transition: opacity .2s ease, transform .25s ease;
+  }
+
+  .home #cursor.over-panel #cursorLabel {
+    opacity: .86;
+    transform: scale(1);
+  }
+
+  /* La obra entra en negativo; el cursor permanece verde */
+  .home .panel-wrap img {
+    transition: filter .32s ease, opacity .32s ease;
+  }
+
+  .home .panel-wrap:hover img {
+    filter: invert(1);
+    opacity: 1;
+  }
+
+  /* El indicador ya no aparece como caja encima de la imagen */
+  .home .panel-instruction {
+    display: none;
+  }
+
+  /* Lanzas con halo y color luminoso en degradé */
+  .home .bg-float {
+    opacity: 1;
+    mix-blend-mode: screen;
+    filter:
+      brightness(1.38)
+      contrast(1.08)
+      saturate(1.35)
+      drop-shadow(0 0 6px rgba(255, 255, 255, .45))
+      drop-shadow(0 0 18px rgba(159, 206, 221, .72))
+      drop-shadow(0 0 34px rgba(255, 126, 91, .34));
+  }
+
+  .home .f1,
+  .home .f3 {
+    filter:
+      brightness(1.45)
+      saturate(1.5)
+      drop-shadow(0 0 8px rgba(190, 255, 219, .58))
+      drop-shadow(0 0 26px rgba(83, 255, 178, .46));
+  }
+
+  .home .f2,
+  .home .f4 {
+    filter:
+      brightness(1.42)
+      saturate(1.45)
+      drop-shadow(0 0 8px rgba(255, 226, 198, .62))
+      drop-shadow(0 0 27px rgba(255, 104, 70, .42));
+  }
+}
+
+/* ==================================================
    HOME 2026 — INTRO, DEGRADÉ Y DISEÑO ADAPTABLE
    Estas reglas cierran el archivo para prevalecer
    sobre la versión de escritorio original.
@@ -1830,7 +1984,6 @@ body.home {
   }
 
 }
-
 
 
 
