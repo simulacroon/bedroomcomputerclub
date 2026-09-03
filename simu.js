@@ -1,8 +1,8 @@
-const panels = document.querySelectorAll(".panel");
-const audio = document.getElementById("sound");
-const cursor = document.getElementById("cursor");
+const panels = document.querySelectorAll('.panel');
+const audio = document.getElementById('sound');
+const cursor = document.getElementById('cursor');
 
-const isHome = document.body.classList.contains("home");
+const isHome = document.body.classList.contains('home');
 
 let index = 0;
 let isScrolling = false;
@@ -14,12 +14,13 @@ let touchStartY = 0;
 INTRO: CALIBRACIÓN DE SEÑAL
 ========================= */
 
-const intro = document.getElementById("intro");
-const introSkip = document.getElementById("introSkip");
-const introStatus = document.getElementById("introStatus");
-const voltageValue = document.getElementById("voltageValue");
-const voltageWave = document.getElementById("voltageWave");
-const introProgress = document.getElementById("introProgress");
+const intro = document.getElementById('intro');
+const introSkip = document.getElementById('introSkip');
+const introStatus = document.getElementById('introStatus');
+const voltageValue = document.getElementById('voltageValue');
+const voltageWave = document.getElementById('voltageWave');
+const introProgress = document.getElementById('introProgress');
+
 
 if (isHome && intro) {
 
@@ -35,10 +36,10 @@ if (isHome && intro) {
 
     introFinished = true;
 
-    document.body.classList.remove("is-intro");
-    document.body.classList.add("intro-complete");
+    document.body.classList.remove('is-intro');
+    document.body.classList.add('intro-complete');
 
-    intro.setAttribute("aria-hidden", "true");
+    intro.setAttribute('aria-hidden', 'true');
 
     setTimeout(() => {
       intro.remove();
@@ -58,48 +59,56 @@ if (isHome && intro) {
       1
     );
 
-    const voltage = (
-      progress * 12 +
-      Math.sin(elapsed * 0.018) *
+    const measuredFrequency = (
+      36 +
+      progress * 404 +
+      Math.sin(elapsed * 0.014) *
       (1 - progress) *
-      2.4
+      9
     ).toFixed(2);
-
-    const amplitude =
-      38 - progress * 23;
-
-    const frequency =
-      0.045 + progress * 0.035;
 
     const points = [];
 
 
-    for (let x = 0; x <= 600; x += 8) {
+    /* Curva de Lissajous: relación 3:2 */
+
+    for (let step = 0; step <= 420; step++) {
+
+      const angle =
+        (step / 420) *
+        Math.PI *
+        2;
+
+      const phase =
+        elapsed * 0.00115;
+
+      const x =
+        180 +
+        Math.sin(
+          3 * angle + phase
+        ) *
+        132;
 
       const y =
-        60 +
+        130 +
         Math.sin(
-          x * frequency +
-          elapsed * 0.012
+          2 * angle
         ) *
-        amplitude *
-        (
-          0.65 +
-          Math.sin(x * 0.011) * 0.25
-        );
+        92;
 
       points.push(
-        `${x === 0 ? "M" : "L"}${x} ${y.toFixed(2)}`
+        `${step === 0 ? 'M' : 'L'}${x.toFixed(2)} ${y.toFixed(2)}`
       );
 
     }
 
 
-    voltageValue.textContent = voltage;
+    voltageValue.textContent =
+      measuredFrequency;
 
     voltageWave.setAttribute(
-      "d",
-      points.join(" ")
+      'd',
+      points.join(' ')
     );
 
     introProgress.style.width =
@@ -109,17 +118,17 @@ if (isHome && intro) {
     if (progress < 0.38) {
 
       introStatus.textContent =
-        "iniciando voltaje";
+        'midiendo frecuencias';
 
     } else if (progress < 0.78) {
 
       introStatus.textContent =
-        "calibrando oscilación";
+        'comparando fase 3:2';
 
     } else {
 
       introStatus.textContent =
-        "señal estable";
+        'frecuencia estable';
 
     }
 
@@ -143,7 +152,7 @@ if (isHome && intro) {
 
 
   introSkip.addEventListener(
-    "click",
+    'click',
     finishIntro
   );
 
@@ -163,10 +172,10 @@ if (isHome && panels.length > 0) {
   function showPanel(i) {
 
     panels.forEach((panel) => {
-      panel.classList.remove("active");
+      panel.classList.remove('active');
     });
 
-    panels[i].classList.add("active");
+    panels[i].classList.add('active');
 
   }
 
@@ -175,12 +184,12 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    "click",
+    'click',
     (event) => {
 
       if (
         document.body.classList.contains(
-          "is-intro"
+          'is-intro'
         )
       ) {
         return;
@@ -188,7 +197,7 @@ if (isHome && panels.length > 0) {
 
       if (
         event.target.closest(
-          "a, button, .pages-menu"
+          'a, button, .pages-menu'
         )
       ) {
         return;
@@ -227,12 +236,12 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    "wheel",
+    'wheel',
     (event) => {
 
       if (
         document.body.classList.contains(
-          "is-intro"
+          'is-intro'
         )
       ) {
         return;
@@ -284,7 +293,7 @@ if (isHome && panels.length > 0) {
     if (
       isScrolling ||
       document.body.classList.contains(
-        "is-intro"
+        'is-intro'
       )
     ) {
       return;
@@ -316,7 +325,7 @@ if (isHome && panels.length > 0) {
   ========================= */
 
   window.addEventListener(
-    "touchstart",
+    'touchstart',
     (event) => {
 
       touchStartY =
@@ -330,7 +339,7 @@ if (isHome && panels.length > 0) {
 
 
   window.addEventListener(
-    "touchend",
+    'touchend',
     (event) => {
 
       const distance =
@@ -375,17 +384,17 @@ DIRECTORIO DE PÁGINAS
 
 const pagesTrigger =
   document.getElementById(
-    "pagesTrigger"
+    'pagesTrigger'
   );
 
 const pagesMenu =
   document.getElementById(
-    "pagesMenu"
+    'pagesMenu'
   );
 
 const pagesClose =
   document.getElementById(
-    "pagesClose"
+    'pagesClose'
   );
 
 
@@ -398,17 +407,17 @@ if (
   function setPagesMenu(open) {
 
     pagesMenu.classList.toggle(
-      "is-open",
+      'is-open',
       open
     );
 
     pagesMenu.setAttribute(
-      "aria-hidden",
+      'aria-hidden',
       String(!open)
     );
 
     pagesTrigger.setAttribute(
-      "aria-expanded",
+      'aria-expanded',
       String(open)
     );
 
@@ -416,12 +425,12 @@ if (
 
 
   pagesTrigger.addEventListener(
-    "click",
+    'click',
     () => {
 
       setPagesMenu(
         !pagesMenu.classList.contains(
-          "is-open"
+          'is-open'
         )
       );
 
@@ -430,7 +439,7 @@ if (
 
 
   pagesClose.addEventListener(
-    "click",
+    'click',
     () => {
 
       setPagesMenu(false);
@@ -440,10 +449,10 @@ if (
 
 
   document.addEventListener(
-    "keydown",
+    'keydown',
     (event) => {
 
-      if (event.key === "Escape") {
+      if (event.key === 'Escape') {
 
         setPagesMenu(false);
 
@@ -470,7 +479,7 @@ let currentY = mouseY;
 
 
 window.addEventListener(
-  "mousemove",
+  'mousemove',
   (event) => {
 
     mouseX = event.clientX;
@@ -485,18 +494,21 @@ function moveCursor() {
   if (cursor) {
 
     currentX +=
-      (mouseX - currentX) * 0.15;
+      (mouseX - currentX) *
+      0.15;
 
     currentY +=
-      (mouseY - currentY) * 0.15;
+      (mouseY - currentY) *
+      0.15;
 
     cursor.style.left =
-      currentX + "px";
+      currentX + 'px';
 
     cursor.style.top =
-      currentY + "px";
+      currentY + 'px';
 
   }
+
 
   requestAnimationFrame(
     moveCursor
@@ -509,12 +521,60 @@ moveCursor();
 
 
 /* =========================
+TEXTO DENTRO DEL CURSOR
+========================= */
+
+const cursorLabel =
+  document.getElementById(
+    'cursorLabel'
+  );
+
+
+if (
+  isHome &&
+  cursor &&
+  cursorLabel
+) {
+
+  document
+    .querySelectorAll('.panel-wrap')
+    .forEach((panelWrap) => {
+
+      panelWrap.addEventListener(
+        'mouseenter',
+        () => {
+
+          cursor.classList.add(
+            'over-panel'
+          );
+
+        }
+      );
+
+
+      panelWrap.addEventListener(
+        'mouseleave',
+        () => {
+
+          cursor.classList.remove(
+            'over-panel'
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/* =========================
 VIDEOS CIRCULARES SCROLL
 ========================= */
 
 const circleVideos =
   document.querySelectorAll(
-    ".circle-video"
+    '.circle-video'
   );
 
 
@@ -531,7 +591,7 @@ const circleObserver =
           if (entry.isIntersecting) {
 
             video.classList.add(
-              "visible"
+              'visible'
             );
 
             video.play();
@@ -576,7 +636,7 @@ const observer =
           if (entry.isIntersecting) {
 
             entry.target.classList.add(
-              "visible"
+              'visible'
             );
 
           }
@@ -592,7 +652,7 @@ const observer =
 
 
 document
-  .querySelectorAll(".reveal")
+  .querySelectorAll('.reveal')
   .forEach((element) => {
 
     observer.observe(element);
@@ -607,21 +667,21 @@ KINKYCUIR // FLOATING ASCII AUDIO PLAYER
 const kinkyEpisodes = [
 
   {
-    number: "001",
-    title: "Bondage y Consentimiento",
-    file: "audio/cap1.m4a"
+    number: '001',
+    title: 'Bondage y Consentimiento',
+    file: 'audio/cap1.m4a'
   },
 
   {
-    number: "002",
-    title: "Derecho al placer disca",
-    file: "audio/cap2.m4a"
+    number: '002',
+    title: 'Derecho al placer disca',
+    file: 'audio/cap2.m4a'
   },
 
   {
-    number: "003",
-    title: "Punto G — guía",
-    file: "audio/cap3.m4a"
+    number: '003',
+    title: 'Punto G — guía',
+    file: 'audio/cap3.m4a'
   }
 
 ];
@@ -629,72 +689,72 @@ const kinkyEpisodes = [
 
 const kinkyAudio =
   document.getElementById(
-    "kinkyAudio"
+    'kinkyAudio'
   );
 
 const kinkyPlayer =
   document.getElementById(
-    "kinkyPlayer"
+    'kinkyPlayer'
   );
 
 const kinkyPlay =
   document.getElementById(
-    "kinkyPlay"
+    'kinkyPlay'
   );
 
 const kinkyPrev =
   document.getElementById(
-    "kinkyPrev"
+    'kinkyPrev'
   );
 
 const kinkyNext =
   document.getElementById(
-    "kinkyNext"
+    'kinkyNext'
   );
 
 const kinkyNumber =
   document.getElementById(
-    "kinkyNumber"
+    'kinkyNumber'
   );
 
 const kinkyTitle =
   document.getElementById(
-    "kinkyTitle"
+    'kinkyTitle'
   );
 
 const kinkyIndicator =
   document.getElementById(
-    "kinkyIndicator"
+    'kinkyIndicator'
   );
 
 const kinkySignal =
   document.getElementById(
-    "kinkySignal"
+    'kinkySignal'
   );
 
 const kinkyStatus =
   document.getElementById(
-    "kinkyStatus"
+    'kinkyStatus'
   );
 
 const kinkyCurrent =
   document.getElementById(
-    "kinkyCurrent"
+    'kinkyCurrent'
   );
 
 const kinkyDuration =
   document.getElementById(
-    "kinkyDuration"
+    'kinkyDuration'
   );
 
 const kinkyProgress =
   document.getElementById(
-    "kinkyProgress"
+    'kinkyProgress'
   );
 
 const kinkyProgressContainer =
   document.getElementById(
-    "kinkyProgressContainer"
+    'kinkyProgressContainer'
   );
 
 
@@ -719,7 +779,8 @@ if (
     const episode =
       kinkyEpisodes[index];
 
-    kinkyCurrentEpisode = index;
+    kinkyCurrentEpisode =
+      index;
 
     kinkyAudio.pause();
 
@@ -735,28 +796,28 @@ if (
       episode.title;
 
     kinkyCurrent.textContent =
-      "00:00";
+      '00:00';
 
     kinkyDuration.textContent =
-      "00:00";
+      '00:00';
 
     kinkyProgress.style.width =
-      "0%";
+      '0%';
 
     kinkySignal.textContent =
-      "░░░░░░░░░░";
+      '░░░░░░░░░░';
 
     kinkyStatus.textContent =
-      "LOADING";
+      'LOADING';
 
     kinkyIndicator.textContent =
-      "○";
+      '○';
 
     kinkyPlay.textContent =
-      "PLAY";
+      'PLAY';
 
     kinkyPlayer.classList.remove(
-      "playing"
+      'playing'
     );
 
   }
@@ -767,7 +828,7 @@ if (
   ================================================== */
 
   kinkyPlay.addEventListener(
-    "click",
+    'click',
     async () => {
 
       if (kinkyAudio.paused) {
@@ -779,12 +840,12 @@ if (
         } catch (error) {
 
           console.error(
-            "ERROR DE AUDIO:",
+            'ERROR DE AUDIO:',
             error
           );
 
           kinkyStatus.textContent =
-            "ERROR";
+            'ERROR';
 
         }
 
@@ -803,7 +864,7 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "loadedmetadata",
+    'loadedmetadata',
     () => {
 
       kinkyDuration.textContent =
@@ -812,7 +873,7 @@ if (
         );
 
       kinkyStatus.textContent =
-        "READY";
+        'READY';
 
     }
   );
@@ -823,20 +884,20 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "play",
+    'play',
     () => {
 
       kinkyPlay.textContent =
-        "PAUSE";
+        'PAUSE';
 
       kinkyStatus.textContent =
-        "ONLINE";
+        'ONLINE';
 
       kinkyIndicator.textContent =
-        "●";
+        '●';
 
       kinkyPlayer.classList.add(
-        "playing"
+        'playing'
       );
 
     }
@@ -848,20 +909,20 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "pause",
+    'pause',
     () => {
 
       kinkyPlay.textContent =
-        "PLAY";
+        'PLAY';
 
       kinkyStatus.textContent =
-        "PAUSED";
+        'PAUSED';
 
       kinkyIndicator.textContent =
-        "○";
+        '○';
 
       kinkyPlayer.classList.remove(
-        "playing"
+        'playing'
       );
 
     }
@@ -873,16 +934,16 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "error",
+    'error',
     () => {
 
       console.error(
-        "No se pudo cargar:",
+        'No se pudo cargar:',
         kinkyAudio.src
       );
 
       kinkyStatus.textContent =
-        "AUDIO ERROR";
+        'AUDIO ERROR';
 
     }
   );
@@ -893,7 +954,7 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "timeupdate",
+    'timeupdate',
     () => {
 
       if (
@@ -904,19 +965,24 @@ if (
         return;
       }
 
+
       const percentage =
         (
           kinkyAudio.currentTime /
           kinkyAudio.duration
-        ) * 100;
+        ) *
+        100;
+
 
       kinkyProgress.style.width =
-        percentage + "%";
+        percentage + '%';
+
 
       kinkyCurrent.textContent =
         kinkyFormatTime(
           kinkyAudio.currentTime
         );
+
 
       const totalBars = 10;
 
@@ -925,9 +991,10 @@ if (
           percentage / 10
         );
 
+
       kinkySignal.textContent =
-        "█".repeat(activeBars) +
-        "░".repeat(
+        '█'.repeat(activeBars) +
+        '░'.repeat(
           totalBars - activeBars
         );
 
@@ -940,7 +1007,7 @@ if (
   ================================================== */
 
   kinkyProgressContainer.addEventListener(
-    "click",
+    'click',
     (event) => {
 
       if (
@@ -951,17 +1018,21 @@ if (
         return;
       }
 
+
       const rect =
         kinkyProgressContainer
           .getBoundingClientRect();
+
 
       const position =
         event.clientX -
         rect.left;
 
+
       const percentage =
         position /
         rect.width;
+
 
       kinkyAudio.currentTime =
         percentage *
@@ -976,10 +1047,11 @@ if (
   ================================================== */
 
   kinkyPrev.addEventListener(
-    "click",
+    'click',
     () => {
 
       kinkyCurrentEpisode--;
+
 
       if (
         kinkyCurrentEpisode < 0
@@ -989,6 +1061,7 @@ if (
           kinkyEpisodes.length - 1;
 
       }
+
 
       loadKinkyEpisode(
         kinkyCurrentEpisode
@@ -1003,10 +1076,11 @@ if (
   ================================================== */
 
   kinkyNext.addEventListener(
-    "click",
+    'click',
     () => {
 
       kinkyCurrentEpisode++;
+
 
       if (
         kinkyCurrentEpisode >=
@@ -1016,6 +1090,7 @@ if (
         kinkyCurrentEpisode = 0;
 
       }
+
 
       loadKinkyEpisode(
         kinkyCurrentEpisode
@@ -1030,27 +1105,27 @@ if (
   ================================================== */
 
   kinkyAudio.addEventListener(
-    "ended",
+    'ended',
     () => {
 
       kinkyStatus.textContent =
-        "COMPLETE";
+        'COMPLETE';
 
       kinkyIndicator.textContent =
-        "○";
+        '○';
 
       kinkyPlay.textContent =
-        "PLAY";
+        'PLAY';
 
       kinkyPlayer.classList.remove(
-        "playing"
+        'playing'
       );
 
       kinkyProgress.style.width =
-        "0%";
+        '0%';
 
       kinkyCurrent.textContent =
-        "00:00";
+        '00:00';
 
     }
   );
@@ -1065,28 +1140,31 @@ if (
     if (
       !Number.isFinite(seconds)
     ) {
-      return "00:00";
+      return '00:00';
     }
+
 
     const minutes =
       Math.floor(
         seconds / 60
       );
 
+
     const secondsRest =
       Math.floor(
         seconds % 60
       );
 
+
     return (
       String(minutes).padStart(
         2,
-        "0"
+        '0'
       ) +
-      ":" +
+      ':' +
       String(secondsRest).padStart(
         2,
-        "0"
+        '0'
       )
     );
 
@@ -1109,12 +1187,12 @@ SPATIAL VIDEO MEMORY
 
 const fragmentoStage =
   document.getElementById(
-    "fragmentoStage"
+    'fragmentoStage'
   );
 
 const fragmentoVideo =
   document.getElementById(
-    "fragmentoVideo"
+    'fragmentoVideo'
   );
 
 
@@ -1188,22 +1266,27 @@ if (
 
     const canvas =
       document.createElement(
-        "canvas"
+        'canvas'
       );
 
+
     canvas.classList.add(
-      "fragmento-frame"
+      'fragmento-frame'
     );
+
 
     canvas.width = 840;
     canvas.height = 472;
+
 
     fragmentoStage.appendChild(
       canvas
     );
 
+
     const context =
-      canvas.getContext("2d");
+      canvas.getContext('2d');
+
 
     frames.push({
 
@@ -1240,20 +1323,25 @@ if (
 
 
   window.addEventListener(
-    "mousemove",
+    'mousemove',
     (event) => {
 
       targetMouseX =
         (
           event.clientX /
           window.innerWidth
-        ) * 2 - 1;
+        ) *
+        2 -
+        1;
+
 
       targetMouseY =
         (
           event.clientY /
           window.innerHeight
-        ) * 2 - 1;
+        ) *
+        2 -
+        1;
 
     }
   );
@@ -1290,6 +1378,7 @@ if (
 
     }
 
+
     requestAnimationFrame(
       drawVideo
     );
@@ -1314,6 +1403,7 @@ if (
         fragmentMouseX
       ) *
       SMOOTHNESS;
+
 
     fragmentMouseY +=
       (
@@ -1379,6 +1469,7 @@ if (
           ) *
           SMOOTHNESS;
 
+
         frame.y +=
           (
             frame.targetY -
@@ -1432,7 +1523,7 @@ if (
       */
 
       window.addEventListener(
-        "click",
+        'click',
         () => {
 
           fragmentoVideo.play();
