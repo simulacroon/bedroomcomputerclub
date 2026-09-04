@@ -2610,25 +2610,31 @@ body.home {
   }
 
   .home .text-top {
-    top: 12px;
-    left: 14px;
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: auto;
     z-index: 8;
     font-size: 18px;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
     text-shadow: 0 1px 5px rgba(60,65,82,.34);
+    transform: translateY(calc(-100% - 8px));
   }
 
   .home .text-bottom {
-    right: 14px;
-    bottom: 12px;
+    top: auto;
+    left: auto;
+    right: 0;
+    bottom: 0;
     z-index: 8;
     font-size: 18px;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
     text-shadow: 0 1px 5px rgba(60,65,82,.34);
+    transform: translateY(calc(100% + 8px));
   }
 
   /* Cursor verde siempre por encima de la obra */
@@ -2646,7 +2652,6 @@ body.home {
       inset 0 0 24px rgba(255,255,255,.12);
   }
 }
-
 
 
 
