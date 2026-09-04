@@ -2594,7 +2594,7 @@ body.home {
   .home .panel {
     justify-content: flex-end;
     align-items: center;
-    padding: 92px 7.5vw 72px 48vw;
+    padding: 92px 5.5vw 72px 48vw;
   }
 
   .home .panel-wrap {
@@ -2611,7 +2611,7 @@ body.home {
 
   .home .text-top {
     top: 0;
-    left: 0;
+    left: 9%;
     right: auto;
     bottom: auto;
     z-index: 8;
@@ -2626,7 +2626,7 @@ body.home {
   .home .text-bottom {
     top: auto;
     left: auto;
-    right: 0;
+    right: 9%;
     bottom: 0;
     z-index: 8;
     font-size: 18px;
